@@ -41241,6 +41241,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ([{
   name: 'REC PCB1 ARDUINO',
   extensionId: 'recpcb1arduino',
+  extensionURL: './recpcb1arduino.js',
   collaborator: '@roboticaencolegios',
   description: 'Control de placa Arduino vía Web Serial.',
   iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-pcb.png',
@@ -41251,6 +41252,7 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   name: 'IA Señales de Tránsito',
   extensionId: 'iaSenalesTransitoV7',
+  extensionURL: './iaSenalesTransitoV7.js',
   collaborator: '@roboticaencolegios',
   description: 'Reconocimiento de señales viales con IA.',
   iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-transito.png',
@@ -41261,6 +41263,7 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   name: 'IA Visión Manos',
   extensionId: 'iaVisionRECPro',
+  extensionURL: './iaVisionRECPro.js',
   collaborator: '@roboticaencolegios',
   description: 'Detección de manos y rostros con MediaPipe.',
   iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-manos.png',
@@ -41271,6 +41274,7 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   name: 'Voz a Texto REC',
   extensionId: 'vozTextoREC',
+  extensionURL: './vozTextoREC.js',
   collaborator: '@roboticaencolegios',
   description: 'Control por comandos de voz.',
   iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-voztexto.png',
@@ -52975,7 +52979,7 @@ const updateMetrics = function updateMetrics(metrics) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "data:;base64,"
+module.exports = "data:;base64,//4jACAARQBtAHAAdAB5ACAASABFAFgAIABmAGkAbABlACAAcABsAGEAYwBlAGgAbwBsAGQAZQByAA0ACgA="
 
 /***/ }),
 
