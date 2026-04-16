@@ -52975,9 +52975,9 @@ const updateMetrics = function updateMetrics(metrics) {
   !*** ./static/microbit/scratch-microbit-1.2.0.hex ***!
   \****************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d52d60b7b.hex";
+module.exports = "data:;base64,"
 
 /***/ }),
 
