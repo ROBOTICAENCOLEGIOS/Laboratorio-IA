@@ -12,28 +12,11 @@ const frameSource = __webpack_require__(/*! ./tw-load-script-as-plain-text!./tw-
 const none = "'none'";
 const featurePolicy = {
   'accelerometer': none,
-  'ambient-light-sensor': none,
-  'battery': none,
-  'camera': none,
-  'display-capture': none,
-  'document-domain': none,
-  'encrypted-media': none,
-  'fullscreen': none,
-  'geolocation': none,
-  'gyroscope': none,
-  'magnetometer': none,
-  'microphone': none,
-  'midi': none,
-  'payment': none,
-  'picture-in-picture': none,
-  'publickey-credentials-get': none,
-  'speaker-selection': none,
-  'usb': none,
-  'vibrate': none,
-  'vr': none,
-  'screen-wake-lock': none,
-  'web-share': none,
-  'interest-cohort': none
+  'camera': '*',
+  'microphone': '*',
+  'serial': '*',
+  'bluetooth': '*',
+  'display-capture': '*'
 };
 const generateAllow = () => Object.entries(featurePolicy).map(_ref => {
   let [name, permission] = _ref;
