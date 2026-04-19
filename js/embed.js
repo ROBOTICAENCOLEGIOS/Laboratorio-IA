@@ -26375,8 +26375,8 @@ const toLibraryItem = extension => {
   return extension;
 };
 const translateGalleryItem = (extension, locale) => _objectSpread(_objectSpread({}, extension), {}, {
-  name: extension.nameTranslations[locale] || extension.name,
-  description: extension.descriptionTranslations[locale] || extension.description
+  name: extension.nameTranslations && extension.nameTranslations[locale] || extension && extension.name || 'Unknown Extension',
+  description: extension.descriptionTranslations && extension.descriptionTranslations[locale] || extension && extension.description || ''
 });
 let cachedGallery = null;
 const fetchLibrary = async () => {
@@ -26386,13 +26386,13 @@ const fetchLibrary = async () => {
   }
   const data = await res.json();
   return data.extensions.map(extension => ({
-    name: extension.name,
-    nameTranslations: extension.nameTranslations || {},
-    description: extension.description,
-    descriptionTranslations: extension.descriptionTranslations || {},
-    extensionId: extension.id,
-    extensionURL: "https://extensions.turbowarp.org/".concat(extension.slug, ".js"),
-    iconURL: "https://extensions.turbowarp.org/".concat(extension.image || 'images/unknown.svg'),
+    name: extension && extension.name || 'Unknown Extension',
+    nameTranslations: extension && extension.nameTranslations || {},
+    description: extension && extension.description || '',
+    descriptionTranslations: extension && extension.descriptionTranslations || {},
+    extensionId: extension && extension.id || 'unknown',
+    extensionURL: "https://extensions.turbowarp.org/".concat(extension && extension.slug || 'unknown', ".js"),
+    iconURL: "https://extensions.turbowarp.org/".concat(extension && extension.image || 'images/unknown.svg'),
     tags: ['tw'],
     credits: [...(extension.original || []), ...(extension.by || [])].map(credit => {
       if (credit.link) {
