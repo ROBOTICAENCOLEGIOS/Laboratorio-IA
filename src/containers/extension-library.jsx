@@ -166,7 +166,7 @@ class ExtensionLibrary extends React.PureComponent {
                 const locale = this.props.intl.locale;
                 library.push(
                     ...this.state.gallery
-                        .filter(i => i && i.extensionId !== 'faceSensing') // Null-safe filter
+                        .filter(i => i && i.extensionId && i.extensionId !== 'faceSensing') // Emergency: Comprehensive null-safe filter
                         .map(i => translateGalleryItem(i, locale))
                         .map(toLibraryItem)
                 );

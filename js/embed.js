@@ -26483,7 +26483,7 @@ class ExtensionLibrary extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Pure
       if (this.state.gallery) {
         library.push(toLibraryItem(_lib_libraries_extensions_index_jsx__WEBPACK_IMPORTED_MODULE_6__["galleryMore"]));
         const locale = this.props.intl.locale;
-        library.push(...this.state.gallery.filter(i => i && i.extensionId !== 'faceSensing') // Null-safe filter
+        library.push(...this.state.gallery.filter(i => i && i.extensionId && i.extensionId !== 'faceSensing') // Emergency: Comprehensive null-safe filter
         .map(i => translateGalleryItem(i, locale)).map(toLibraryItem));
       } else if (this.state.galleryError) {
         library.push(toLibraryItem(_lib_libraries_extensions_index_jsx__WEBPACK_IMPORTED_MODULE_6__["galleryError"]));
