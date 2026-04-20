@@ -10,30 +10,13 @@
 const uid = __webpack_require__(/*! ../util/uid */ "./node_modules/scratch-vm/src/util/uid.js");
 const frameSource = __webpack_require__(/*! ./tw-load-script-as-plain-text!./tw-iframe-extension-worker-entry */ "./node_modules/scratch-vm/src/extension-support/tw-load-script-as-plain-text.js!./node_modules/scratch-vm/src/extension-support/tw-iframe-extension-worker-entry.js");
 const none = "'none'";
+// Direct production cleanup - only critical permissions
 const featurePolicy = {
-  'accelerometer': none,
-  'ambient-light-sensor': none,
-  'battery': none,
-  'camera': none,
-  'display-capture': none,
-  'document-domain': none,
-  'encrypted-media': none,
-  'fullscreen': none,
-  'geolocation': none,
-  'gyroscope': none,
-  'magnetometer': none,
-  'microphone': none,
-  'midi': none,
-  'payment': none,
-  'picture-in-picture': none,
-  'publickey-credentials-get': none,
-  'speaker-selection': none,
-  'usb': none,
-  'vibrate': none,
-  'vr': none,
-  'screen-wake-lock': none,
-  'web-share': none,
-  'interest-cohort': none
+  'camera': '*',
+  'microphone': '*',
+  'serial': '*',
+  'bluetooth': '*',
+  'display-capture': '*'
 };
 const generateAllow = () => Object.entries(featurePolicy).map(_ref => {
   let [name, permission] = _ref;
@@ -54,11 +37,9 @@ class IframeExtensionWorker {
     this.iframe.allow = generateAllow();
     document.body.appendChild(this.iframe);
     window.addEventListener('message', this._onWindowMessage.bind(this));
-    const blob = new Blob([// eslint-disable-next-line max-len
-    "<!DOCTYPE html><body><script>window.__WRAPPED_IFRAME_ID__=".concat(JSON.stringify(this.id), ";").concat(frameSource, "</script></body>")], {
-      type: 'text/html; charset=utf-8'
-    });
-    this.iframe.src = URL.createObjectURL(blob);
+    // Force srcdoc in production - eliminate blob usage completely
+    const htmlContent = "<!DOCTYPE html><body><script>window.__WRAPPED_IFRAME_ID__=".concat(JSON.stringify(this.id), ";").concat(frameSource, "</script></body>");
+    this.iframe.srcdoc = htmlContent;
   }
   _onWindowMessage(e) {
     if (!e.data || e.data.vmIframeId !== this.id) {
