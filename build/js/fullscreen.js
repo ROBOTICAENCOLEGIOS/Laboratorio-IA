@@ -41245,6 +41245,7 @@ const loadRECExtension = (fileName, extensionId) => {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = '.js';
+  input.style.display = 'none';
   input.onchange = async e => {
     const file = e.target.files[0];
     if (file) {
@@ -41257,7 +41258,9 @@ const loadRECExtension = (fileName, extensionId) => {
       }
     }
   };
+  document.body.appendChild(input);
   input.click();
+  document.body.removeChild(input);
 };
 /* harmony default export */ __webpack_exports__["default"] = ([{
   name: 'REC - PCB1 ARDUINO',
