@@ -1,6 +1,7 @@
 ﻿/**
 TurboWarp / Scratch 3 Custom Extension — REC PCB1 ARDUINO v1.7.2
 Web Serial API @ 115200 baud. Verde Militar & Bloques Musicales. */ (function (Scratch) { 'use strict';
+if (!Scratch.extensions.unsandboxed) { throw new Error('Esta extensión debe ejecutarse sin sandbox (unsandboxed).'); }
 class RecPcb1Arduino { constructor(runtime) { this.runtime = runtime; this.port = null; this._activePort = null; this.encoder = new TextEncoder(); this.decoder = new TextDecoder(); this._rxRemainder = ''; this._lineWaiters = []; this._readLoopRunning = false; this._serialQueue = Promise.resolve();
   // Suavizado de distancia
   this._distanceEma = null;
@@ -16,7 +17,7 @@ class RecPcb1Arduino { constructor(runtime) { this.runtime = runtime; this.port 
 getInfo() {
   return {
     id: 'recpcb1arduino',
-    name: 'REC - PCB1 ARDUINO',
+    name: 'REC PCB1 ARDUINO',
     color1: '#4b5320',
     color2: '#3d441a',
     color3: '#2f3514',
@@ -262,7 +263,8 @@ _hexToRgb(hex) {
 }
 
 async _setMotor(side, value) {
-    if (side === 'IZQ' || side === 'DER') this._lastMotorValue[side] = value;
+  if ((side === 'IZQ' || side === 'DER') && this._lastMotorValue[side] === value) return;
+  if (side === 'IZQ' || side === 'DER') this._lastMotorValue[side] = value;
   await this._sendLine(`AT+M_${side}=${value}`);
 }
 
@@ -278,7 +280,8 @@ async moveBackward(args) {
 
 async stopMotor(args) {
   if (args.WHICH === 'AMBOS') {
-        this._lastMotorValue['IZQ'] = 0;
+    if (this._lastMotorValue['IZQ'] === 0 && this._lastMotorValue['DER'] === 0) return;
+    this._lastMotorValue['IZQ'] = 0;
     this._lastMotorValue['DER'] = 0;
     await this._sendLine('AT+MOTOR=STOP');
     return;

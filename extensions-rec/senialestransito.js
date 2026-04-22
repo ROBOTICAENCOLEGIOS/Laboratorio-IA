@@ -1,4 +1,3 @@
-// @shards unsandboxed
 (function (Scratch) {
   'use strict';
 
@@ -38,10 +37,10 @@
     getInfo() {
       return {
         id: 'iaSenalesTransitoV7',
-        name: 'REC - IA Señales de Tránsito',
+        name: 'IA Señales de Tránsito',
         color1: '#EAB308',
         blocks: [
-          { opcode: 'loadFiles', blockType: Scratch.BlockType.COMMAND, text: '🌐 CARGAR MODELO DE TRÁNSITO' },
+          { opcode: 'loadFiles', blockType: Scratch.BlockType.COMMAND, text: '📁 CARGAR MODELO (.json y .bin)' },
           { opcode: 'start', blockType: Scratch.BlockType.COMMAND, text: '📷 ENCENDER CÁMARA' },
           { opcode: 'stop', blockType: Scratch.BlockType.COMMAND, text: '❌ APAGAR CÁMARA' },
           { 
@@ -77,17 +76,27 @@
     }
 
     async loadFiles() {
-      try {
-        this.prediction = "DESCARGANDO MODELO...";
-        const URL = "https://roboticaencolegios.github.io/ia-robotica/modelo_transito/";
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
-        this.model = await tmImage.load(modelURL, metadataURL);
-        this.prediction = "MODELO CARGADO OK";
-      } catch (err) { 
-        this.prediction = "ERROR DE RED O CORS"; 
-        console.error(err);
-      }
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.multiple = true;
+      input.onchange = async (e) => {
+        const files = Array.from(e.target.files);
+        const modelFile = files.find(f => f.name.includes('model.json'));
+        const weightsFile = files.find(f => f.name.includes('weights.bin'));
+        const metadataFile = files.find(f => f.name.includes('metadata.json'));
+        if (!modelFile || !weightsFile || !metadataFile) {
+          alert("Selecciona los 3 archivos juntos (model, weights y metadata)");
+          return;
+        }
+        try {
+          this.prediction = "LEYENDO ARCHIVOS...";
+          setTimeout(async () => {
+            this.model = await tmImage.loadFromFiles(modelFile, weightsFile, metadataFile);
+            this.prediction = "MODELO CARGADO OK";
+          }, 500);
+        } catch (err) { this.prediction = "ERROR AL PROCESAR"; }
+      };
+      input.click();
     }
 
     async start() {

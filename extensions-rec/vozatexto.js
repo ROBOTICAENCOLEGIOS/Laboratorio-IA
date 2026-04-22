@@ -1,6 +1,8 @@
-// @shards unsandboxed
 (function(Scratch) {
   'use strict';
+  if (!Scratch.extensions.unsandboxed) {
+    throw new Error('Requiere modo unsandboxed para usar el micrófono');
+  }
 
   class VozATexto {
     constructor() {
@@ -13,7 +15,7 @@
     getInfo() {
       return {
         id: 'vozTextoREC',
-        name: 'REC - Voz a Texto',
+        name: 'Voz a Texto',
         color1: '#2563EB',
         blocks: [
           {
