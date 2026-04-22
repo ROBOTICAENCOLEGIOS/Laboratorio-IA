@@ -38871,50 +38871,73 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// Manual Extension Loading for REC Extensions
+const loadRECExtension = (fileName, extensionId) => {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.js';
+  input.style.display = 'none';
+  input.onchange = async e => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const url = URL.createObjectURL(file);
+        await Scratch.vm.extensionManager.loadExtensionURL(url);
+        URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error('Error loading extension:', error);
+      }
+    }
+  };
+  document.body.appendChild(input);
+  input.click();
+  document.body.removeChild(input);
+};
 /* harmony default export */ __webpack_exports__["default"] = ([{
-  name: 'REC PCB1 ARDUINO',
+  name: 'REC - PCB1 ARDUINO',
   extensionId: 'recpcb1arduino',
-  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/recpcb1arduino.js',
   collaborator: '@roboticaencolegios',
   description: 'Control de placa Arduino vía Web Serial.',
-  iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-pcb.png',
-  insetIconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-pcb.png',
+  iconURL: '/static/icono-pcb.png',
+  insetIconURL: '/static/icono-pcb.png',
   featured: true,
   disabled: false,
-  internetConnectionRequired: true
+  internetConnectionRequired: true,
+  onClick: () => loadRECExtension('extensionpcb.js', 'recpcb1arduino')
 }, {
-  name: 'IA Señales de Tránsito',
+  name: 'REC - IA Señales de Tránsito',
   extensionId: 'iaSenalesTransitoV7',
-  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/iaSenalesTransitoV7.js',
   collaborator: '@roboticaencolegios',
   description: 'Reconocimiento de señales viales con IA.',
-  iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-transito.png',
-  insetIconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-transito.png',
+  iconURL: '/static/icono-transito.png',
+  insetIconURL: '/static/icono-transito.png',
   featured: true,
   disabled: false,
-  internetConnectionRequired: true
+  internetConnectionRequired: true,
+  onClick: () => loadRECExtension('senialestransito.js', 'iaSenalesTransitoV7')
 }, {
-  name: 'IA Visión Manos',
+  name: 'REC - IA Visión Manos',
   extensionId: 'iaVisionRECPro',
-  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/iaVisionRECPro.js',
   collaborator: '@roboticaencolegios',
   description: 'Detección de manos y rostros con MediaPipe.',
-  iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-manos.png',
-  insetIconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-manos.png',
+  iconURL: '/static/icono-manos.png',
+  insetIconURL: '/static/icono-manos.png',
   featured: true,
   disabled: false,
-  internetConnectionRequired: true
+  internetConnectionRequired: true,
+  onClick: () => loadRECExtension('iamanos.js', 'iaVisionRECPro')
 }, {
-  name: 'Voz a Texto REC',
+  name: 'REC - Voz a Texto',
   extensionId: 'vozTextoREC',
-  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/vozTextoREC.js',
   collaborator: '@roboticaencolegios',
   description: 'Control por comandos de voz.',
-  iconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-voztexto.png',
-  insetIconURL: 'https://roboticaencolegios.github.io/ia-robotica/icono-voztexto.png',
+  iconURL: '/static/icono-voztexto.png',
+  insetIconURL: '/static/icono-voztexto.png',
   featured: true,
   disabled: false,
-  internetConnectionRequired: true
+  internetConnectionRequired: true,
+  onClick: () => loadRECExtension('vozatexto.js', 'vozTextoREC')
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
     defaultMessage: "Music",
