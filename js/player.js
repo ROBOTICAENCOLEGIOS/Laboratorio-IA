@@ -41241,7 +41241,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Manual Extension Loading for REC Extensions
-const loadRECExtension = (fileName, extensionId) => {
+const loadRECExtension = fileName => {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = '.js';
@@ -41272,7 +41272,7 @@ const loadRECExtension = (fileName, extensionId) => {
   featured: true,
   disabled: false,
   internetConnectionRequired: true,
-  onClick: () => loadRECExtension('extensionpcb.js', 'recpcb1arduino')
+  onClick: () => loadRECExtension('extensionpcb.js')
 }, {
   name: 'REC - IA Señales de Tránsito',
   extensionId: 'iaSenalesTransitoV7',
@@ -41283,7 +41283,7 @@ const loadRECExtension = (fileName, extensionId) => {
   featured: true,
   disabled: false,
   internetConnectionRequired: true,
-  onClick: () => loadRECExtension('senialestransito.js', 'iaSenalesTransitoV7')
+  onClick: () => loadRECExtension('senialestransito.js')
 }, {
   name: 'REC - IA Visión Manos',
   extensionId: 'iaVisionRECPro',
@@ -41294,7 +41294,7 @@ const loadRECExtension = (fileName, extensionId) => {
   featured: true,
   disabled: false,
   internetConnectionRequired: true,
-  onClick: () => loadRECExtension('iamanos.js', 'iaVisionRECPro')
+  onClick: () => loadRECExtension('iamanos.js')
 }, {
   name: 'REC - Voz a Texto',
   extensionId: 'vozTextoREC',
@@ -41305,7 +41305,7 @@ const loadRECExtension = (fileName, extensionId) => {
   featured: true,
   disabled: false,
   internetConnectionRequired: true,
-  onClick: () => loadRECExtension('vozatexto.js', 'vozTextoREC')
+  onClick: () => loadRECExtension('vozatexto.js')
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
     defaultMessage: "Music",
@@ -53005,7 +53005,7 @@ const updateMetrics = function updateMetrics(metrics) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "data:;base64,//4jACAARQBtAHAAdAB5ACAASABFAFgAIABmAGkAbABlACAAcABsAGEAYwBlAGgAbwBsAGQAZQByAA0ACgA="
+module.exports = "data:;base64,//4NAAoA"
 
 /***/ }),
 
