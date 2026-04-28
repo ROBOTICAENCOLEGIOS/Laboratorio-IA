@@ -56,7 +56,7 @@ import galleryIcon from './gallery/gallery.svg';
 import {APP_NAME} from '../../brand';
 
 // Manual Extension Loading for REC Extensions
-const loadRECExtension = (fileName, extensionId) => {
+const loadRECExtension = (fileName) => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.js';
@@ -91,7 +91,7 @@ export default [
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
-        onClick: () => loadRECExtension('extensionpcb.js', 'recpcb1arduino')
+        onClick: () => loadRECExtension('extensionpcb.js')
     },
     {
         name: 'REC - IA Señales de Tránsito',
@@ -103,7 +103,7 @@ export default [
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
-        onClick: () => loadRECExtension('senialestransito.js', 'iaSenalesTransitoV7')
+        onClick: () => loadRECExtension('senialestransito.js')
     },
     {
         name: 'REC - IA Visión Manos',
@@ -115,7 +115,7 @@ export default [
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
-        onClick: () => loadRECExtension('iamanos.js', 'iaVisionRECPro')
+        onClick: () => loadRECExtension('iamanos.js')
     },
     {
         name: 'REC - Voz a Texto',
@@ -127,7 +127,7 @@ export default [
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
-        onClick: () => loadRECExtension('vozatexto.js', 'vozTextoREC')
+        onClick: () => loadRECExtension('vozatexto.js')
     },
     {
         name: (
