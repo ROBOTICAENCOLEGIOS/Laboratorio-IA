@@ -39166,41 +39166,41 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   extensionId: 'extensionpcb',
   iconURL: arduinoIconURL,
   description: 'Controla componentes electrónicos y sensores Arduino.',
-  tags: ['robotica'],
+  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  url: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/extensionpcb.js'
+  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/extensionpcb.js'
 }, {
   name: 'Manos Robóticas',
   extensionId: 'iamanos',
   iconURL: manosIconURL,
   description: 'Controla manos robóticas con gestos y movimientos.',
-  tags: ['robotica'],
+  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  url: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/iamanos.js'
+  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/iamanos.js'
 }, {
   name: 'Señales de Tránsito',
   extensionId: 'senialestransito',
   iconURL: transitoIconURL,
   description: 'Reconoce señales de tránsito usando inteligencia artificial.',
-  tags: ['robotica'],
+  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  url: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/senialestransito.js'
+  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/senialestransito.js'
 }, {
   name: 'Voz a Texto',
   extensionId: 'vozatexto',
   iconURL: vozIconURL,
   description: 'Convierte voz en texto para controlar tus proyectos.',
-  tags: ['robotica'],
+  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  url: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/vozatexto.js'
+  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/vozatexto.js'
 }]);
 const galleryLoading = {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
