@@ -33403,7 +33403,9 @@ const isTrustedExtension = url =>
 // Always trust our official extension repostiory.
 url.startsWith('https://extensions.turbowarp.org/') ||
 // For development.
-url.startsWith('http://localhost:8000/') || extensionsTrustedByUser.has(url);
+url.startsWith('http://localhost:8000/') ||
+// Trust @roboticaencolegios extensions from jsDelivr CDN
+url.startsWith('https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/') || extensionsTrustedByUser.has(url);
 
 /**
  * Set of fetch resource hosts that were manually trusted by the user.
