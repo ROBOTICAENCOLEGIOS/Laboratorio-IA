@@ -12887,7 +12887,17 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.mainMenu
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.fileGroup
-    }, this.props.errors.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_tw_menu_label_jsx__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+      className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.menuBarItem
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("img", {
+      id: "logo_img",
+      src: "https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/LOGO_REC.png",
+      alt: "Laboratorio REC",
+      className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.scratchLogo,
+      draggable: false
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
+      className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.collapsibleLabel
+    }, "Laboratorio REC")), this.props.errors.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_tw_menu_label_jsx__WEBPACK_IMPORTED_MODULE_18__["default"], {
       open: this.props.errorsMenuOpen,
       onOpen: this.props.onClickErrors,
       onClose: this.props.onRequestCloseErrors
@@ -41555,11 +41565,8 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
 }]);
 const galleryLoading = {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
-    defaultMessage: "{APP_NAME} Extension Gallery",
-    id: "tw.extensionGallery.name",
-    values: {
-      APP_NAME: _brand__WEBPACK_IMPORTED_MODULE_37__["APP_NAME"]
-    }
+    defaultMessage: "TurboWarp Extension Gallery",
+    id: "tw.extensionGallery.name"
   }),
   href: 'https://extensions.turbowarp.org/',
   extensionId: 'gallery',
@@ -41575,11 +41582,8 @@ const galleryLoading = {
 };
 const galleryMore = {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
-    defaultMessage: "{APP_NAME} Extension Gallery",
-    id: "tw.extensionGallery.name",
-    values: {
-      APP_NAME: _brand__WEBPACK_IMPORTED_MODULE_37__["APP_NAME"]
-    }
+    defaultMessage: "TurboWarp Extension Gallery",
+    id: "tw.extensionGallery.name"
   }),
   href: 'https://extensions.turbowarp.org/',
   extensionId: 'gallery',
@@ -41595,11 +41599,8 @@ const galleryMore = {
 };
 const galleryError = {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
-    defaultMessage: "{APP_NAME} Extension Gallery",
-    id: "tw.extensionGallery.name",
-    values: {
-      APP_NAME: _brand__WEBPACK_IMPORTED_MODULE_37__["APP_NAME"]
-    }
+    defaultMessage: "TurboWarp Extension Gallery",
+    id: "tw.extensionGallery.name"
   }),
   href: 'https://extensions.turbowarp.org/',
   extensionId: 'gallery',
@@ -42113,7 +42114,9 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   tag: 'tw',
   intlLabel: _brand__WEBPACK_IMPORTED_MODULE_0__["APP_NAME"]
-}]);
+}
+// Note: @roboticaencolegios tag is intentionally excluded to avoid redundant filter
+]);
 
 /***/ }),
 
