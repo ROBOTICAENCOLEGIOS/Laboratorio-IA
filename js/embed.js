@@ -11721,7 +11721,7 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("img", {
       id: "logo_img",
-      src: "https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/LOGO_REC.png",
+      src: "https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/LOGO_REC-removebg-preview.png",
       alt: "Laboratorio REC",
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.scratchLogo,
       draggable: false,
@@ -12087,7 +12087,7 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_button_button_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.feedbackButton
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_3__["FormattedMessage"], {
-      defaultMessage: "Instagram @roboticaencolegios",
+      defaultMessage: "Instagram Laboratorio REC",
       id: "tw.feedbackButton"
     }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.accountInfoGroup
@@ -33406,7 +33406,7 @@ const isTrustedExtension = url =>
 url.startsWith('https://extensions.turbowarp.org/') ||
 // For development.
 url.startsWith('http://localhost:8000/') ||
-// Trust @roboticaencolegios extensions from jsDelivr CDN
+// Trust extensions from CDN
 url.startsWith('https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/') || extensionsTrustedByUser.has(url);
 
 /**
