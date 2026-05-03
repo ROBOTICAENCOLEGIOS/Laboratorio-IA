@@ -11715,13 +11715,22 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.fileGroup
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-      className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.menuBarItem
+      className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.menuBarItem,
+      style: {
+        backgroundColor: 'transparent'
+      }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("img", {
       id: "logo_img",
       src: "https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/LOGO_REC.png",
       alt: "Laboratorio REC",
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.scratchLogo,
-      draggable: false
+      draggable: false,
+      style: {
+        backgroundColor: 'transparent !important',
+        mixBlendMode: 'multiply',
+        padding: 0,
+        margin: 0
+      }
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.collapsibleLabel
     }, "Laboratorio REC")), this.props.errors.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_tw_menu_label_jsx__WEBPACK_IMPORTED_MODULE_18__["default"], {
@@ -38893,7 +38902,6 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   extensionId: 'extensionpcb',
   iconURL: arduinoIconURL,
   description: 'Controla componentes electrónicos y sensores Arduino.',
-  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
@@ -38903,7 +38911,6 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   extensionId: 'iamanos',
   iconURL: manosIconURL,
   description: 'Controla manos robóticas con gestos y movimientos.',
-  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
@@ -38913,7 +38920,6 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   extensionId: 'senialestransito',
   iconURL: transitoIconURL,
   description: 'Reconoce señales de tránsito usando inteligencia artificial.',
-  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
@@ -38923,7 +38929,6 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   extensionId: 'vozatexto',
   iconURL: vozIconURL,
   description: 'Convierte voz en texto para controlar tus proyectos.',
-  tags: ['@roboticaencolegios'],
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
