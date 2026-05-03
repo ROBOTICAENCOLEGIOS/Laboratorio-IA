@@ -1,8 +1,13 @@
 {
-  "short_name": "TurboWarp",
-  "name": "TurboWarp",
-  "description": "Mod of Scratch 3 with a compiler, dark mode, and more features.",
+  "short_name": "Laboratorio REC",
+  "name": "Laboratorio REC",
+  "description": "Editor de programación visual personalizado para educación robótica.",
   "icons": [
+    {
+      "src": "faviconrec.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
     {
       "src": "images/192.png",
       "type": "image/png",

@@ -11727,7 +11727,6 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
       draggable: false,
       style: {
         backgroundColor: 'transparent !important',
-        mixBlendMode: 'multiply',
         padding: 0,
         margin: 0
       }
