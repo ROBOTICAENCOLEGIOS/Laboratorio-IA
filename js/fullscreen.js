@@ -41257,7 +41257,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ([{
+
+// URLs de iconos de extensiones @roboticaencolegios
+const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/arduino.png';
+const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/manos.png';
+const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/transito.png';
+const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/voz.png';
+/* harmony default export */ __webpack_exports__["default"] = ([
+// Extensiones @roboticaencolegios - Prioridad al inicio
+{
+  name: 'Arduino PCB',
+  extensionId: 'extensionpcb',
+  iconURL: arduinoIconURL,
+  description: 'Controla componentes electrónicos y sensores Arduino.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/extensionpcb.js'
+}, {
+  name: 'Manos Robóticas',
+  extensionId: 'iamanos',
+  iconURL: manosIconURL,
+  description: 'Controla manos robóticas con gestos y movimientos.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js'
+}, {
+  name: 'Señales de Tránsito',
+  extensionId: 'senialestransito',
+  iconURL: transitoIconURL,
+  description: 'Reconoce señales de tránsito usando inteligencia artificial.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js'
+}, {
+  name: 'Voz a Texto',
+  extensionId: 'vozatexto',
+  iconURL: vozIconURL,
+  description: 'Convierte voz en texto para controlar tus proyectos.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js'
+}, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
     defaultMessage: "Music",
     id: "gui.extension.music.name"
@@ -41497,11 +41541,8 @@ __webpack_require__.r(__webpack_exports__);
   featured: true
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
-    defaultMessage: "{APP_NAME} Blocks",
-    id: "tw.twExtension.name",
-    values: {
-      APP_NAME: _brand__WEBPACK_IMPORTED_MODULE_37__["APP_NAME"]
-    }
+    defaultMessage: "TurboWarp Blocks",
+    id: "tw.twExtension.name"
   }),
   extensionId: 'tw',
   iconURL: _tw_tw_svg__WEBPACK_IMPORTED_MODULE_33___default.a,
@@ -41529,11 +41570,8 @@ __webpack_require__.r(__webpack_exports__);
 }]);
 const galleryLoading = {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
-    defaultMessage: "{APP_NAME} Extension Gallery",
-    id: "tw.extensionGallery.name",
-    values: {
-      APP_NAME: _brand__WEBPACK_IMPORTED_MODULE_37__["APP_NAME"]
-    }
+    defaultMessage: "TurboWarp Extension Gallery",
+    id: "tw.extensionGallery.name"
   }),
   href: 'https://extensions.turbowarp.org/',
   extensionId: 'gallery',
@@ -41549,11 +41587,8 @@ const galleryLoading = {
 };
 const galleryMore = {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
-    defaultMessage: "{APP_NAME} Extension Gallery",
-    id: "tw.extensionGallery.name",
-    values: {
-      APP_NAME: _brand__WEBPACK_IMPORTED_MODULE_37__["APP_NAME"]
-    }
+    defaultMessage: "TurboWarp Extension Gallery",
+    id: "tw.extensionGallery.name"
   }),
   href: 'https://extensions.turbowarp.org/',
   extensionId: 'gallery',
@@ -41569,11 +41604,8 @@ const galleryMore = {
 };
 const galleryError = {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
-    defaultMessage: "{APP_NAME} Extension Gallery",
-    id: "tw.extensionGallery.name",
-    values: {
-      APP_NAME: _brand__WEBPACK_IMPORTED_MODULE_37__["APP_NAME"]
-    }
+    defaultMessage: "TurboWarp Extension Gallery",
+    id: "tw.extensionGallery.name"
   }),
   href: 'https://extensions.turbowarp.org/',
   extensionId: 'gallery',
@@ -42087,7 +42119,9 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   tag: 'tw',
   intlLabel: _brand__WEBPACK_IMPORTED_MODULE_0__["APP_NAME"]
-}]);
+}
+// Note: @roboticaencolegios tag is intentionally excluded to avoid redundant filter
+]);
 
 /***/ }),
 
