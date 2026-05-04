@@ -38899,7 +38899,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/extensionpcb.js',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/extensionpcb.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Manos Robóticas',
@@ -38910,7 +38910,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/iamanos.js',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Señales de Tránsito',
@@ -38921,7 +38921,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/senialestransito.js',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Voz a Texto',
@@ -38932,7 +38932,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/vozatexto.js',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js',
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
