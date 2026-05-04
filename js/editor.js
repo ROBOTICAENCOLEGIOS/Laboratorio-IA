@@ -41280,7 +41280,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js?v=666',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@f755231/extensionesrec/iamanos.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Señales de Tránsito',
