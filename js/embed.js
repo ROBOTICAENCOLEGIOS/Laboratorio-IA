@@ -33398,6 +33398,8 @@ const manuallyTrustExtension = url => {
 const isTrustedExtension = url =>
 // Always trust our official extension repostiory.
 url.startsWith('https://extensions.turbowarp.org/') ||
+// Trust @roboticaencolegios extensions.
+url.startsWith('https://roboticaencolegios.github.io/') ||
 // For development.
 url.startsWith('http://localhost:8000/') || extensionsTrustedByUser.has(url);
 
@@ -38896,7 +38898,8 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/extensionpcb.js',
+  useUnsandboxed: true,
+  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/extensionesrec/extensionpcb.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Manos Robóticas',
@@ -38906,7 +38909,8 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js',
+  useUnsandboxed: true,
+  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/extensionesrec/iamanos.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Señales de Tránsito',
@@ -38916,7 +38920,8 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js',
+  useUnsandboxed: true,
+  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/extensionesrec/senialestransito.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Voz a Texto',
@@ -38926,7 +38931,8 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js',
+  useUnsandboxed: true,
+  extensionURL: 'https://roboticaencolegios.github.io/ia-robotica/extensionesrec/vozatexto.js',
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
