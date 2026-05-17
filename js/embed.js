@@ -38901,7 +38901,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@d8fa630/extensionesrec/extensionpcb.js',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/extensionpcb.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Manos Robóticas',
