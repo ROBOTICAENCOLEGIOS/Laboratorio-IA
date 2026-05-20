@@ -13184,10 +13184,10 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
       target: "_blank",
       style: {
         textDecoration: 'none',
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold'
       }
-    }, "Feedback de @roboticaencolegios"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_divider_divider_jsx__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    }, "Instagram de @roboticaencolegios"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_divider_divider_jsx__WEBPACK_IMPORTED_MODULE_14__["default"], {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.divider
     }), this.props.canEditTitle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
       className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(_menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.menuBarItem, _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.growable)
