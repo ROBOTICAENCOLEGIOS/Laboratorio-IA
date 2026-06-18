@@ -27013,7 +27013,8 @@ class LibraryItem extends react__WEBPACK_IMPORTED_MODULE_2___default.a.PureCompo
   }
   render() {
     const iconMd5 = this.curIconMd5();
-    const iconURL = iconMd5 ? "https://cdn.assets.scratch.mit.edu/internalapi/asset/".concat(iconMd5, "/get/") : this.props.iconRawURL;
+    const isLocalJeep = (iconMd5 && iconMd5.includes('e05121e01d233ba56399226226db0fca')) || (this.props.name && this.props.name.toLowerCase().includes('recrobot'));
+    const iconURL = isLocalJeep ? "static/assets/e05121e01d233ba56399226226db0fca.svg" : (iconMd5 ? "https://cdn.assets.scratch.mit.edu/internalapi/asset/".concat(iconMd5, "/get/") : this.props.iconRawURL);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_library_item_library_item_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
       intl: this.props.intl,
       bluetoothRequired: this.props.bluetoothRequired,
@@ -37137,7 +37138,7 @@ const defaultProject = translator => {
     dataFormat: 'SVG',
     data: encoder.encode(_raw_loader_cd21514d0531fdffb22204e0ec5ed84a_svg__WEBPACK_IMPORTED_MODULE_2___default.a)
   }, {
-    id: '927d672925e7b99f7813735c484c6922',
+    id: '550774b7579a54151bfb23983342946c',
     assetType: 'ImageVector',
     dataFormat: 'SVG',
     data: encoder.encode(_raw_loader_dango_cat_svg__WEBPACK_IMPORTED_MODULE_3___default.a)
@@ -37218,12 +37219,12 @@ const projectData = translateFunction => {
       comments: {},
       currentCostume: 0,
       costumes: [{
-        assetId: '927d672925e7b99f7813735c484c6922',
+        assetId: '550774b7579a54151bfb23983342946c',
         name: translator(messages.costume, {
           index: 1
         }),
         bitmapResolution: 1,
-        md5ext: '927d672925e7b99f7813735c484c6922.svg',
+        md5ext: '550774b7579a54151bfb23983342946c.svg',
         dataFormat: 'svg',
         rotationCenterX: 30.74937882782359,
         rotationCenterY: 58.864768144346826
@@ -38898,7 +38899,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/extensionpcb.js',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/extensionpcb.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'Manos Robóticas',
@@ -38909,7 +38910,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'Señales de Tránsito',
@@ -38920,7 +38921,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js?v=2',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'Voz a Texto',
@@ -38931,7 +38932,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js?v=2',
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
@@ -42071,6 +42072,9 @@ class Storage extends _turbowarp_scratch_storage__WEBPACK_IMPORTED_MODULE_0___de
     this.assetHost = assetHost;
   }
   getAssetGetConfig(asset) {
+    if (asset && asset.assetId === 'e05121e01d233ba56399226226db0fca') {
+      return { url: new URL('static/assets/e05121e01d233ba56399226226db0fca.svg', location.href).href };
+    }
     return "".concat(this.assetHost, "/internalapi/asset/").concat(asset.assetId, ".").concat(asset.dataFormat, "/get/");
   }
   getAssetCreateConfig(asset) {
