@@ -35777,7 +35777,7 @@ url.startsWith('https://roboticaencolegios.github.io/') ||
 // Trust jsDelivr CDN for @roboticaencolegios extensions.
 url.startsWith('https://cdn.jsdelivr.net/') ||
 // For development.
-url.startsWith('http://localhost:8000/') || extensionsTrustedByUser.has(url);
+url.startsWith('http://localhost:') || url.startsWith('http://127.0.0.1:') || extensionsTrustedByUser.has(url);
 
 /**
  * Set of fetch resource hosts that were manually trusted by the user.
@@ -41260,6 +41260,10 @@ const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-
 const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/manos.png';
 const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/transito.png';
 const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/voz.png';
+const _isLocalDev = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+const emocionesIconURL = _isLocalDev
+  ? 'ia-robotica/iconos_rec/REC%20IA%20emociones.png'
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20emociones.png';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {
@@ -41305,6 +41309,19 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   unsandboxed: true,
   useUnsandboxed: true,
   extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js?t=' + Date.now(),
+  tags: ['@roboticaencolegios']
+}, {
+  name: 'IA: Emociones Rostro',
+  extensionId: 'iaEmocionesREC',
+  iconURL: emocionesIconURL,
+  description: 'Detecta emociones del rostro (FELIZ, TRISTE, ENOJADO, SORPRENDIDO, NEUTRAL) y si la boca está abierta, usando IA en vivo.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  useUnsandboxed: true,
+  extensionURL: _isLocalDev
+    ? window.location.origin + '/ia-robotica/extensionesrec/iaemociones.js'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iaemociones.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
