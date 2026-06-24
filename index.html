@@ -197,5 +197,75 @@
       if (document.title !== t) document.title = t;
     }).observe(document.querySelector('title'), { childList: true });
   </script>
+
+  <script>
+    /* ════════════════════════════════════════════════════════════════════════
+       REC Dynamic Extension Loader
+       Resuelve el SHA del último commit en main para invalidar el caché de
+       jsDelivr automáticamente en cada push, sin tocar URLs manualmente.
+       ════════════════════════════════════════════════════════════════════════ */
+    (async function recDynamicLoader() {
+      const REPO = 'ROBOTICAENCOLEGIOS/ia-robotica';
+
+      const EXTENSIONS = [
+        'extensionesrec/extensionpcb.js',
+        'extensionesrec/extensionAutonoma.js',
+        'extensionesrec/iamanos.js',
+        'extensionesrec/iaemociones.js',
+        'extensionesrec/senialestransito.js',
+        'extensionesrec/iaobjetos.js',
+        'extensionesrec/iateachable.js',
+      ];
+
+      // ── Paso 1: Resolver el SHA del último commit en main ────────────────
+      // Fallback a 'main' si la API de GitHub no responde (rate-limit / offline)
+      let latestSha = 'main';
+      try {
+        const resp = await fetch(
+          `https://api.github.com/repos/${REPO}/commits/main`,
+          { headers: { Accept: 'application/vnd.github.v3+json' }, cache: 'no-store' }
+        );
+        if (resp.ok) {
+          const json = await resp.json();
+          latestSha = json.sha;
+          console.info('[REC Loader] SHA resuelto:', latestSha.slice(0, 7));
+        } else {
+          console.warn('[REC Loader] API respondió', resp.status, '— usando rama "main" como fallback.');
+        }
+      } catch (e) {
+        console.warn('[REC Loader] API de GitHub no disponible, usando rama "main":', e.message);
+      }
+
+      // ── Paso 2: Construir URLs con el SHA dinámico ───────────────────────
+      // Expuesto en window.REC_EXTENSION_URLS para uso externo (debug, proyectos)
+      window.REC_EXTENSION_URLS = EXTENSIONS.map(
+        path => `https://cdn.jsdelivr.net/gh/${REPO}@${latestSha}/${path}`
+      );
+      console.info('[REC Loader] URLs listas (sha: ' + latestSha.slice(0, 7) + '):', window.REC_EXTENSION_URLS);
+
+      // ── Paso 3: Esperar al VM de TurboWarp ─────────────────────────────
+      const vm = await new Promise((resolve, reject) => {
+        if (window.vm) return resolve(window.vm);
+        const TIMEOUT_MS = 20000;
+        const t0 = Date.now();
+        const id = setInterval(() => {
+          if (window.vm) { clearInterval(id); resolve(window.vm); }
+          else if (Date.now() - t0 > TIMEOUT_MS) { clearInterval(id); reject(new Error('TurboWarp VM no disponible tras ' + TIMEOUT_MS / 1000 + 's')); }
+        }, 250);
+      }).catch(e => { console.warn('[REC Loader]', e.message); return null; });
+
+      if (!vm) return;
+
+      // ── Paso 4: Cargar extensiones en orden ─────────────────────────────
+      for (const url of window.REC_EXTENSION_URLS) {
+        try {
+          await vm.extensionManager.loadExtensionURL(url);
+          console.info('[REC Loader] ✅', url);
+        } catch (e) {
+          console.warn('[REC Loader] ⚠️ Error cargando', url, '—', e.message);
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
