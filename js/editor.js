@@ -11345,7 +11345,16 @@ class LibraryComponent extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Comp
     }
     let filteredItems = favoriteItems.concat(nonFavoriteItems);
     if (this.state.selectedTag !== 'all') {
-      filteredItems = filteredItems.filter(dataItem => dataItem.tags && dataItem.tags.map(i => i.toLowerCase()).includes(this.state.selectedTag));
+      const _isRecFilter = this.state.selectedTag === '@roboticaencolegios';
+      filteredItems = filteredItems.filter(dataItem => {
+        if (_isRecFilter) {
+          const _id = (dataItem.extensionId || '').toLowerCase();
+          return _id.includes('rec') ||
+                 _id === 'extensionpcb' ||
+                 (dataItem.tags && dataItem.tags.map(i => i.toLowerCase()).includes('@roboticaencolegios'));
+        }
+        return dataItem.tags && dataItem.tags.map(i => i.toLowerCase()).includes(this.state.selectedTag);
+      });
     }
     if (this.state.filterQuery) {
       filteredItems = filteredItems.filter(dataItem => {
@@ -42183,11 +42192,8 @@ __webpack_require__.r(__webpack_exports__);
   tag: 'scratch',
   intlLabel: 'Scratch'
 }, {
-  tag: 'tw',
-  intlLabel: _brand__WEBPACK_IMPORTED_MODULE_0__["APP_NAME"]
-}, {
   tag: '@roboticaencolegios',
-  intlLabel: 'Robotica en Colegios'
+  intlLabel: 'RoboticaEnColegios R.E.C.'
 }]);
 
 /***/ }),
