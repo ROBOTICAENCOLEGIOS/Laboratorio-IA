@@ -41264,6 +41264,12 @@ const _isLocalDev = window.location.hostname === '127.0.0.1' || window.location.
 const emocionesIconURL = _isLocalDev
   ? 'ia-robotica/iconos_rec/REC%20IA%20emociones.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20emociones.png';
+const objetosIconURL = _isLocalDev
+  ? 'ia-robotica/iconos_rec/REC%20IA%20objetos.png'
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20objetos.png';
+const teachableIconURL = _isLocalDev
+  ? 'ia-robotica/iconos_rec/REC%20IA%20teachable.png'
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20teachable.png';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {
@@ -41322,6 +41328,32 @@ const emocionesIconURL = _isLocalDev
   extensionURL: _isLocalDev
     ? window.location.origin + '/ia-robotica/extensionesrec/iaemociones.js'
     : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iaemociones.js?t=' + Date.now(),
+  tags: ['@roboticaencolegios']
+}, {
+  name: 'IA: Detección de Objetos',
+  extensionId: 'iaObjetosREC',
+  iconURL: objetosIconURL,
+  description: 'Detecta objetos cotidianos en tiempo real (PERSONA, GATO, PERRO, AUTO, CELULAR y más) usando IA COCO-SSD.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  useUnsandboxed: true,
+  extensionURL: _isLocalDev
+    ? window.location.origin + '/ia-robotica/extensionesrec/iaobjetos.js'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iaobjetos.js?t=' + Date.now(),
+  tags: ['@roboticaencolegios']
+}, {
+  name: 'IA: Teachable Machine',
+  extensionId: 'iaTeachableREC',
+  iconURL: teachableIconURL,
+  description: 'Cargá tu propio modelo de Google Teachable Machine y detectá cualquier imagen que hayas entrenado.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  useUnsandboxed: true,
+  extensionURL: _isLocalDev
+    ? window.location.origin + '/ia-robotica/extensionesrec/iateachable.js'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iateachable.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
