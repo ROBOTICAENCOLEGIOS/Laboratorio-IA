@@ -41258,17 +41258,6 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {
-  name: 'Arduino PCB',
-  extensionId: 'extensionpcb',
-  iconURL: arduinoIconURL,
-  description: 'Controla componentes electrónicos y sensores Arduino.',
-  featured: true,
-  incompatibleWithScratch: true,
-  unsandboxed: true,
-  useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/extensionpcb.js?t=' + Date.now(),
-  tags: ['@roboticaencolegios']
-}, {
   name: 'Manos Robóticas',
   extensionId: 'iamanos',
   iconURL: manosIconURL,
