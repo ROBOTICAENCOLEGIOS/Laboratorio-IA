@@ -38899,7 +38899,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js?t=' + Date.now(),
+  extensionURL: new URL('extensionesrec/iamanos.js', document.baseURI).href + '?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'Señales de Tránsito',
@@ -38910,7 +38910,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js?t=' + Date.now(),
+  extensionURL: new URL('extensionesrec/senialestransito.js', document.baseURI).href + '?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'Voz a Texto',
@@ -38921,7 +38921,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js?t=' + Date.now(),
+  extensionURL: new URL('extensionesrec/vozatexto.js', document.baseURI).href + '?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
