@@ -35785,6 +35785,8 @@ url.startsWith('https://extensions.turbowarp.org/') ||
 url.startsWith('https://roboticaencolegios.github.io/') ||
 // Trust jsDelivr CDN for @roboticaencolegios extensions.
 url.startsWith('https://cdn.jsdelivr.net/') ||
+// Trust laboratoriorec.com.ar production domain (extensiones locales unsandboxed).
+url.startsWith('https://laboratoriorec.com.ar/') ||
 // For development.
 url.startsWith('http://localhost:') || url.startsWith('http://127.0.0.1:') || extensionsTrustedByUser.has(url);
 
@@ -41279,9 +41281,23 @@ const objetosIconURL = _isLocalDev
 const teachableIconURL = _isLocalDev
   ? 'ia-robotica/iconos_rec/REC%20IA%20teachable.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20teachable.png';
+const _recLocalBase = new URL('extensionesrec/', document.baseURI).href;
+const jeepIconURL = _recLocalBase + 'RobotJeepvirtual.png';
+const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {
+  name: 'Robot Jeep Virtual',
+  extensionId: 'robotJeepVirtualREC',
+  iconURL: jeepIconURL,
+  description: 'Simulá y programá el Robot Jeep: física 2D, sensores, LEDs y audio 100% offline.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  useUnsandboxed: true,
+  extensionURL: jeepExtURL,
+  tags: ['@roboticaencolegios']
+}, {
   name: 'Manos Robóticas',
   extensionId: 'iamanos',
   iconURL: manosIconURL,
