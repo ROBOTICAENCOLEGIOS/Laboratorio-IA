@@ -1,118 +1,194 @@
-// ── REESCRITURA: Sprite nativo en el escenario de Scratch ──────────────────
-(function(Scratch) {
+// ── Robot Jeep Virtual REC v2.2 ─────────────────────────────────────────────
+// Enlaza al sprite preexistente "RECRobotJeepAuto". Sin vm.addSprite().
+// Sensor de línea: renderer.sampleColor4b en el punto sensor delantero.
+// Sensores de distancia calibrados. Motores sin fricción (persistentes).
+(function (Scratch) {
   'use strict';
+
   if (!Scratch.extensions.unsandboxed) {
     throw new Error('Robot Jeep Virtual requiere modo unsandboxed.');
   }
 
-  // ─── Constantes de física ──────────────────────────────────────────────────
-  const FRICTION = 0.88;
-  const MAX_V    = 160;   // unidades Scratch/s (≈ px del escenario)
-  const MAX_W    = 150;   // grados/s
+  // ── Constantes ──────────────────────────────────────────────────────────
+  const MAX_V        = 160;   // Scratch units/s al 100 %
+  const TURN_SCALE   = 1.8;   // grados/s por unidad de diferencia (vR - vL)
+  const SENSOR_DIST  = 36;    // Scratch units al frente del centro (sensor de piso)
+  const LINE_THRESH  = 60;    // umbral RGB para considerar color negro/línea
+  const BORDER_OFFSET = 10;   // cm a restar cuando el rayo impacta el borde del escenario
+  const SPRITE_OFFSET = 27;   // cm a restar cuando el rayo impacta otro sprite
+  const SCALE_CM     = 0.42;  // factor de conversión Scratch units → cm
 
   const NOTES = {
-    DO:261.63, RE:293.66, MI:329.63, FA:349.23,
-    SOL:392.00, LA:440.00, SI:493.88, DO5:523.25
+    DO: 261.63, RE: 293.66, MI: 329.63, FA: 349.23,
+    SOL: 392.00, LA: 440.00, SI: 493.88, DO5: 523.25
   };
 
-  // ─── Nombre del sprite ─────────────────────────────────────────────────────
-  const SPRITE_NAME = 'RECrobotJeepAuto';
+  // Nombre exacto del sprite que ya viene precargado en la plataforma
+  const SPRITE_NAME = 'RECRobotJeepAuto';
 
-  // ─── Estado del Jeep (coordenadas Scratch: y+ arriba) ─────────────────────
-  const jeep = { x: 0, y: 0, dir: 90, v: 0, w: 0, leftLed: false, rightLed: false };
-  let ultraDist = 100, onLine = false, rafId = null, lastTs = null;
+  // ── Estado del Jeep ─────────────────────────────────────────────────────
+  const jeep = { x: 0, y: 0, dir: 90, vL: 0, vR: 0 };
+  let homePos   = { x: 0, y: 0, dir: 90 };
+  let ultraDist = 100;
+  let onLine    = false;
+  let rafId     = null;
+  let lastSetX  = 0;
+  let lastSetY  = 0;
+  let lastTs    = null;
 
-  // ─── Audio Web API (100% offline) ─────────────────────────────────────────
+  // ── Estado de LEDs ─────────────────────────────────────────────────────────
+  // LED 1 = faro DERECHO  (cy=16 en el SVG, parte superior de la imagen)
+  // LED 2 = faro IZQUIERDO (cy=47 en el SVG, parte inferior de la imagen)
+  let led1On    = false;
+  let led2On    = false;
+  let led1Color = '#ffff00';   // color independiente por faro
+  let led2Color = '#ffff00';
+  let baseSvgText = null;
+  let ledSkinId   = null;
+
+  // ── Audio Web API (offline) ─────────────────────────────────────────────
   let audioCtx = null;
   function getAudio() {
     return audioCtx || (audioCtx = new (window.AudioContext || window.webkitAudioContext)());
   }
   function playTone(freq, type, dur) {
     try {
-      const ac = getAudio(), osc = ac.createOscillator(), g = ac.createGain();
-      osc.type = type || 'sine';
+      const ac  = getAudio();
+      const osc = ac.createOscillator();
+      const g   = ac.createGain();
+      osc.type  = type || 'sine';
       osc.frequency.setValueAtTime(freq, ac.currentTime);
       g.gain.setValueAtTime(0.28, ac.currentTime);
       g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
-      osc.connect(g); g.connect(ac.destination);
-      osc.start(); osc.stop(ac.currentTime + dur);
-    } catch(e) {}
+      osc.connect(g);
+      g.connect(ac.destination);
+      osc.start();
+      osc.stop(ac.currentTime + dur);
+    } catch (e) { /* ignorar */ }
   }
 
-  // ─── SVG del Jeep (top-down, frente hacia la derecha = dir 90) ────────────
-  // Disfraz 0: LEDs apagados  |  Disfraz 1: LEDs encendidos
-  function makeJeepSVG(leftLed, rightLed) {
-    const ll = (leftLed)  ? '#FFEE58' : '#1a1a1a';
-    const rl = (rightLed) ? '#FFEE58' : '#1a1a1a';
-    const ls = (leftLed)  ? '#FDD835' : '#555';
-    const rs = (rightLed) ? '#FDD835' : '#555';
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="52" viewBox="0 0 80 52">
-  <rect x="4" y="6" width="68" height="40" rx="5" fill="#E64A19" stroke="#BF360C" stroke-width="2"/>
-  <rect x="12" y="14" width="36" height="24" rx="3" fill="#BF360C"/>
-  <rect x="52" y="14" width="14" height="24" rx="2" fill="rgba(130,205,255,0.52)" stroke="#90CAF9" stroke-width="1"/>
-  <rect x="0"  y="3"  width="16" height="10" rx="2" fill="#212121" stroke="#424242" stroke-width="0.8"/>
-  <rect x="62" y="3"  width="16" height="10" rx="2" fill="#212121" stroke="#424242" stroke-width="0.8"/>
-  <rect x="0"  y="39" width="16" height="10" rx="2" fill="#212121" stroke="#424242" stroke-width="0.8"/>
-  <rect x="62" y="39" width="16" height="10" rx="2" fill="#212121" stroke="#424242" stroke-width="0.8"/>
-  <circle cx="77" cy="15" r="5" fill="${ll}" stroke="${ls}" stroke-width="1.2"/>
-  <circle cx="77" cy="37" r="5" fill="${rl}" stroke="${rs}" stroke-width="1.2"/>
-  <rect x="74" y="22" width="9" height="8" rx="1" fill="#F50057" stroke="#C51162" stroke-width="1"/>
-</svg>`;
+  // ── Helpers VM ──────────────────────────────────────────────────────────
+  function getVM() {
+    return (Scratch && Scratch.vm) ? Scratch.vm : window.vm;
   }
 
-  // ─── Helpers de VM ────────────────────────────────────────────────────────
-  function getVM()     { return window.vm || Scratch.vm; }
+  // Busca el sprite por nombre exacto; si no lo encuentra usa el primer sprite.
   function getTarget() {
-    const vm = getVM(); if (!vm) return null;
-    return vm.runtime.targets.find(t => !t.isStage && t.sprite && t.sprite.name === SPRITE_NAME) || null;
-  }
-
-  // ─── Registrar SVG en storage (TurboWarp / scratch-storage) ──────────────
-  function storeAsset(vm, svgString, assetId) {
-    try {
-      const st = vm.runtime.storage;
-      if (!st || !st.AssetType) return;
-      const data = new TextEncoder().encode(svgString);
-      const asset = st.createAsset(st.AssetType.ImageVector, 'svg', data, assetId, false);
-      if (st.store) st.store(asset);
-    } catch(e) { console.warn('[Jeep] storeAsset:', e.message); }
-  }
-
-  // ─── Inyectar el Sprite en el escenario ───────────────────────────────────
-  async function addJeepSprite() {
     const vm = getVM();
-    if (!vm) { console.error('[Jeep] VM no disponible'); return; }
-
-    if (getTarget()) { startPhysics(); return; } // ya existe, solo arrancar física
-
-    const id0 = 'rec-jeep-leds-off-v2';
-    const id1 = 'rec-jeep-leds-on-v2';
-
-    storeAsset(vm, makeJeepSVG(false, false), id0);
-    storeAsset(vm, makeJeepSVG(true,  true),  id1);
-
-    const spriteJSON = JSON.stringify({
-      isStage: false, name: SPRITE_NAME,
-      variables: {}, lists: {}, broadcasts: {}, blocks: {}, comments: {},
-      currentCostume: 0,
-      costumes: [
-        { name: 'jeep-leds-off', bitmapResolution: 1, dataFormat: 'svg',
-          assetId: id0, md5ext: id0 + '.svg', rotationCenterX: 40, rotationCenterY: 26 },
-        { name: 'jeep-leds-on',  bitmapResolution: 1, dataFormat: 'svg',
-          assetId: id1, md5ext: id1 + '.svg', rotationCenterX: 40, rotationCenterY: 26 }
-      ],
-      sounds: [], volume: 100, visible: true,
-      x: 0, y: 0, size: 80, direction: 90,
-      draggable: true, rotationStyle: 'all around'
-    });
-
-    try {
-      await vm.addSprite(spriteJSON);
-      startPhysics();
-    } catch(e) { console.error('[Jeep] addSprite error:', e); }
+    if (!vm) return null;
+    const byName = vm.runtime.targets.find(
+      t => !t.isStage && t.sprite && t.sprite.name === SPRITE_NAME
+    );
+    if (byName) return byName;
+    // Fallback: primer sprite no-escenario disponible
+    return vm.runtime.targets.find(t => !t.isStage) || null;
   }
 
-  // ─── Bucle de física (RAF) ────────────────────────────────────────────────
+  // ── LED: obtener SVG original del disfraz ──────────────────────────────
+  // Intenta 2 métodos en orden:
+  //  1. costume.asset.data (Uint8Array en memoria del runtime)
+  //  2. fetch() del archivo en el servidor
+  async function fetchBaseSvg(target) {
+    if (baseSvgText) return true;
+
+    // Método 1: desde el asset en memoria del runtime
+    try {
+      const costume = target.sprite && target.sprite.costumes[0];
+      if (costume && costume.asset && costume.asset.data) {
+        baseSvgText = new TextDecoder().decode(costume.asset.data);
+        if (baseSvgText && baseSvgText.includes('<svg')) {
+          console.info('[Jeep LED] SVG obtenido desde costume.asset.data');
+          return true;
+        }
+        baseSvgText = null;
+      }
+    } catch (e) { /* continuar con método 2 */ }
+
+    // Método 2: fetch desde el servidor
+    try {
+      const base    = new URL('extensionesrec/', document.baseURI).href;
+      const assetId = (target.sprite && target.sprite.costumes[0] &&
+                       target.sprite.costumes[0].assetId) ||
+                      '4ef9ac16f7933b898664438a0767a697';
+      const resp    = await fetch(base + assetId + '.svg');
+      if (resp.ok) {
+        baseSvgText = await resp.text();
+        console.info('[Jeep LED] SVG obtenido desde servidor:', base + assetId + '.svg');
+        return true;
+      }
+    } catch (e) {
+      console.warn('[Jeep LED] fetchBaseSvg falló:', e.message);
+    }
+
+    return false;
+  }
+
+  // ── LED: generar SVG compuesto (imagen original + círculos de faro) ──────
+  // cx=74  → frente del Jeep (borde derecho del viewBox)
+  // cy=16  → LED 1 (faro DERECHO),  5 px más adentro que el borde superior
+  // cy=47  → LED 2 (faro IZQUIERDO), 5 px más adentro que el borde inferior
+  function makeLedSvg(baseSvg) {
+    const defs =
+      '<defs><filter id="jglow" x="-60%" y="-60%" width="220%" height="220%">' +
+      '<feGaussianBlur stdDeviation="3" result="blur"/>' +
+      '<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>' +
+      '</filter></defs>';
+    let circles = '';
+    if (led1On) {
+      circles += `<circle cx="74" cy="21" r="5" fill="${led1Color}" opacity="0.95" filter="url(#jglow)"/>`;
+    }
+    if (led2On) {
+      circles += `<circle cx="74" cy="40" r="5" fill="${led2Color}" opacity="0.95" filter="url(#jglow)"/>`;
+    }
+    return baseSvg.replace('</svg>', defs + circles + '</svg>');
+  }
+
+  // ── LED: aplicar / retirar el skin compuesto ──────────────────────────────
+  function applyLedVisual() {
+    const t = getTarget();
+    if (!t) return;
+    const vm       = getVM();
+    const renderer = vm && vm.runtime && vm.runtime.renderer;
+    if (!renderer || !baseSvgText) return;
+
+    const anyOn = led1On || led2On;
+    if (anyOn) {
+      const ledSvg = makeLedSvg(baseSvgText);
+      if (ledSkinId === null) {
+        ledSkinId = renderer.createSVGSkin(ledSvg, [40, 31.5]);
+      } else {
+        renderer.updateSVGSkin(ledSkinId, ledSvg, [40, 31.5]);
+      }
+      renderer.updateDrawableSkinId(t.drawableID, ledSkinId);
+    } else {
+      // Restaurar skin original del costume 0
+      const origSkinId = t.sprite && t.sprite.costumes[0] && t.sprite.costumes[0].skinId;
+      if (origSkinId !== undefined) {
+        renderer.updateDrawableSkinId(t.drawableID, origSkinId);
+      }
+    }
+    vm.runtime.requestRedraw();
+  }
+
+  // ── Arranque: sincroniza estado con el sprite preexistente ───────────────
+  function syncAndStart() {
+    const t = getTarget();
+    if (!t) return false;
+    jeep.x   = t.x;
+    jeep.y   = t.y;
+    jeep.dir = t.direction;
+    homePos  = { x: t.x, y: t.y, dir: t.direction };
+    lastSetX = t.x;
+    lastSetY = t.y;
+    t.draggable = true;
+    if (!rafId) startPhysics();
+    // Pre-fetch del SVG para tener listos los LEDs sin demora
+    fetchBaseSvg(t).catch(() => {});
+    console.info('[Jeep] Enlazado a sprite "' + (t.sprite && t.sprite.name) + '" en (' + t.x + ',' + t.y + ')');
+    return true;
+  }
+
+  // ── Bucle de física (RAF) ────────────────────────────────────────────────
   function startPhysics() {
     if (rafId) return;
     lastTs = null;
@@ -124,189 +200,295 @@
     })(performance.now());
   }
 
-  // ─── Cinemática diferencial ───────────────────────────────────────────────
-  // Convenio Scratch: dir 0=arriba (+y), 90=derecha (+x), 180=abajo (-y)
-  // dx = sin(dir_rad), dy = cos(dir_rad)  →  x += v·sin·Δt, y += v·cos·Δt
+  // ── Cinemática diferencial — motores persistentes, sin fricción ──────────
   function physicsStep(dt) {
-    const rad = jeep.dir * Math.PI / 180;
-    jeep.x += jeep.v * Math.sin(rad) * dt;
-    jeep.y += jeep.v * Math.cos(rad) * dt;
-    jeep.dir = ((jeep.dir + jeep.w * dt) % 360 + 360) % 360;
+    const v    = (jeep.vL + jeep.vR) / 2;
+    const wDeg = (jeep.vR - jeep.vL) * TURN_SCALE;
+    const rad  = (jeep.dir * Math.PI) / 180;
 
-    jeep.v *= FRICTION;
-    jeep.w *= FRICTION;
-    if (Math.abs(jeep.v) < 0.4)  jeep.v = 0;
-    if (Math.abs(jeep.w) < 0.15) jeep.w = 0;
+    jeep.x  += v * Math.sin(rad) * dt;
+    jeep.y  += v * Math.cos(rad) * dt;
+    jeep.dir = (((jeep.dir + wDeg * dt) % 360) + 360) % 360;
 
-    // Límites del escenario Scratch (±240 x, ±180 y)
     jeep.x = Math.max(-230, Math.min(230, jeep.x));
     jeep.y = Math.max(-170, Math.min(170, jeep.y));
 
-    // Actualizar sensores y sprite
-    updateUltrasound();
     const t = getTarget();
-    if (t) {
-      t.setXY(jeep.x, jeep.y);
-      t.setDirection(jeep.dir);
-      updateLineSensor(t);
-      updateLedCostume(t);
+    if (!t) return;
+
+    // Detección de arrastre: compara posición del sprite vs lo que escribimos el frame anterior
+    const DRAG_THRESHOLD = 4;
+    const driftX = t.x - lastSetX;
+    const driftY = t.y - lastSetY;
+    if (Math.abs(driftX) > DRAG_THRESHOLD || Math.abs(driftY) > DRAG_THRESHOLD) {
+      jeep.x  = t.x;
+      jeep.y  = t.y;
+      jeep.vL = 0;
+      jeep.vR = 0;
+      homePos = { x: t.x, y: t.y, dir: jeep.dir };
     }
+
+    t.setXY(jeep.x, jeep.y);
+    t.setDirection(jeep.dir);
+    lastSetX = jeep.x;
+    lastSetY = jeep.y;
+
+    updateSensors(t);
   }
 
-  // ─── Ultrasonido: raycasting analítico hasta borde del escenario ──────────
-  // Proyecta el vector frontal e intersecta con los límites del stage (rectángulo).
-  function updateUltrasound() {
-    const rad = jeep.dir * Math.PI / 180;
-    const dx = Math.sin(rad);
-    const dy = Math.cos(rad);
+  // ── Sensores ─────────────────────────────────────────────────────────────
+  function updateSensors(target) {
+    const rad = (jeep.dir * Math.PI) / 180;
+    const dx  = Math.sin(rad);
+    const dy  = Math.cos(rad);
     const EPS = 1e-6;
-    let tMin = 999;
+    let tBorder = 9999;
+    let tSprite = 9999;
 
+    // Raycasting hasta bordes del escenario
     if (Math.abs(dx) > EPS) {
-      const t1 = (dx > 0) ? (230 - jeep.x) / dx : (-230 - jeep.x) / dx;
-      if (t1 > 0) tMin = Math.min(tMin, t1);
+      const t1 = dx > 0 ? (230 - jeep.x) / dx : (-230 - jeep.x) / dx;
+      if (t1 > 0) tBorder = Math.min(tBorder, t1);
     }
     if (Math.abs(dy) > EPS) {
-      const t2 = (dy > 0) ? (170 - jeep.y) / dy : (-170 - jeep.y) / dy;
-      if (t2 > 0) tMin = Math.min(tMin, t2);
+      const t2 = dy > 0 ? (170 - jeep.y) / dy : (-170 - jeep.y) / dy;
+      if (t2 > 0) tBorder = Math.min(tBorder, t2);
     }
 
-    // También revisar distancia a otros sprites
+    // Raycasting hacia otros sprites
     const vm = getVM();
     if (vm) {
-      vm.runtime.targets.forEach(t => {
-        if (t.isStage || (t.sprite && t.sprite.name === SPRITE_NAME)) return;
-        const dsx = t.x - jeep.x, dsy = t.y - jeep.y;
-        const proj = dsx * dx + dsy * dy;
-        if (proj > 0) {
-          const perp = Math.abs(dsx * dy - dsy * dx);
-          if (perp < 20) tMin = Math.min(tMin, proj);
+      vm.runtime.targets.forEach(spr => {
+        if (spr.isStage || spr === target) return;
+        const sx   = spr.x - jeep.x;
+        const sy   = spr.y - jeep.y;
+        const proj = sx * dx + sy * dy;
+        if (proj > 4) {
+          const perp = Math.abs(sx * dy - sy * dx);
+          if (perp < 22) tSprite = Math.min(tSprite, proj);
         }
       });
     }
 
-    ultraDist = Math.max(0, Math.round(tMin * 0.42));
-  }
-
-  // ─── Sensor de línea: color rojo del disfraz tocando negro del escenario ──
-  // El rectángulo rojo (#F50057) en la nariz del disfraz detecta líneas negras.
-  function updateLineSensor(target) {
-    try {
-      const vm = getVM();
-      const renderer = vm && vm.runtime && vm.runtime.renderer;
-      if (!renderer || target.drawableID === undefined) { onLine = false; return; }
-      onLine = !!(renderer.colorIsTouchingColor &&
-                  renderer.colorIsTouchingColor(target.drawableID, [245, 0, 87], [0, 0, 0], 15));
-    } catch(e) { onLine = false; }
-  }
-
-  // ─── LEDs: cambiar disfraz 0 (off) ↔ 1 (on) ──────────────────────────────
-  function updateLedCostume(target) {
-    const idx = (jeep.leftLed || jeep.rightLed) ? 1 : 0;
-    if (target.currentCostume !== idx) {
-      target.currentCostume = idx;
-      if (target.runtime && target.runtime.requestRedraw) target.runtime.requestRedraw();
+    // Distancia calibrada
+    let distCm;
+    if (tSprite < tBorder) {
+      distCm = Math.round(tSprite * SCALE_CM) - SPRITE_OFFSET;
+    } else {
+      distCm = Math.round(tBorder * SCALE_CM) - BORDER_OFFSET;
     }
+    ultraDist = Math.max(0, distCm);
+
+    // ── Sensor de línea: muestreo de píxel en el punto delantero ─────────
+    // Calcula el punto del sensor (SENSOR_DIST unidades adelante del centro).
+    // Usa renderer.sampleColor4b sobre todos los drawables EXCEPTO el Jeep.
+    // Si el pixel muestreado es negro (R,G,B < LINE_THRESH) → onLine = true.
+    try {
+      const renderer = vm && vm.runtime && vm.runtime.renderer;
+      if (renderer && renderer._visibleDrawList && renderer._allDrawables) {
+        const sensorX = jeep.x + SENSOR_DIST * dx;
+        const sensorY = jeep.y + SENSOR_DIST * dy;
+
+        // Lista de drawables visibles, excluyendo el sprite del Jeep
+        const drawables = renderer._visibleDrawList
+          .filter(id => id !== target.drawableID)
+          .map(id => ({ id, drawable: renderer._allDrawables[id] }))
+          .filter(d => d.drawable);
+
+        const pixel = new Uint8ClampedArray(4);
+        renderer.sampleColor4b([sensorX, sensorY], drawables, pixel);
+
+        // Negro: R, G, B todos por debajo del umbral y alpha sólido
+        onLine = pixel[0] < LINE_THRESH &&
+                 pixel[1] < LINE_THRESH &&
+                 pixel[2] < LINE_THRESH &&
+                 pixel[3] > 128;
+      }
+    } catch (e) { /* ignorar errores del renderer */ }
   }
 
-  // ─── Clase de extensión Scratch ───────────────────────────────────────────
-  class RobotJeepVirtual {
+  // ── Ícono de categoría: círculo naranja limpio ───────────────────────────
+  const MENU_ICON_URI =
+    'data:image/svg+xml;base64,' +
+    btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">' +
+         '<circle cx="20" cy="20" r="20" fill="#FF6B35"/>' +
+         '</svg>');
+
+  // ── Clase de extensión ───────────────────────────────────────────────────
+  class RobotJeepVirtualREC {
+    constructor() {
+      // Intentar enlazar al sprite preexistente (con reintentos)
+      const tryLink = () => {
+        if (!syncAndStart()) setTimeout(tryLink, 500);
+      };
+      const vm = getVM();
+      if (vm && vm.runtime) {
+        setTimeout(tryLink, 600);
+      } else {
+        // Esperar al VM antes de intentar
+        const waitVM = setInterval(() => {
+          if (getVM() && getVM().runtime) {
+            clearInterval(waitVM);
+            setTimeout(tryLink, 600);
+          }
+        }, 300);
+      }
+    }
+
     getInfo() {
       const base = new URL('extensionesrec/', document.baseURI).href;
       return {
-        id: 'robotJeepVirtualREC',
-        name: 'Robot Jeep Virtual',
-        color1: '#FF6B35', color2: '#E84315', color3: '#BF360C',
-        menuIconURI: base + 'RobotJeepvirtual.png',
+        id:          'robotJeepVirtualREC',
+        name:        'Robot Jeep Virtual',
+        color1:      '#FF6B35',
+        color2:      '#E84315',
+        color3:      '#BF360C',
+        menuIconURI: MENU_ICON_URI,
+        iconURL:     base + 'RobotJeepvirtual.png',
         blocks: [
           { blockType: Scratch.BlockType.LABEL, text: '🚙 Movimiento del Jeep' },
           {
-            opcode: 'moverAdelante', blockType: Scratch.BlockType.COMMAND,
-            text: 'mover adelante [VEL] %',
-            arguments: { VEL: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } }
-          },
-          {
-            opcode: 'moverAtras', blockType: Scratch.BlockType.COMMAND,
-            text: 'mover atrás [VEL] %',
-            arguments: { VEL: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } }
-          },
-          {
-            opcode: 'girarIzquierda', blockType: Scratch.BlockType.COMMAND,
-            text: 'girar izquierda [VEL] %',
-            arguments: { VEL: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } }
-          },
-          {
-            opcode: 'girarDerecha', blockType: Scratch.BlockType.COMMAND,
-            text: 'girar derecha [VEL] %',
-            arguments: { VEL: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } }
-          },
-          { opcode: 'detener', blockType: Scratch.BlockType.COMMAND, text: 'detener Jeep' },
-          { blockType: Scratch.BlockType.LABEL, text: '📡 Sensores' },
-          {
-            opcode: 'distanciaUltra', blockType: Scratch.BlockType.REPORTER,
-            text: 'distancia al obstáculo (cm)'
-          },
-          {
-            opcode: 'sensorLinea', blockType: Scratch.BlockType.BOOLEAN,
-            text: '¿sensor de línea activo?'
-          },
-          { blockType: Scratch.BlockType.LABEL, text: '💡 LEDs frontales' },
-          {
-            opcode: 'setLed', blockType: Scratch.BlockType.COMMAND,
-            text: 'LED [LADO] [EST]',
+            opcode: 'moveForward',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'Mover motor [SIDE] hacia ADELANTE a [PCT]%',
             arguments: {
-              LADO: { type: Scratch.ArgumentType.STRING, menu: 'LADOS', defaultValue: 'izquierdo' },
-              EST:  { type: Scratch.ArgumentType.STRING, menu: 'ONOFF', defaultValue: 'ON' }
+              SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
+              PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
             }
           },
-          { blockType: Scratch.BlockType.LABEL, text: '🔊 Audio offline' },
+          {
+            opcode: 'moveBackward',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'Mover motor [SIDE] hacia ATRAS a [PCT]%',
+            arguments: {
+              SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
+              PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
+            }
+          },
+          {
+            opcode: 'stopMotor',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'Detener motor [WHICH]',
+            arguments: {
+              WHICH: { type: Scratch.ArgumentType.STRING, menu: 'stopWhich', defaultValue: 'AMBOS' }
+            }
+          },
+          { opcode: 'resetPos', blockType: Scratch.BlockType.COMMAND, text: 'reiniciar posición del Jeep' },
+          { blockType: Scratch.BlockType.LABEL, text: '📡 Sensores' },
+          { opcode: 'distanceCm',   blockType: Scratch.BlockType.REPORTER, text: 'Distancia en cm' },
+          { opcode: 'lineDetected', blockType: Scratch.BlockType.BOOLEAN,  text: 'Detecta linea' },
+          { blockType: Scratch.BlockType.LABEL, text: '💡 LEDs frontales' },
+          {
+            opcode: 'lightOn',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'Encender Luz [LED] en color [COLOR]',
+            arguments: {
+              LED:   { type: Scratch.ArgumentType.STRING, menu: 'ledWhich', defaultValue: 'TODAS' },
+              COLOR: { type: Scratch.ArgumentType.COLOR,  defaultValue: '#ffff00' }
+            }
+          },
+          {
+            opcode: 'lightOff',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'Apagar Luz [LED]',
+            arguments: {
+              LED: { type: Scratch.ArgumentType.STRING, menu: 'ledWhich', defaultValue: 'TODAS' }
+            }
+          },
+          { blockType: Scratch.BlockType.LABEL, text: '🔊 Audio' },
           { opcode: 'bocina', blockType: Scratch.BlockType.COMMAND, text: 'sonar bocina' },
           {
-            opcode: 'tocarNota', blockType: Scratch.BlockType.COMMAND,
+            opcode: 'tocarNota',
+            blockType: Scratch.BlockType.COMMAND,
             text: 'tocar nota [NOTA] por [DUR] seg',
             arguments: {
-              NOTA: { type: Scratch.ArgumentType.STRING, menu: 'NOTAS', defaultValue: 'DO' },
+              NOTA: { type: Scratch.ArgumentType.STRING, menu: 'menuNotas', defaultValue: 'DO' },
               DUR:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 0.5 }
             }
           },
-          { blockType: Scratch.BlockType.LABEL, text: '🎮 Control' },
-          { opcode: 'iniciar',   blockType: Scratch.BlockType.COMMAND, text: 'iniciar Jeep en el escenario' },
-          { opcode: 'resetPos',  blockType: Scratch.BlockType.COMMAND, text: 'reiniciar posición del Jeep' }
         ],
         menus: {
-          LADOS: { acceptReporters: false, items: ['izquierdo', 'derecho'] },
-          ONOFF: { acceptReporters: false, items: ['ON', 'OFF'] },
-          NOTAS: { acceptReporters: true,  items: ['DO','RE','MI','FA','SOL','LA','SI','DO5'] }
+          motorSide: {
+            acceptReporters: false,
+            items: [
+              { text: 'IZQUIERDO / B', value: 'IZQ' },
+              { text: 'DERECHO / A',   value: 'DER' }
+            ]
+          },
+          stopWhich: {
+            acceptReporters: false,
+            items: [
+              { text: 'IZQUIERDO / B', value: 'IZQ' },
+              { text: 'DERECHO / A',   value: 'DER' },
+              { text: 'AMBOS',         value: 'AMBOS' }
+            ]
+          },
+          ledWhich:  { acceptReporters: false, items: ['1', '2', 'TODAS'] },
+          menuNotas: { acceptReporters: true,  items: ['DO','RE','MI','FA','SOL','LA','SI','DO5'] }
         }
       };
     }
 
-    iniciar()             { addJeepSprite(); }
-    moverAdelante({VEL})  { jeep.v =  Math.max(0, Math.min(100, +VEL)) / 100 * MAX_V; }
-    moverAtras({VEL})     { jeep.v = -Math.max(0, Math.min(100, +VEL)) / 100 * MAX_V; }
-    girarIzquierda({VEL}) { jeep.v = Math.max(0, Math.min(100, +VEL)) / 100 * (MAX_V * 0.6); jeep.w = -MAX_W; }
-    girarDerecha({VEL})   { jeep.v = Math.max(0, Math.min(100, +VEL)) / 100 * (MAX_V * 0.6); jeep.w =  MAX_W; }
-    detener()             { jeep.v = 0; jeep.w = 0; }
-    distanciaUltra()      { return ultraDist; }
-    sensorLinea()         { return onLine; }
-    setLed({LADO, EST}) {
-      const on = String(EST).toUpperCase() === 'ON';
-      if (String(LADO) === 'izquierdo') jeep.leftLed = on; else jeep.rightLed = on;
+    // ── Movimiento ────────────────────────────────────────────────────────
+    moveForward ({ SIDE, PCT }) {
+      const v = (Math.max(0, Math.min(100, +PCT)) / 100) * MAX_V;
+      if (SIDE === 'IZQ') jeep.vL = v; else jeep.vR = v;
     }
-    bocina() {
+    moveBackward ({ SIDE, PCT }) {
+      const v = -((Math.max(0, Math.min(100, +PCT)) / 100) * MAX_V);
+      if (SIDE === 'IZQ') jeep.vL = v; else jeep.vR = v;
+    }
+    stopMotor ({ WHICH }) {
+      if (WHICH === 'AMBOS') { jeep.vL = 0; jeep.vR = 0; }
+      else if (WHICH === 'IZQ') jeep.vL = 0;
+      else jeep.vR = 0;
+    }
+
+    // ── Sensores ──────────────────────────────────────────────────────────
+    distanceCm ()   { return ultraDist; }
+    lineDetected () { return onLine; }
+
+    // ── LEDs ──────────────────────────────────────────────────────────────
+    async lightOn ({ LED, COLOR }) {
+      const t = getTarget();
+      if (t && !baseSvgText) await fetchBaseSvg(t);
+      const c = COLOR || '#ffff00';
+      if (LED === '1' || LED === 'TODAS') { led1On = true; led1Color = c; }
+      if (LED === '2' || LED === 'TODAS') { led2On = true; led2Color = c; }
+      applyLedVisual();
+    }
+    lightOff ({ LED }) {
+      if (LED === '1' || LED === 'TODAS') led1On = false;
+      if (LED === '2' || LED === 'TODAS') led2On = false;
+      applyLedVisual();
+    }
+
+    // ── Audio ─────────────────────────────────────────────────────────────
+    bocina () {
       playTone(880, 'square', 0.15);
       setTimeout(() => playTone(660, 'square', 0.1), 190);
     }
-    tocarNota({NOTA, DUR}) {
-      playTone(NOTES[String(NOTA).toUpperCase()] || 440, 'sine', Number(DUR) || 0.5);
+    tocarNota ({ NOTA, DUR }) {
+      const freq = NOTES[String(NOTA).toUpperCase()] || 440;
+      playTone(freq, 'sine', Math.max(0.05, Number(DUR) || 0.5));
     }
-    resetPos() {
-      jeep.x = 0; jeep.y = 0; jeep.dir = 90; jeep.v = 0; jeep.w = 0;
-      jeep.leftLed = false; jeep.rightLed = false;
+
+    // ── Control ───────────────────────────────────────────────────────────
+    resetPos () {
+      jeep.x   = homePos.x;
+      jeep.y   = homePos.y;
+      jeep.dir = homePos.dir;
+      jeep.vL  = 0;
+      jeep.vR  = 0;
       const t = getTarget();
-      if (t) { t.setXY(0, 0); t.setDirection(90); }
+      if (t) {
+        t.setXY(homePos.x, homePos.y);
+        t.setDirection(homePos.dir);
+        lastSetX = homePos.x;
+        lastSetY = homePos.y;
+      }
     }
   }
 
-  Scratch.extensions.register(new RobotJeepVirtual());
+  Scratch.extensions.register(new RobotJeepVirtualREC());
 })(Scratch);

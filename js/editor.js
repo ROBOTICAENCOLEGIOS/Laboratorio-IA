@@ -11437,11 +11437,11 @@ class LibraryComponent extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Comp
       iconRawURL: ((dataItem && dataItem.assetId && typeof dataItem.assetId === 'string' && dataItem.assetId.includes('e05121e01d233ba56399226226db0fca')) || 
                (dataItem && dataItem.md5ext && typeof dataItem.md5ext === 'string' && dataItem.md5ext.includes('e05121e01d233ba56399226226db0fca')) ||
                (dataItem && dataItem.name && typeof dataItem.name === 'string' && dataItem.name.toLowerCase().includes('jeep')) ||
-               (dataItem && dataItem.name && typeof dataItem.name === 'string' && dataItem.name.toLowerCase().includes('recrobot'))) ? "static/assets/e05121e01d233ba56399226226db0fca.svg" : dataItem.rawURL,
+               (dataItem && dataItem.name && typeof dataItem.name === 'string' && dataItem.name.toLowerCase().includes('recrobot'))) ? (window.__recJeepIconURL || 'extensionesrec/RobotJeepvirtual.png') : dataItem.rawURL,
       icons: ((dataItem && dataItem.assetId && typeof dataItem.assetId === 'string' && dataItem.assetId.includes('e05121e01d233ba56399226226db0fca')) || 
                (dataItem && dataItem.md5ext && typeof dataItem.md5ext === 'string' && dataItem.md5ext.includes('e05121e01d233ba56399226226db0fca')) ||
                (dataItem && dataItem.name && typeof dataItem.name === 'string' && dataItem.name.toLowerCase().includes('jeep')) ||
-               (dataItem && dataItem.name && typeof dataItem.name === 'string' && dataItem.name.toLowerCase().includes('recrobot'))) ? [{ assetId: 'e05121e01d233ba56399226226db0fca', md5ext: 'e05121e01d233ba56399226226db0fca.svg', dataFormat: 'svg' }] : dataItem.costumes,
+               (dataItem && dataItem.name && typeof dataItem.name === 'string' && dataItem.name.toLowerCase().includes('recrobot'))) ? null : dataItem.costumes,
       id: index,
       incompatibleWithScratch: dataItem.incompatibleWithScratch,
       favorite: this.state.favorites.includes(dataItem[this.props.persistableKey]),
@@ -41282,7 +41282,28 @@ const teachableIconURL = _isLocalDev
   ? 'ia-robotica/iconos_rec/REC%20IA%20teachable.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20teachable.png';
 const _recLocalBase = new URL('extensionesrec/', document.baseURI).href;
-const jeepIconURL = _recLocalBase + 'RobotJeepvirtual.png';
+// Cargar el PNG del Jeep como DataURI para que la tarjeta del catálogo
+// lo muestre sin depender de rutas relativas ni acceso a internet.
+// Usa XHR síncrono (deprecated pero funcional) en dev local;
+// si falla, cae al raw de GitHub (producción con internet).
+window.__recJeepIconURL = null;
+const jeepIconURL = (function() {
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', _recLocalBase + 'RobotJeepvirtual.png', false);
+    xhr.overrideMimeType('text/plain; charset=x-user-defined');
+    xhr.send(null);
+    if (xhr.status === 200) {
+      let bin = '';
+      for (let i = 0; i < xhr.responseText.length; i++) {
+        bin += String.fromCharCode(xhr.responseText.charCodeAt(i) & 0xFF);
+      }
+      return 'data:image/png;base64,' + btoa(bin);
+    }
+  } catch (e) { /* sin internet o fuera de dev local */ }
+  return 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/RobotJeepvirtual.png';
+})();
+window.__recJeepIconURL = jeepIconURL;
 const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
