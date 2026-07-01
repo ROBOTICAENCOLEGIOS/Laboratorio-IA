@@ -125,8 +125,8 @@
 
   // ── LED: generar SVG compuesto (imagen original + círculos de faro) ──────
   // cx=74  → frente del Jeep (borde derecho del viewBox)
-  // cy=16  → LED 1 (faro DERECHO),  5 px más adentro que el borde superior
-  // cy=47  → LED 2 (faro IZQUIERDO), 5 px más adentro que el borde inferior
+  // cy=40  → LED 1 (faro DERECHO),  posición visual derecha en el escenario
+  // cy=21  → LED 2 (faro IZQUIERDO), posición visual izquierda en el escenario
   function makeLedSvg(baseSvg) {
     const defs =
       '<defs><filter id="jglow" x="-60%" y="-60%" width="220%" height="220%">' +
@@ -135,10 +135,10 @@
       '</filter></defs>';
     let circles = '';
     if (led1On) {
-      circles += `<circle cx="74" cy="21" r="5" fill="${led1Color}" opacity="0.95" filter="url(#jglow)"/>`;
+      circles += `<circle cx="74" cy="40" r="5" fill="${led1Color}" opacity="0.95" filter="url(#jglow)"/>`;
     }
     if (led2On) {
-      circles += `<circle cx="74" cy="40" r="5" fill="${led2Color}" opacity="0.95" filter="url(#jglow)"/>`;
+      circles += `<circle cx="74" cy="21" r="5" fill="${led2Color}" opacity="0.95" filter="url(#jglow)"/>`;
     }
     return baseSvg.replace('</svg>', defs + circles + '</svg>');
   }
@@ -432,16 +432,16 @@
     // ── Movimiento ────────────────────────────────────────────────────────
     moveForward ({ SIDE, PCT }) {
       const v = (Math.max(0, Math.min(100, +PCT)) / 100) * MAX_V;
-      if (SIDE === 'IZQ') jeep.vL = v; else jeep.vR = v;
+      if (SIDE === 'IZQ') jeep.vR = v; else jeep.vL = v;
     }
     moveBackward ({ SIDE, PCT }) {
       const v = -((Math.max(0, Math.min(100, +PCT)) / 100) * MAX_V);
-      if (SIDE === 'IZQ') jeep.vL = v; else jeep.vR = v;
+      if (SIDE === 'IZQ') jeep.vR = v; else jeep.vL = v;
     }
     stopMotor ({ WHICH }) {
       if (WHICH === 'AMBOS') { jeep.vL = 0; jeep.vR = 0; }
-      else if (WHICH === 'IZQ') jeep.vL = 0;
-      else jeep.vR = 0;
+      else if (WHICH === 'IZQ') jeep.vR = 0;
+      else jeep.vL = 0;
     }
 
     // ── Sensores ──────────────────────────────────────────────────────────
