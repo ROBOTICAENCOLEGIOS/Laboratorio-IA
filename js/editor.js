@@ -41273,13 +41273,13 @@ const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia
 const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/voz.png';
 const _isLocalDev = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
 const emocionesIconURL = _isLocalDev
-  ? 'ia-robotica/iconos_rec/REC%20IA%20emociones.png'
+  ? 'extensionesrec/rec_ia_emociones.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20emociones.png';
 const objetosIconURL = _isLocalDev
-  ? 'ia-robotica/iconos_rec/REC%20IA%20objetos.png'
+  ? 'extensionesrec/rec_ia_objetos.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20objetos.png';
 const teachableIconURL = _isLocalDev
-  ? 'ia-robotica/iconos_rec/REC%20IA%20teachable.png'
+  ? 'extensionesrec/rec_ia_teachable.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20teachable.png';
 const _recLocalBase = new URL('extensionesrec/', document.baseURI).href;
 // Cargar el PNG del Jeep como DataURI para que la tarjeta del catálogo
