@@ -1,4 +1,4 @@
-﻿/**
+/**
 TurboWarp / Scratch 3 Custom Extension � REC PCB1 ARDUINO v2.0 (GOLDEN BACKUP)
 Web Serial API @ 115200 baud. Verde Militar & Bloques Musicales. */ (function (Scratch) { 'use strict';
 
@@ -296,8 +296,8 @@ _parseIntelHex(hexStr) {
 // El alumno recupera el modo En Vivo / IA con un solo clic, sin necesidad de Arduino IDE.
 async restaurarFirmware() {
   const HEX_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
-    ? window.location.origin + '/ia-robotica/firmdata/firmware_rec_blindado.hex'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/firmdata/firmware_rec_blindado.hex';
+    ? window.location.origin + '/Laboratorio-IA/extensionesrec/firmdata/firmware_rec_blindado.hex'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/firmdata/firmware_rec_blindado.hex';
 
   const log = (m) => console.info('[RestaurarFirmware]', m);
   let port = null, writer = null, looping = false;

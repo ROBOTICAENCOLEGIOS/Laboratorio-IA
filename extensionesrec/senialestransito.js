@@ -12,8 +12,8 @@
   }
 
   const _REC_CAMERA_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
-    ? window.location.origin + '/ia-robotica/extensionesrec/recCamera.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/recCamera.js';
+    ? window.location.origin + '/Laboratorio-IA/extensionesrec/recCamera.js'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/recCamera.js';
 
   class IASenalesTransito {
     constructor() {
@@ -92,7 +92,7 @@
 
     async loadFiles() {
       await this._ensureLibs();
-      const base = "https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/modelo_transito/";
+      const base = "https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/modelo_transito/";
       try {
         this.prediction = "DESCARGANDO CEREBRO...";
         this.model = await window.tmImage.load(base + "model.json", base + "metadata.json");

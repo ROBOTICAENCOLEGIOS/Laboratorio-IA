@@ -82504,13 +82504,13 @@ __webpack_require__.r(__webpack_exports__);
 
 // URLs de iconos de extensiones @roboticaencolegios
 
-const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/arduino.png';
+const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/arduino.png';
 
-const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/manos.png';
+const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/manos.png';
 
-const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/transito.png';
+const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/transito.png';
 
-const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/voz.png';
+const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/voz.png';
 
 /* harmony default export */ __webpack_exports__["default"] = ([
 
@@ -82534,7 +82534,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
 
   useUnsandboxed: true,
 
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js?t=' + Date.now(),
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iamanos.js?t=' + Date.now(),
 
   tags: ['@roboticaencolegios']
 
@@ -82556,7 +82556,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
 
   useUnsandboxed: true,
 
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js?t=' + Date.now(),
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/senialestransito.js?t=' + Date.now(),
 
   tags: ['@roboticaencolegios']
 
@@ -82578,7 +82578,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robo
 
   useUnsandboxed: true,
 
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js?t=' + Date.now(),
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/vozatexto.js?t=' + Date.now(),
 
   tags: ['@roboticaencolegios']
 

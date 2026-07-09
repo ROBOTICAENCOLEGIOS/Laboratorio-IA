@@ -38884,10 +38884,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // URLs de iconos de extensiones @roboticaencolegios
-const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/arduino.png';
-const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/manos.png';
-const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/transito.png';
-const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/voz.png';
+const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/arduino.png';
+const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/manos.png';
+const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/transito.png';
+const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/voz.png';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {

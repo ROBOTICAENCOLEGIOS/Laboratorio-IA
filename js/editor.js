@@ -41267,20 +41267,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // URLs de iconos de extensiones @roboticaencolegios
-const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/arduino.png';
-const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/manos.png';
-const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/transito.png';
-const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/voz.png';
+const arduinoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/arduino.png';
+const manosIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/manos.png';
+const transitoIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/transito.png';
+const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/voz.png';
 const _isLocalDev = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
 const emocionesIconURL = _isLocalDev
   ? 'extensionesrec/rec_ia_emociones.png'
-  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20emociones.png';
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/REC%20IA%20emociones.png';
 const objetosIconURL = _isLocalDev
   ? 'extensionesrec/rec_ia_objetos.png'
-  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20objetos.png';
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/REC%20IA%20objetos.png';
 const teachableIconURL = _isLocalDev
   ? 'extensionesrec/rec_ia_teachable.png'
-  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/iconos_rec/REC%20IA%20teachable.png';
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/iconos_rec/REC%20IA%20teachable.png';
 const _recLocalBase = new URL('extensionesrec/', document.baseURI).href;
 // Cargar el PNG del Jeep como DataURI para que la tarjeta del catálogo
 // lo muestre sin depender de rutas relativas ni acceso a internet.
@@ -41301,7 +41301,7 @@ const jeepIconURL = (function() {
       return 'data:image/png;base64,' + btoa(bin);
     }
   } catch (e) { /* sin internet o fuera de dev local */ }
-  return 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/ia-robotica/main/extensionesrec/RobotJeepvirtual.png';
+  return 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/extensionesrec/RobotJeepvirtual.png';
 })();
 window.__recJeepIconURL = jeepIconURL;
 const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
@@ -41327,7 +41327,7 @@ const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iamanos.js?t=' + Date.now(),
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iamanos.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'Señales de Tránsito',
@@ -41338,7 +41338,7 @@ const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/senialestransito.js?t=' + Date.now(),
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/senialestransito.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'Voz a Texto',
@@ -41349,7 +41349,7 @@ const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/vozatexto.js?t=' + Date.now(),
+  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/vozatexto.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'IA: Emociones Rostro',
@@ -41361,8 +41361,8 @@ const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
   unsandboxed: true,
   useUnsandboxed: true,
   extensionURL: _isLocalDev
-    ? window.location.origin + '/ia-robotica/extensionesrec/iaemociones.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iaemociones.js?t=' + Date.now(),
+    ? window.location.origin + '/Laboratorio-IA/extensionesrec/iaemociones.js'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iaemociones.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'IA: Detección de Objetos',
@@ -41374,8 +41374,8 @@ const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
   unsandboxed: true,
   useUnsandboxed: true,
   extensionURL: _isLocalDev
-    ? window.location.origin + '/ia-robotica/extensionesrec/iaobjetos.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iaobjetos.js?t=' + Date.now(),
+    ? window.location.origin + '/Laboratorio-IA/extensionesrec/iaobjetos.js'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iaobjetos.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: 'IA: Teachable Machine',
@@ -41387,8 +41387,8 @@ const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
   unsandboxed: true,
   useUnsandboxed: true,
   extensionURL: _isLocalDev
-    ? window.location.origin + '/ia-robotica/extensionesrec/iateachable.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/ia-robotica@main/extensionesrec/iateachable.js?t=' + Date.now(),
+    ? window.location.origin + '/Laboratorio-IA/extensionesrec/iateachable.js'
+    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iateachable.js?t=' + Date.now(),
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
