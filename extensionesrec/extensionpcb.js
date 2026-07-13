@@ -6,6 +6,552 @@ if (!Scratch.extensions.unsandboxed) {
   throw new Error('Esta extension debe ejecutarse sin sandbox (unsandboxed) para acceder al puerto serial.');
 }
 
+const I18N_BLOCKS = {
+  es: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: '¡ROBOT 1 Arduino (Bluetooth-USB) cargado! Busca los bloques al final de la paleta izquierda 👇',
+    btn_connect: 'Conectar Robot',
+    check_connection: 'Check Connection',
+    block_move_fwd: 'Mover motor [SIDE] hacia ADELANTE a [PCT]%',
+    block_move_bwd: 'Mover motor [SIDE] hacia ATRAS a [PCT]%',
+    block_stop_motor: 'Detener motor [WHICH]',
+    block_light_on: 'Encender Luz [LED] en color [COLOR]',
+    block_light_off: 'Apagar Luz [LED]',
+    block_play_note: 'Tocar nota [NOTE] por [MS] ms',
+    block_get_dht: 'Obtener [TIPO]',
+    block_distance_cm: 'Distancia en cm',
+    block_line_detected: 'Detecta linea',
+    block_restore_firmware: 'Restaurar firmware original 🔄',
+    motor_left: 'IZQUIERDO / B',
+    motor_right: 'DERECHO / A',
+    stop_both: 'AMBOS',
+    led_all: 'TODAS',
+    dht_temp: 'Temperatura (C)',
+    dht_hum: 'Humedad (%)',
+    note_do: 'DO (C4)',
+    note_re: 'RE (D4)',
+    note_mi: 'MI (E4)',
+    note_fa: 'FA (F4)',
+    note_sol: 'SOL (G4)',
+    note_la: 'LA (A4)',
+    note_si: 'SI (B4)',
+    note_do5: 'DO (C5)'
+  },
+  en: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) loaded! Look for the blocks at the bottom of the left palette 👇',
+    btn_connect: 'Connect Robot',
+    check_connection: 'Check Connection',
+    block_move_fwd: 'Move [SIDE] motor FORWARD at [PCT]%',
+    block_move_bwd: 'Move [SIDE] motor BACKWARD at [PCT]%',
+    block_stop_motor: 'Stop [WHICH] motor',
+    block_light_on: 'Turn on [LED] light with color [COLOR]',
+    block_light_off: 'Turn off [LED] light',
+    block_play_note: 'Play note [NOTE] for [MS] ms',
+    block_get_dht: 'Get [TIPO]',
+    block_distance_cm: 'distance in cm',
+    block_line_detected: 'line detected',
+    block_restore_firmware: 'Restore original firmware 🔄',
+    motor_left: 'LEFT / B',
+    motor_right: 'RIGHT / A',
+    stop_both: 'BOTH',
+    led_all: 'ALL',
+    dht_temp: 'Temperature (C)',
+    dht_hum: 'Humidity (%)',
+    note_do: 'C (C4)',
+    note_re: 'D (D4)',
+    note_mi: 'E (E4)',
+    note_fa: 'F (F4)',
+    note_sol: 'G (G4)',
+    note_la: 'A (A4)',
+    note_si: 'B (B4)',
+    note_do5: 'C (C5)'
+  },
+  pt: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) carregado! Procure os blocos no final da paleta à esquerda 👇',
+    btn_connect: 'Conectar Robot',
+    check_connection: 'Verificar Conexão',
+    block_move_fwd: 'Mover motor [SIDE] para FRENTE a [PCT]%',
+    block_move_bwd: 'Mover motor [SIDE] para TRÁS a [PCT]%',
+    block_stop_motor: 'Parar motor [WHICH]',
+    block_light_on: 'Acender luz [LED] na cor [COLOR]',
+    block_light_off: 'Apagar luz [LED]',
+    block_play_note: 'Tocar nota [NOTE] por [MS] ms',
+    block_get_dht: 'Obter [TIPO]',
+    block_distance_cm: 'distância em cm',
+    block_line_detected: 'detecta linha',
+    block_restore_firmware: 'Restaurar firmware original 🔄',
+    motor_left: 'ESQUERDO / B',
+    motor_right: 'DIREITO / A',
+    stop_both: 'AMBOS',
+    led_all: 'TODAS',
+    dht_temp: 'Temperatura (C)',
+    dht_hum: 'Umidade (%)',
+    note_do: 'DÓ (C4)',
+    note_re: 'RÉ (D4)',
+    note_mi: 'MI (E4)',
+    note_fa: 'FÁ (F4)',
+    note_sol: 'SOL (G4)',
+    note_la: 'LÁ (A4)',
+    note_si: 'SI (B4)',
+    note_do5: 'DÓ (C5)'
+  },
+  fr: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) chargé ! Retrouve les blocs en bas de la palette à gauche 👇',
+    btn_connect: 'Connecter le Robot',
+    check_connection: 'Vérifier la connexion',
+    block_move_fwd: 'Avancer le moteur [SIDE] à [PCT]%',
+    block_move_bwd: 'Reculer le moteur [SIDE] à [PCT]%',
+    block_stop_motor: 'Arrêter le moteur [WHICH]',
+    block_light_on: 'Allumer la LED [LED] de couleur [COLOR]',
+    block_light_off: 'Éteindre la LED [LED]',
+    block_play_note: 'Jouer la note [NOTE] pendant [MS] ms',
+    block_get_dht: 'Obtenir [TIPO]',
+    block_distance_cm: 'distance en cm',
+    block_line_detected: 'détecte la ligne',
+    block_restore_firmware: 'Restaurer le firmware original 🔄',
+    motor_left: 'GAUCHE / B',
+    motor_right: 'DROITE / A',
+    stop_both: 'LES DEUX',
+    led_all: 'TOUTES',
+    dht_temp: 'Température (C)',
+    dht_hum: 'Humidité (%)',
+    note_do: 'DO (C4)',
+    note_re: 'RÉ (D4)',
+    note_mi: 'MI (E4)',
+    note_fa: 'FA (F4)',
+    note_sol: 'SOL (G4)',
+    note_la: 'LA (A4)',
+    note_si: 'SI (B4)',
+    note_do5: 'DO (C5)'
+  },
+  de: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) geladen! Die Blöcke findest du unten in der linken Palette 👇',
+    btn_connect: 'Roboter verbinden',
+    check_connection: 'Verbindung prüfen',
+    block_move_fwd: 'Motor [SIDE] um [PCT]% VORWÄRTS bewegen',
+    block_move_bwd: 'Motor [SIDE] um [PCT]% RÜCKWÄRTS bewegen',
+    block_stop_motor: 'Motor [WHICH] stoppen',
+    block_light_on: 'LED [LED] in Farbe [COLOR] einschalten',
+    block_light_off: 'LED [LED] ausschalten',
+    block_play_note: 'Note [NOTE] für [MS] ms spielen',
+    block_get_dht: '[TIPO] abrufen',
+    block_distance_cm: 'Entfernung in cm',
+    block_line_detected: 'Linie erkannt',
+    block_restore_firmware: 'Original-Firmware wiederherstellen 🔄',
+    motor_left: 'LINKS / B',
+    motor_right: 'RECHTS / A',
+    stop_both: 'BEIDE',
+    led_all: 'ALLE',
+    dht_temp: 'Temperatur (C)',
+    dht_hum: 'Luftfeuchtigkeit (%)',
+    note_do: 'C (C4)',
+    note_re: 'D (D4)',
+    note_mi: 'E (E4)',
+    note_fa: 'F (F4)',
+    note_sol: 'G (G4)',
+    note_la: 'A (A4)',
+    note_si: 'H (B4)',
+    note_do5: 'C (C5)'
+  },
+  it: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) caricato! Cerca i blocchi in fondo alla palette a sinistra 👇',
+    btn_connect: 'Connetti Robot',
+    check_connection: 'Controlla connessione',
+    block_move_fwd: 'Muovere il motore [SIDE] in AVANTI al [PCT]%',
+    block_move_bwd: 'Muovere il motore [SIDE] INDIETRO al [PCT]%',
+    block_stop_motor: 'Fermare il motore [WHICH]',
+    block_light_on: 'Accendere luce [LED] di colore [COLOR]',
+    block_light_off: 'Spegnere luce [LED]',
+    block_play_note: 'Suonare nota [NOTE] per [MS] ms',
+    block_get_dht: 'Ottieni [TIPO]',
+    block_distance_cm: 'distanza in cm',
+    block_line_detected: 'rileva linea',
+    block_restore_firmware: 'Ripristina firmware originale 🔄',
+    motor_left: 'SINISTRO / B',
+    motor_right: 'DESTRO / A',
+    stop_both: 'ENTRAMBI',
+    led_all: 'TUTTE',
+    dht_temp: 'Temperatura (C)',
+    dht_hum: 'Umidità (%)',
+    note_do: 'DO (C4)',
+    note_re: 'RE (D4)',
+    note_mi: 'MI (E4)',
+    note_fa: 'FA (F4)',
+    note_sol: 'SOL (G4)',
+    note_la: 'LA (A4)',
+    note_si: 'SI (B4)',
+    note_do5: 'DO (C5)'
+  },
+  zh: {
+    ext_title: 'ROBOT 1 Arduino（Bluetooth-USB）',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino（Bluetooth-USB）已加载！在左侧积木栏底部查找积木 👇',
+    btn_connect: '连接机器人',
+    check_connection: '检查连接',
+    block_move_fwd: '以 [PCT]% 向前移动 [SIDE] 电机',
+    block_move_bwd: '以 [PCT]% 向后移动 [SIDE] 电机',
+    block_stop_motor: '停止 [WHICH] 电机',
+    block_light_on: '打开 [LED] 灯，颜色为 [COLOR]',
+    block_light_off: '关闭 [LED] 灯',
+    block_play_note: '以 [NOTE] 音符播放 [MS] 毫秒',
+    block_get_dht: '获取 [TIPO]',
+    block_distance_cm: '距离（厘米）',
+    block_line_detected: '检测到线',
+    block_restore_firmware: '恢复原始固件 🔄',
+    motor_left: '左 / B',
+    motor_right: '右 / A',
+    stop_both: '全部',
+    led_all: '全部',
+    dht_temp: '温度（C）',
+    dht_hum: '湿度（%）',
+    note_do: 'C (C4)',
+    note_re: 'D (D4)',
+    note_mi: 'E (E4)',
+    note_fa: 'F (F4)',
+    note_sol: 'G (G4)',
+    note_la: 'A (A4)',
+    note_si: 'B (B4)',
+    note_do5: 'C (C5)'
+  },
+  ja: {
+    ext_title: 'ROBOT 1 Arduino（Bluetooth-USB）',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino（Bluetooth-USB）が読み込まれました！左のパレットの一番下にブロックがあります 👇',
+    btn_connect: 'ロボットを接続',
+    check_connection: '接続を確認',
+    block_move_fwd: '[SIDE] モーターを [PCT]% で前進させる',
+    block_move_bwd: '[SIDE] モーターを [PCT]% で後退させる',
+    block_stop_motor: '[WHICH] モーターを停止する',
+    block_light_on: '色 [COLOR] の [LED] ライトをつける',
+    block_light_off: '[LED] ライトを消す',
+    block_play_note: '音符 [NOTE] を [MS] ミリ秒鳴らす',
+    block_get_dht: '[TIPO] を取得',
+    block_distance_cm: '距離（cm）',
+    block_line_detected: 'ラインを検出',
+    block_restore_firmware: '元のファームウェアを復元 🔄',
+    motor_left: '左 / B',
+    motor_right: '右 / A',
+    stop_both: '両方',
+    led_all: 'すべて',
+    dht_temp: '温度（C）',
+    dht_hum: '湿度（%）',
+    note_do: 'ド (C4)',
+    note_re: 'レ (D4)',
+    note_mi: 'ミ (E4)',
+    note_fa: 'ファ (F4)',
+    note_sol: 'ソ (G4)',
+    note_la: 'ラ (A4)',
+    note_si: 'シ (B4)',
+    note_do5: 'ド (C5)'
+  },
+  ko: {
+    ext_title: 'ROBOT 1 Arduino(Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino(Bluetooth-USB)이(가) 로드되었습니다! 왼쪽 팔레트 하단에서 블록을 찾으세요 👇',
+    btn_connect: '로봇 연결',
+    check_connection: '연결 확인',
+    block_move_fwd: '[SIDE] 모터를 [PCT]%로 전진',
+    block_move_bwd: '[SIDE] 모터를 [PCT]%로 후진',
+    block_stop_motor: '[WHICH] 모터 정지',
+    block_light_on: '[COLOR] 색상으로 [LED] 조명 켜기',
+    block_light_off: '[LED] 조명 끄기',
+    block_play_note: '음 [NOTE] 를 [MS] ms 동안 연주',
+    block_get_dht: '[TIPO] 가져오기',
+    block_distance_cm: '거리(cm)',
+    block_line_detected: '라인 감지',
+    block_restore_firmware: '원래 펌웨어 복원 🔄',
+    motor_left: '왼쪽 / B',
+    motor_right: '오른쪽 / A',
+    stop_both: '양쪽',
+    led_all: '전체',
+    dht_temp: '온도(C)',
+    dht_hum: '습도(%)',
+    note_do: '도 (C4)',
+    note_re: '레 (D4)',
+    note_mi: '미 (E4)',
+    note_fa: '파 (F4)',
+    note_sol: '솔 (G4)',
+    note_la: '라 (A4)',
+    note_si: '시 (B4)',
+    note_do5: '도 (C5)'
+  },
+  ru: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) загружен! Ищи блоки внизу левой палитры 👇',
+    btn_connect: 'Подключить робота',
+    check_connection: 'Проверить подключение',
+    block_move_fwd: 'Двигать мотор [SIDE] вперёд на [PCT]%',
+    block_move_bwd: 'Двигать мотор [SIDE] назад на [PCT]%',
+    block_stop_motor: 'Остановить мотор [WHICH]',
+    block_light_on: 'Включить свет [LED] цвета [COLOR]',
+    block_light_off: 'Выключить свет [LED]',
+    block_play_note: 'играть ноту [NOTE] [MS] мс',
+    block_get_dht: 'Получить [TIPO]',
+    block_distance_cm: 'расстояние в см',
+    block_line_detected: 'обнаружена линия',
+    block_restore_firmware: 'Восстановить исходную прошивку 🔄',
+    motor_left: 'ЛЕВЫЙ / B',
+    motor_right: 'ПРАВЫЙ / A',
+    stop_both: 'ОБА',
+    led_all: 'ВСЕ',
+    dht_temp: 'Температура (C)',
+    dht_hum: 'Влажность (%)',
+    note_do: 'ДО (C4)',
+    note_re: 'РЕ (D4)',
+    note_mi: 'МИ (E4)',
+    note_fa: 'ФА (F4)',
+    note_sol: 'СОЛЬ (G4)',
+    note_la: 'ЛЯ (A4)',
+    note_si: 'СИ (B4)',
+    note_do5: 'ДО (C5)'
+  },
+  ar: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'تم تحميل ROBOT 1 Arduino (Bluetooth-USB)! ابحث عن الكتل في أسفل اللوحة اليسرى 👇',
+    btn_connect: 'توصيل الروبوت',
+    check_connection: 'التحقق من الاتصال',
+    block_move_fwd: 'تحريك المحرك [SIDE] للأمام بنسبة [PCT]%',
+    block_move_bwd: 'تحريك المحرك [SIDE] للخلف بنسبة [PCT]%',
+    block_stop_motor: 'إيقاف المحرك [WHICH]',
+    block_light_on: 'تشغيل ضوء [LED] باللون [COLOR]',
+    block_light_off: 'إطفاء ضوء [LED]',
+    block_play_note: 'عزف نوتة [NOTE] لمدة [MS] مللي ثانية',
+    block_get_dht: 'الحصول على [TIPO]',
+    block_distance_cm: 'المسافة بالسم',
+    block_line_detected: 'اكتشاف الخط',
+    block_restore_firmware: 'استعادة البرامج الثابتة الأصلية 🔄',
+    motor_left: 'يسار / B',
+    motor_right: 'يمين / A',
+    stop_both: 'كلاهما',
+    led_all: 'الكل',
+    dht_temp: 'درجة الحرارة (C)',
+    dht_hum: 'الرطوبة (%)',
+    note_do: 'دو (C4)',
+    note_re: 'ري (D4)',
+    note_mi: 'مي (E4)',
+    note_fa: 'فا (F4)',
+    note_sol: 'صول (G4)',
+    note_la: 'لا (A4)',
+    note_si: 'سي (B4)',
+    note_do5: 'دو (C5)'
+  },
+  hi: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) लोड हो गया है! बाएँ पैलेट के नीचे ब्लॉक खोजें 👇',
+    btn_connect: 'रोबोट कनेक्ट करें',
+    check_connection: 'कनेक्शन जांचें',
+    block_move_fwd: '[SIDE] मोटर को [PCT]% पर आगे बढ़ाएं',
+    block_move_bwd: '[SIDE] मोटर को [PCT]% पर पीछे करें',
+    block_stop_motor: '[WHICH] मोटर रोकें',
+    block_light_on: '[LED] लाइट को [COLOR] रंग में चालू करें',
+    block_light_off: '[LED] लाइट बंद करें',
+    block_play_note: '[NOTE] नोट को [MS] मिलीसेकंड तक बजाएं',
+    block_get_dht: '[TIPO] प्राप्त करें',
+    block_distance_cm: 'दूरी सेमी में',
+    block_line_detected: 'रेखा का पता चला',
+    block_restore_firmware: 'मूल फर्मवेयर पुनर्स्थापित करें 🔄',
+    motor_left: 'बायाँ / B',
+    motor_right: 'दायाँ / A',
+    stop_both: 'दोनों',
+    led_all: 'सभी',
+    dht_temp: 'तापमान (C)',
+    dht_hum: 'नमी (%)',
+    note_do: 'डो (C4)',
+    note_re: 'रे (D4)',
+    note_mi: 'मी (E4)',
+    note_fa: 'फा (F4)',
+    note_sol: 'सोल (G4)',
+    note_la: 'ला (A4)',
+    note_si: 'सी (B4)',
+    note_do5: 'डो (C5)'
+  },
+  bn: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) लोड हो গया है! বাম প্যালেটের নিচে ব্লকগুলো খুঁজুন 👇',
+    btn_connect: 'রোবট সংযোগ করুন',
+    check_connection: 'সংযোগ পরীক্ষা করুন',
+    block_move_fwd: '[SIDE] মোটর [PCT]% এগিয়ে চালান',
+    block_move_bwd: '[SIDE] মোটর [PCT]% পিছিয়ে চালান',
+    block_stop_motor: '[WHICH] মোটর থামান',
+    block_light_on: '[LED] আলো [COLOR] রঙে জ্বালান',
+    block_light_off: '[LED] আলো বন্ধ করুন',
+    block_play_note: '[MS] মিলিসেকেন্ডের জন্য [NOTE] নোট বাজান',
+    block_get_dht: '[TIPO] পান',
+    block_distance_cm: 'সেন্টিমিটারে দূরত্ব',
+    block_line_detected: 'লাইন শনাক্ত হয়েছে',
+    block_restore_firmware: 'মূল ফার্মওয়্যার পুনরুদ্ধার করুন 🔄',
+    motor_left: 'বাম / B',
+    motor_right: 'ডান / A',
+    stop_both: 'উভয়',
+    led_all: 'সব',
+    dht_temp: 'তাপমাত্রা (C)',
+    dht_hum: 'আর্দ্রতা (%)',
+    note_do: 'ডো (C4)',
+    note_re: 'রে (D4)',
+    note_mi: 'মি (E4)',
+    note_fa: 'ফা (F4)',
+    note_sol: 'সোল (G4)',
+    note_la: 'লা (A4)',
+    note_si: 'সি (B4)',
+    note_do5: 'ডো (C5)'
+  },
+  id: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) dimuat! Cari bloknya di bagian bawah palet kiri 👇',
+    btn_connect: 'Hubungkan Robot',
+    check_connection: 'Periksa Koneksi',
+    block_move_fwd: 'Gerakkan motor [SIDE] MAJU dengan [PCT]%',
+    block_move_bwd: 'Gerakkan motor [SIDE] MUNDUR dengan [PCT]%',
+    block_stop_motor: 'Hentikan motor [WHICH]',
+    block_light_on: 'Nyalakan lampu [LED] dengan warna [COLOR]',
+    block_light_off: 'Matikan lampu [LED]',
+    block_play_note: 'Mainkan nada [NOTE] selama [MS] md',
+    block_get_dht: 'Dapatkan [TIPO]',
+    block_distance_cm: 'jarak dalam cm',
+    block_line_detected: 'garis terdeteksi',
+    block_restore_firmware: 'Pulihkan firmware asli 🔄',
+    motor_left: 'KIRI / B',
+    motor_right: 'KANAN / A',
+    stop_both: 'KEDUANYA',
+    led_all: 'SEMUA',
+    dht_temp: 'Suhu (C)',
+    dht_hum: 'Kelembaban (%)',
+    note_do: 'DO (C4)',
+    note_re: 'RE (D4)',
+    note_mi: 'MI (E4)',
+    note_fa: 'FA (F4)',
+    note_sol: 'SOL (G4)',
+    note_la: 'LA (A4)',
+    note_si: 'SI (B4)',
+    note_do5: 'DO (C5)'
+  },
+  tr: {
+    ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) yüklendi! Blokları sol paletin en altında bulun 👇',
+    btn_connect: 'Robotu Bağla',
+    check_connection: 'Bağlantıyı Kontrol Et',
+    block_move_fwd: '[SIDE] motorunu [PCT]% ile İLERİ hareket ettir',
+    block_move_bwd: '[SIDE] motorunu [PCT]% ile GERİ hareket ettir',
+    block_stop_motor: '[WHICH] motorunu durdur',
+    block_light_on: '[LED] ışığını [COLOR] renginde aç',
+    block_light_off: '[LED] ışığını kapat',
+    block_play_note: '[NOTE] notasını [MS] ms çal',
+    block_get_dht: '[TIPO] Al',
+    block_distance_cm: 'mesafe cm cinsinden',
+    block_line_detected: 'çizgi algılandı',
+    block_restore_firmware: "Orijinal firmware'i geri yükle 🔄",
+    motor_left: 'SOL / B',
+    motor_right: 'SAĞ / A',
+    stop_both: 'İKİSİ',
+    led_all: 'TÜMÜ',
+    dht_temp: 'Sıcaklık (C)',
+    dht_hum: 'Nem (%)',
+    note_do: 'DO (C4)',
+    note_re: 'RE (D4)',
+    note_mi: 'Mİ (E4)',
+    note_fa: 'FA (F4)',
+    note_sol: 'SOL (G4)',
+    note_la: 'LA (A4)',
+    note_si: 'Sİ (B4)',
+    note_do5: 'DO (C5)'
+  }
+};
+
+// ── Toast de extensión cargada ──────────────────────────────────────────
+let arduinoToastCssInjected = false;
+function injectArduinoToastCSS() {
+  if (arduinoToastCssInjected) return;
+  arduinoToastCssInjected = true;
+  const style = document.createElement('style');
+  style.id = 'rec-arduino-toast-css';
+  style.textContent =
+    '#rec-arduino-toast {' +
+    '  position: fixed;' +
+    '  bottom: 1rem;' +
+    '  left: 1rem;' +
+    '  z-index: 9999;' +
+    '  max-width: 320px;' +
+    '  background: rgba(40,40,40,0.95);' +
+    '  color: #fff;' +
+    '  border-left: 4px solid #4b5320;' +
+    '  border-radius: 0.75rem;' +
+    '  padding: 0.75rem 1rem;' +
+    '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;' +
+    '  font-size: 0.95rem;' +
+    '  line-height: 1.4;' +
+    '  box-shadow: 0 6px 20px rgba(0,0,0,0.25);' +
+    '  opacity: 0;' +
+    '  transform: translateY(20px);' +
+    '  transition: opacity 0.4s ease, transform 0.4s ease;' +
+    '  pointer-events: none;' +
+    '}' +
+    '#rec-arduino-toast.rec-arduino-toast-visible {' +
+    '  opacity: 1;' +
+    '  transform: translateY(0);' +
+    '}' +
+    '#rec-arduino-toast.rec-arduino-toast-hiding {' +
+    '  opacity: 0;' +
+    '  transform: translateY(10px);' +
+    '}' +
+    '#rec-arduino-toast .rec-arduino-toast-icon {' +
+    '  display: inline-block;' +
+    '  margin-right: 0.5rem;' +
+    '  font-size: 1.1rem;' +
+    '  vertical-align: middle;' +
+    '}' +
+    '#rec-arduino-toast .rec-arduino-toast-text {' +
+    '  vertical-align: middle;' +
+    '  display: inline;' +
+    '}';
+  document.head.appendChild(style);
+}
+
+function showArduinoLoadedToast() {
+  if (!document.body) return;
+  injectArduinoToastCSS();
+
+  const existing = document.getElementById('rec-arduino-toast');
+  if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+
+  const locale = window.currentRecLocale || 'es';
+  const dict = I18N_BLOCKS[locale] || I18N_BLOCKS['es'];
+  const msg = dict.arduino_bt_loaded_msg || I18N_BLOCKS['es'].arduino_bt_loaded_msg;
+
+  const toast = document.createElement('div');
+  toast.id = 'rec-arduino-toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+
+  const icon = document.createElement('span');
+  icon.className = 'rec-arduino-toast-icon';
+  icon.textContent = '🤖';
+
+  const text = document.createElement('span');
+  text.className = 'rec-arduino-toast-text';
+  text.textContent = msg;
+
+  toast.appendChild(icon);
+  toast.appendChild(text);
+
+  document.body.appendChild(toast);
+
+  if (toast.offsetWidth) {
+    // no-op
+  }
+
+  toast.classList.add('rec-arduino-toast-visible');
+
+  setTimeout(() => {
+    toast.classList.remove('rec-arduino-toast-visible');
+    toast.classList.add('rec-arduino-toast-hiding');
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 400);
+  }, 4500);
+}
+
 class RecPcb1Arduino { constructor(runtime) { this.runtime = runtime; this.port = null; this._activePort = null; this.encoder = new TextEncoder(); this.decoder = new TextDecoder(); this._rxRemainder = ''; this._lineWaiters = []; this._readLoopRunning = false; this._serialQueue = Promise.resolve();
   this._distanceEma = null;
   this._distanceLastMs = 0;
@@ -16,20 +562,21 @@ class RecPcb1Arduino { constructor(runtime) { this.runtime = runtime; this.port 
 }
 
 getInfo() {
+  const t = I18N_BLOCKS[window.currentRecLocale || 'es'] || I18N_BLOCKS['es'];
   return {
     id: 'recpcb1arduino',
-    name: 'ROBOT 1 Arduino (bluetooth-usb)',
+    name: t.ext_title,
     color1: '#4b5320',
     color2: '#3d441a',
     color3: '#2f3514',
     blocks: [
-      { func: 'connectRobot', blockType: Scratch.BlockType.BUTTON, text: 'Conectar Robot', callFunc: this.connectRobot.bind(this) },
-      { opcode: 'checkConnection', blockType: Scratch.BlockType.REPORTER, text: 'Check Connection' },
+      { func: 'connectRobot', blockType: Scratch.BlockType.BUTTON, text: t.btn_connect, callFunc: this.connectRobot.bind(this) },
+      { opcode: 'checkConnection', blockType: Scratch.BlockType.REPORTER, text: t.check_connection },
       '---',
       {
         opcode: 'moveForward',
         blockType: Scratch.BlockType.COMMAND,
-        text: 'Mover motor [SIDE] hacia ADELANTE a [PCT]%',
+        text: t.block_move_fwd,
         arguments: { 
           SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' }, 
           PCT: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } 
@@ -38,7 +585,7 @@ getInfo() {
       {
         opcode: 'moveBackward',
         blockType: Scratch.BlockType.COMMAND,
-        text: 'Mover motor [SIDE] hacia ATRAS a [PCT]%',
+        text: t.block_move_bwd,
         arguments: { 
           SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' }, 
           PCT: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } 
@@ -47,7 +594,7 @@ getInfo() {
       {
         opcode: 'stopMotor',
         blockType: Scratch.BlockType.COMMAND,
-        text: 'Detener motor [WHICH]',
+        text: t.block_stop_motor,
         arguments: { 
           WHICH: { type: Scratch.ArgumentType.STRING, menu: 'stopWhich', defaultValue: 'AMBOS' } 
         }
@@ -56,7 +603,7 @@ getInfo() {
       {
         opcode: 'lightOn',
         blockType: Scratch.BlockType.COMMAND,
-        text: 'Encender Luz [LED] en color [COLOR]',
+        text: t.block_light_on,
         arguments: { 
           LED: { type: Scratch.ArgumentType.STRING, menu: 'ledWhich', defaultValue: 'TODAS' }, 
           COLOR: { type: Scratch.ArgumentType.COLOR, defaultValue: '#ff0000' } 
@@ -65,7 +612,7 @@ getInfo() {
       { 
         opcode: 'lightOff', 
         blockType: Scratch.BlockType.COMMAND, 
-        text: 'Apagar Luz [LED]', 
+        text: t.block_light_off, 
         arguments: { 
           LED: { type: Scratch.ArgumentType.STRING, menu: 'ledWhich', defaultValue: 'TODAS' } 
         } 
@@ -73,7 +620,7 @@ getInfo() {
       {
         opcode: 'playNote',
         blockType: Scratch.BlockType.COMMAND,
-        text: 'Tocar nota [NOTE] por [MS] ms',
+        text: t.block_play_note,
         arguments: { 
           NOTE: { type: Scratch.ArgumentType.NUMBER, menu: 'musicalNotes', defaultValue: 262 }, 
           MS: { type: Scratch.ArgumentType.NUMBER, defaultValue: 500 } 
@@ -83,26 +630,26 @@ getInfo() {
       {
         opcode: 'getDHT',
         blockType: Scratch.BlockType.REPORTER,
-        text: 'Obtener [TIPO]',
+        text: t.block_get_dht,
         arguments: { 
           TIPO: { type: Scratch.ArgumentType.STRING, menu: 'dhtMenu', defaultValue: 'TEMP' } 
         }
       },
-      { opcode: 'distanceCm', blockType: Scratch.BlockType.REPORTER, text: 'Distancia en cm' },
-      { opcode: 'lineDetected', blockType: Scratch.BlockType.BOOLEAN, text: 'Detecta linea' },
+      { opcode: 'distanceCm', blockType: Scratch.BlockType.REPORTER, text: t.block_distance_cm },
+      { opcode: 'lineDetected', blockType: Scratch.BlockType.BOOLEAN, text: t.block_line_detected },
       '---',
-      { opcode: 'restaurarFirmware', blockType: Scratch.BlockType.COMMAND, text: 'Restaurar firmware original 🔄' }
+      { opcode: 'restaurarFirmware', blockType: Scratch.BlockType.COMMAND, text: t.block_restore_firmware }
     ],
     menus: {
-      motorSide: { items: [{ text: 'IZQUIERDO / B', value: 'IZQ' }, { text: 'DERECHO / A', value: 'DER' }] },
-      stopWhich: { items: [{ text: 'IZQUIERDO / B', value: 'IZQ' }, { text: 'DERECHO / A', value: 'DER' }, { text: 'AMBOS', value: 'AMBOS' }] },
-      ledWhich: { items: ['1', '2', 'TODAS'] },
-      dhtMenu: { items: [{ text: 'Temperatura (C)', value: 'TEMP' }, { text: 'Humedad (%)', value: 'HUM' }] },
+      motorSide: { items: [{ text: t.motor_left, value: 'IZQ' }, { text: t.motor_right, value: 'DER' }] },
+      stopWhich: { items: [{ text: t.motor_left, value: 'IZQ' }, { text: t.motor_right, value: 'DER' }, { text: t.stop_both, value: 'AMBOS' }] },
+      ledWhich: { items: ['1', '2', t.led_all] },
+      dhtMenu: { items: [{ text: t.dht_temp, value: 'TEMP' }, { text: t.dht_hum, value: 'HUM' }] },
       musicalNotes: {
         items: [
-          { text: 'DO (C4)', value: '262' }, { text: 'RE (D4)', value: '294' }, { text: 'MI (E4)', value: '330' },
-          { text: 'FA (F4)', value: '349' }, { text: 'SOL (G4)', value: '392' }, { text: 'LA (A4)', value: '440' },
-          { text: 'SI (B4)', value: '494' }, { text: 'DO (C5)', value: '523' }
+          { text: t.note_do, value: '262' }, { text: t.note_re, value: '294' }, { text: t.note_mi, value: '330' },
+          { text: t.note_fa, value: '349' }, { text: t.note_sol, value: '392' }, { text: t.note_la, value: '440' },
+          { text: t.note_si, value: '494' }, { text: t.note_do5, value: '523' }
         ]
       }
     }

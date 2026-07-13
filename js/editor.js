@@ -53172,4 +53172,627 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
 /***/ })
 
 /******/ });
+
+/* ==================== REC i18n Phase 2 ====================
+   Inyectado localmente en el bundle editor.js. No requiere build.
+   - Diccionario global window.REC_STRINGS (15 idiomas).
+   - Listener seguro sobre el store de Redux (window._reduxStore o window.ReduxStore).
+   - window.updateRECUI(locale) actualiza document.title y botones del menu bar.
+   - MutationObserver quirúrgico para traducir la tarjeta "Robot Jeep Virtual"
+     dentro del modal de la biblioteca de extensiones.
+   Reglas: no innerHTML/outerHTML; solo textContent sobre nodos de texto finales.
+   ============================================================ */
+
+(function () {
+  'use strict';
+
+  // 1. Diccionario global con 15 idiomas
+  if (typeof window.REC_STRINGS === 'undefined') {
+    window.REC_STRINGS = {
+      es: {
+        bar_title: '@roboticaencolegios IA, Robótica y programación en un solo lugar',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Cómo usar la I.A.',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Simulador virtual del Robot Jeep para programar sin hardware.'
+      },
+      en: {
+        bar_title: '@roboticaencolegios AI, Robotics and programming in one place',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'How to use AI',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Virtual Robot Jeep simulator for programming without hardware.'
+      },
+      pt: {
+        bar_title: '@roboticaencolegios IA, Robótica e programação em um só lugar',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Como usar a IA',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Simulador virtual do Robot Jeep para programar sem hardware.'
+      },
+      fr: {
+        bar_title: '@roboticaencolegios IA, Robotique et programmation en un seul endroit',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Comment utiliser l\'IA',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Simulateur virtuel du Robot Jeep pour programmer sans matériel.'
+      },
+      de: {
+        bar_title: '@roboticaencolegios KI, Robotik und Programmierung an einem Ort',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Wie man KI nutzt',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Virtueller Robot Jeep-Simulator zum Programmieren ohne Hardware.'
+      },
+      it: {
+        bar_title: '@roboticaencolegios IA, Robotica e programmazione in un unico luogo',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Come usare l\'IA',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Simulatore virtuale del Robot Jeep per programmare senza hardware.'
+      },
+      zh: {
+        bar_title: '@roboticaencolegios 人工智能、机器人与编程一站式平台',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: '如何使用人工智能',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Robot Jeep 虚拟模拟器，无需硬件即可编程。'
+      },
+      ja: {
+        bar_title: '@roboticaencolegios AI、ロボット、プログラミングのすべてがここに',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'AIの使い方',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'ハードウェアなしでプログラミングできる Robot Jeep 仮想シミュレーター。'
+      },
+      ko: {
+        bar_title: '@roboticaencolegios AI, 로봇 및 프로그래밍을 한 곳에서',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'AI 사용 방법',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: '하드웨어 없이 프로그래밍할 수 있는 Robot Jeep 가상 시뮬레이터입니다.'
+      },
+      ru: {
+        bar_title: '@roboticaencolegios ИИ, робототехника и программирование в одном месте',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Как использовать ИИ',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Виртуальный симулятор Robot Jeep для программирования без оборудования.'
+      },
+      ar: {
+        bar_title: '@roboticaencolegios الذكاء الاصطناعي والروبوتات والبرمجة في مكان واحد',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'كيفية استخدام الذكاء الاصطناعي',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'محاكاة روبوت جيب الافتراضية للبرمجة دون أجهزة.'
+      },
+      hi: {
+        bar_title: '@roboticaencolegios AI, रोबोटिक्स और प्रोग्रामिंग एक ही जगह पर',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'AI का उपयोग कैसे करें',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Robot Jeep का वर्चुअल सिम्युलेटर, बिना हार्डवेयर के प्रोग्रामिंग के लिए।'
+      },
+      bn: {
+        bar_title: '@roboticaencolegios AI, রোবোটিক্স এবং প্রোগ্রামিং এক জায়গায়',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'AI কীভাবে ব্যবহার করবেন',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Robot Jeep-এর ভার্চুয়াল সিমুলেটর, হার্ডওয়্যার ছাড়াই প্রোগ্রামিং করতে।'
+      },
+      id: {
+        bar_title: '@roboticaencolegios AI, Robotika, dan Pemrograman dalam satu tempat',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Cara menggunakan AI',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Simulator virtual Robot Jeep untuk memrogram tanpa perangkat keras.'
+      },
+      tr: {
+        bar_title: '@roboticaencolegios Yapay Zeka, Robotik ve Programlama tek yerde',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Yapay zeka nasıl kullanılır',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Robot Jeep için donanım olmadan programlama yapılabilen sanal simülatör.'
+      }
+    };
+  }
+
+  // Cadenas originales del DOM (valores por defecto) para reconocer nodos
+  // aunque React aún no haya cambiado el locale.
+  var REC_I18N_SOURCES = {
+    btn_jeep: 'ROBOT JEEP VIRTUAL',
+    btn_ia: 'Cómo usar la I.A.',
+    btn_instagram: 'Instagram de @roboticaencolegios',
+    ext_jeep_title: 'Robot Jeep Virtual',
+    ext_jeep_desc: 'Simulá y programá el Robot Jeep: física 2D, sensores, LEDs y audio 100% offline.'
+  };
+
+  var FALLBACK_LOCALE = 'en';
+  var currentRecLocale = null;
+  var reduxListenerInitialized = false;
+  var menuObserver = null;
+  var observedMenuBar = null;
+  var libraryObserver = null;
+  var lastObservedModal = null;
+  var titleObserver = null;
+
+  function getReduxStore() {
+    return window._reduxStore || window.ReduxStore || null;
+  }
+
+  function normalizeLocale(locale) {
+    if (!locale || typeof locale !== 'string') return FALLBACK_LOCALE;
+    var primary = locale.split(/[-_]/)[0].toLowerCase();
+    if (window.REC_STRINGS[primary]) return primary;
+    return FALLBACK_LOCALE;
+  }
+
+  function getStrings(locale) {
+    var normalized = normalizeLocale(locale);
+    return window.REC_STRINGS[normalized] || window.REC_STRINGS[FALLBACK_LOCALE];
+  }
+
+  function getTitleTarget(locale) {
+    var normalized = locale || currentRecLocale || FALLBACK_LOCALE;
+    var strings = getStrings(normalized);
+    return strings && strings.bar_title ? strings.bar_title : document.title;
+  }
+
+  function setupTitleObserver() {
+    var titleEl = document.querySelector('title');
+    if (titleEl && titleEl.id === 'rec-i18n-title') {
+      if (titleObserver) return;
+      startTitleObserver(titleEl);
+      forceRECTitle();
+      return;
+    }
+
+    var newTitle = document.createElement('title');
+    newTitle.id = 'rec-i18n-title';
+    var target = getTitleTarget();
+    newTitle.textContent = target;
+    if (titleEl && titleEl.parentNode) {
+      titleEl.parentNode.replaceChild(newTitle, titleEl);
+    } else if (document.head) {
+      document.head.appendChild(newTitle);
+    }
+    startTitleObserver(newTitle);
+    document.title = target;
+  }
+
+  function forceRECTitle() {
+    var target = getTitleTarget();
+    if (document.title !== target) {
+      document.title = target;
+    }
+  }
+
+  function startTitleObserver(el) {
+    if (titleObserver) {
+      titleObserver.disconnect();
+      titleObserver = null;
+    }
+    titleObserver = new MutationObserver(function () {
+      forceRECTitle();
+    });
+    titleObserver.observe(el, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+  }
+
+  function getKnownValues(key) {
+    var values = {};
+    if (REC_I18N_SOURCES[key]) values[REC_I18N_SOURCES[key]] = true;
+    for (var lang in window.REC_STRINGS) {
+      if (!window.REC_STRINGS.hasOwnProperty(lang)) continue;
+      var v = window.REC_STRINGS[lang][key];
+      if (v) values[v] = true;
+    }
+    return values;
+  }
+
+  function walkTextNodes(root, callback) {
+    if (!root) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    var node;
+    while ((node = walker.nextNode()) !== null) {
+      callback(node);
+    }
+  }
+
+  function updateMatchingTextNode(root, key, newText) {
+    if (!root) return;
+    var known = getKnownValues(key);
+    walkTextNodes(root, function (node) {
+      var trimmed = (node.textContent || '').trim();
+      if (known[trimmed]) {
+        node.textContent = newText;
+      }
+    });
+  }
+
+  // 2. Inyección/actualización de botones del menu bar
+  function injectRECCSS() {
+    if (document.getElementById('rec-i18n-css')) return;
+    var style = document.createElement('style');
+    style.id = 'rec-i18n-css';
+    style.textContent =
+      '[class*="see-inside-button"] { display: none !important; }' +
+      '[class*="menu-bar_project-page-button_"] { display: none !important; }' +
+      '[class*="menu-bar_menu-bar-item_"]:has([class*="community-button_community-button_"]) { display: none !important; }' +
+      '[class*="community-button_community-button_"] { display: none !important; }' +
+      '[class*="menu-bar_"] a[href*="laboratoriorec.com.ar"],' +
+      '[class*="menu-bar_"] a[href*="Laboratorio-IA"] { display: none !important; }' +
+      '[class*="menu-bar_menu-bar-item_"]:has(> a[href*="instagram.com/roboticaencolegios"]) { display: none !important; }' +
+      '[class*="menu-bar_menu-bar-item_"]:has(> a[href*="www.roboticaencolegios.com.ar"]) { display: none !important; }' +
+      '#btn-rec-jeep, #btn-rec-ia, #btn-rec-instagram { align-self: center; }' +
+      '#rec-welcome-toast {' +
+      '  position: fixed;' +
+      '  bottom: 2rem;' +
+      '  left: 50%;' +
+      '  transform: translateX(-50%);' +
+      '  z-index: 9999;' +
+      '  max-width: 90vw;' +
+      '  background: rgba(0,0,0,0.8);' +
+      '  color: #fff;' +
+      '  border-radius: 1rem;' +
+      '  padding: 1rem 1.5rem;' +
+      '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;' +
+      '  text-align: center;' +
+      '  opacity: 0;' +
+      '  transition: opacity 0.5s ease;' +
+      '  pointer-events: none;' +
+      '  box-shadow: 0 8px 24px rgba(0,0,0,0.3);' +
+      '}' +
+      '#rec-welcome-toast.rec-welcome-visible { opacity: 1; }' +
+      '#rec-welcome-toast.rec-welcome-hiding { opacity: 0; }' +
+      '#rec-welcome-toast .rec-welcome-main { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.35rem; white-space: normal; line-height: 1.4; }' +
+      '#rec-welcome-toast .rec-welcome-sub { font-size: 0.85rem; opacity: 0.85; }';
+    document.head.appendChild(style);
+  }
+
+  function ensureRECButtonsExist(locale) {
+    injectRECCSS();
+    var strings = getStrings(locale);
+    if (!strings) return;
+
+    var menuBar = document.querySelector('[class*="menu-bar_"]');
+    if (!menuBar) return;
+
+    var container = document.getElementById('rec-menu-buttons');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'rec-menu-buttons';
+      container.style.cssText = 'display:flex;align-items:center;gap:0.5rem;';
+    }
+
+    var mainMenu = menuBar.querySelector('[class*="menu-bar_main-menu_"]');
+    var titleField = menuBar.querySelector('[class*="menu-bar_growable_"]');
+    var accountGroup = menuBar.querySelector('[class*="menu-bar_account-info-group_"]');
+
+    function insertContainer() {
+      if (container.parentNode !== menuBar) {
+        if (mainMenu) {
+          menuBar.insertBefore(container, mainMenu.nextElementSibling);
+        } else if (titleField) {
+          menuBar.insertBefore(container, titleField);
+        } else if (accountGroup) {
+          menuBar.insertBefore(container, accountGroup);
+        } else {
+          menuBar.appendChild(container);
+        }
+      } else if (mainMenu && container.previousElementSibling !== mainMenu) {
+        menuBar.insertBefore(container, mainMenu.nextElementSibling);
+      } else if (!mainMenu && titleField && container.nextElementSibling !== titleField) {
+        menuBar.insertBefore(container, titleField);
+      }
+    }
+    insertContainer();
+
+    function ensureButton(id, tag, props, text, style) {
+      var btn = document.getElementById(id);
+      if (!btn) {
+        btn = document.createElement(tag);
+        btn.id = id;
+        for (var key in props) {
+          if (key === 'onclick' || key === 'onmouseenter' || key === 'onmouseleave') {
+            btn[key] = props[key];
+          } else {
+            btn.setAttribute(key, props[key]);
+          }
+        }
+        btn.style.cssText = style;
+        container.appendChild(btn);
+      }
+      if (btn.textContent !== text) {
+        btn.textContent = text;
+      }
+      return btn;
+    }
+
+    var jeepBtn = ensureButton(
+      'btn-rec-jeep',
+      'button',
+      {
+        title: 'Cargar extensión Robot Jeep Virtual',
+        onclick: function () {
+          if (!window.vm || !window.vm.extensionManager) {
+            console.warn('[REC] VM no disponible todavía.');
+            return;
+          }
+          var url = new URL('extensionesrec/robotjeepvirtual.js', document.baseURI).href + '?t=' + Date.now();
+          window.vm.extensionManager.loadExtensionURL(url)
+            .then(function () {
+              console.info('[REC] Robot Jeep Virtual cargado');
+            })
+            .catch(function (e) {
+              console.warn('[REC] Jeep ya cargado o error:', e.message);
+            });
+        }
+      },
+      strings.btn_jeep,
+      'background:#e81b23;color:#fff;font-weight:bold;font-family:inherit;font-size:0.75rem;padding:0 0.75rem;height:2rem;border:none;border-radius:4px;cursor:pointer;white-space:nowrap;'
+    );
+    jeepBtn.onmouseenter = function () { jeepBtn.style.background = '#b31219'; };
+    jeepBtn.onmouseleave = function () { jeepBtn.style.background = '#e81b23'; };
+
+    ensureButton(
+      'btn-rec-ia',
+      'a',
+      {
+        href: 'https://www.roboticaencolegios.com.ar/',
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      },
+      strings.btn_ia,
+      'background:#fff;color:#333;font-weight:bold;font-family:inherit;font-size:0.75rem;padding:0 0.75rem;height:2rem;border:none;border-radius:4px;cursor:pointer;white-space:nowrap;text-decoration:none;display:flex;align-items:center;'
+    );
+
+    ensureButton(
+      'btn-rec-instagram',
+      'a',
+      {
+        href: 'https://www.instagram.com/roboticaencolegios',
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      },
+      strings.btn_instagram,
+      'background:transparent;color:#fff;font-weight:bold;font-family:inherit;font-size:0.75rem;padding:0 0.75rem;height:2rem;border:none;cursor:pointer;white-space:nowrap;text-decoration:none;display:flex;align-items:center;'
+    );
+  }
+
+  function findExtensionLibraryModal() {
+    var modals = document.querySelectorAll('[class*="modal_modal-content_"]');
+    for (var i = 0; i < modals.length; i++) {
+      var modal = modals[i];
+      if (
+        modal.querySelector('[class*="library_library-scroll-grid_"]') ||
+        modal.querySelector('[class*="library-item_library-item_"]')
+      ) {
+        return modal;
+      }
+    }
+    return null;
+  }
+
+  function updateLibraryCard(strings) {
+    var modal = findExtensionLibraryModal();
+    if (!modal) return;
+
+    var nameSpans = modal.querySelectorAll('[class*="library-item_library-item-name_"]');
+    for (var i = 0; i < nameSpans.length; i++) {
+      var span = nameSpans[i];
+      var text = (span.textContent || '').trim();
+      if (getKnownValues('ext_jeep_title')[text]) {
+        var titleNode = span.firstChild;
+        if (titleNode && titleNode.nodeType === Node.TEXT_NODE) {
+          titleNode.textContent = strings.ext_jeep_title;
+        }
+
+        var parent = span.parentNode;
+        if (!parent) continue;
+        var descSpan = parent.querySelector('[class*="library-item_featured-description_"]');
+        if (descSpan) {
+          var descNode = descSpan.firstChild;
+          if (descNode && descNode.nodeType === Node.TEXT_NODE) {
+            descNode.textContent = strings.ext_jeep_desc;
+          } else {
+            descSpan.textContent = strings.ext_jeep_desc;
+          }
+        }
+      }
+    }
+  }
+
+  window.updateRECUI = function (locale) {
+    var normalized = normalizeLocale(locale);
+    if (normalized === currentRecLocale && currentRecLocale !== null) return;
+    currentRecLocale = normalized;
+    window.currentRecLocale = currentRecLocale;
+
+    var strings = getStrings(normalized);
+    if (!strings) return;
+
+    document.title = strings.bar_title;
+    ensureRECButtonsExist(normalized);
+    updateLibraryCard(strings);
+  };
+
+  // 3. Redux listener seguro
+  function setupReduxListener() {
+    if (reduxListenerInitialized) return;
+    var store = getReduxStore();
+    if (!store || typeof store.subscribe !== 'function') return;
+
+    reduxListenerInitialized = true;
+    var lastLocale = null;
+
+    store.subscribe(function () {
+      var state = store.getState();
+      var locale = state && state.locales && state.locales.locale;
+      if (locale && locale !== lastLocale) {
+        lastLocale = locale;
+        window.updateRECUI(locale);
+      }
+    });
+
+    var initialState = store.getState();
+    if (initialState && initialState.locales && initialState.locales.locale) {
+      window.updateRECUI(initialState.locales.locale);
+    }
+  }
+
+  // 4. MutationObserver quirúrgico: barra de menú
+  function setupMenuObserver() {
+    var menuBar = document.querySelector('[class*="menu-bar_"]');
+    if (!menuBar) return;
+
+    if (menuObserver && observedMenuBar === menuBar) return;
+
+    if (menuObserver) {
+      menuObserver.disconnect();
+      menuObserver = null;
+    }
+    observedMenuBar = menuBar;
+
+    menuObserver = new MutationObserver(function () {
+      ensureRECButtonsExist(currentRecLocale || FALLBACK_LOCALE);
+    });
+
+    menuObserver.observe(menuBar, {
+      childList: true,
+      subtree: true,
+      attributes: false,
+      characterData: false
+    });
+
+    ensureRECButtonsExist(currentRecLocale || FALLBACK_LOCALE);
+  }
+
+  // 5. MutationObserver quirúrgico: modal de biblioteca de extensiones
+  function setupLibraryObserver() {
+    var modal = findExtensionLibraryModal();
+    if (!modal) {
+      if (libraryObserver) {
+        libraryObserver.disconnect();
+        libraryObserver = null;
+        lastObservedModal = null;
+      }
+      return;
+    }
+    if (libraryObserver && lastObservedModal === modal) return;
+
+    if (libraryObserver) libraryObserver.disconnect();
+    lastObservedModal = modal;
+
+    libraryObserver = new MutationObserver(function () {
+      if (!currentRecLocale) return;
+      updateLibraryCard(getStrings(currentRecLocale));
+    });
+
+    libraryObserver.observe(modal, {
+      childList: true,
+      subtree: true,
+      attributes: false,
+      characterData: false
+    });
+
+    if (currentRecLocale) {
+      updateLibraryCard(getStrings(currentRecLocale));
+    }
+  }
+
+  // Cartel de bienvenida internacional (muro tipográfico)
+  function showGlobalWelcomeToast() {
+    if (window.recWelcomeShown) return;
+    window.recWelcomeShown = true;
+
+    var toast = document.createElement('div');
+    toast.id = 'rec-welcome-toast';
+    toast.className = 'rec-welcome-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+
+    var mainText = document.createElement('div');
+    mainText.className = 'rec-welcome-main';
+    mainText.textContent = 'Bienvenidos • Welcome • Bem-vindos • Bienvenue • Willkommen • Benvenuti • 欢迎 • ようこそ • 환영합니다 • Добро пожаловать • أهلاً بكم • स्वागत हे • স্বাগতম • Selamat Datang • Hoşgeldiniz';
+
+    var subText = document.createElement('div');
+    subText.className = 'rec-welcome-sub';
+    subText.textContent = 'AI & Robotics Lab - Available in 15 languages';
+
+    toast.appendChild(mainText);
+    toast.appendChild(subText);
+
+    if (!document.body) {
+      window.addEventListener('DOMContentLoaded', function () {
+        document.body.appendChild(toast);
+      });
+    } else {
+      document.body.appendChild(toast);
+    }
+
+    // Forzar reflow para que la transición funcione
+    if (toast.offsetWidth) {
+      // no-op
+    }
+
+    toast.classList.add('rec-welcome-visible');
+
+    setTimeout(function () {
+      toast.classList.remove('rec-welcome-visible');
+      toast.classList.add('rec-welcome-hiding');
+      setTimeout(function () {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 500);
+    }, 6500);
+  }
+
+  // 6. Inicialización
+  function init() {
+    // Alinear el alias que pide la tarea
+    if (!window._reduxStore && window.ReduxStore) {
+      window._reduxStore = window.ReduxStore;
+    }
+
+    showGlobalWelcomeToast();
+
+    setupReduxListener();
+    setupTitleObserver();
+    setupMenuObserver();
+    setupLibraryObserver();
+
+    // Detección no invasiva: solo consulta DOM, nunca observa body/Stage.
+    setInterval(function () {
+      setupReduxListener();
+      setupMenuObserver();
+      setupLibraryObserver();
+      setupTitleObserver();
+    }, 500);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
 //# sourceMappingURL=editor.js.map

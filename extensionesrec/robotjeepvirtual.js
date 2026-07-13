@@ -176,11 +176,12 @@
     if (!t) return false;
     jeep.x   = t.x;
     jeep.y   = t.y;
-    jeep.dir = t.direction;
-    homePos  = { x: t.x, y: t.y, dir: t.direction };
+    jeep.dir = (((t.direction % 360) + 360) % 360);
+    homePos  = { x: t.x, y: t.y, dir: jeep.dir };
     lastSetX = t.x;
     lastSetY = t.y;
     t.draggable = true;
+    t.rotationStyle = 'all around';
     if (!rafId) startPhysics();
     // Pre-fetch del SVG para tener listos los LEDs sin demora
     fetchBaseSvg(t).catch(() => {});
@@ -202,6 +203,14 @@
 
   // ── Cinemática diferencial — motores persistentes, sin fricción ──────────
   function physicsStep(dt) {
+    const t = getTarget();
+    if (!t) return;
+
+    // Leer la dirección nativa del sprite para que los bloques nativos
+    // "apuntar en dirección" / "apuntar hacia" tengan efecto.
+    t.rotationStyle = 'all around';
+    jeep.dir = (((t.direction % 360) + 360) % 360);
+
     const v    = (jeep.vL + jeep.vR) / 2;
     const wDeg = (jeep.vR - jeep.vL) * TURN_SCALE;
     const rad  = (jeep.dir * Math.PI) / 180;
@@ -213,9 +222,6 @@
     jeep.x = Math.max(-230, Math.min(230, jeep.x));
     jeep.y = Math.max(-170, Math.min(170, jeep.y));
 
-    const t = getTarget();
-    if (!t) return;
-
     // Detección de arrastre: compara posición del sprite vs lo que escribimos el frame anterior
     const DRAG_THRESHOLD = 4;
     const driftX = t.x - lastSetX;
@@ -225,7 +231,7 @@
       jeep.y  = t.y;
       jeep.vL = 0;
       jeep.vR = 0;
-      homePos = { x: t.x, y: t.y, dir: jeep.dir };
+      homePos = { x: t.x, y: t.y, dir: t.direction };
     }
 
     t.setXY(jeep.x, jeep.y);
@@ -314,9 +320,440 @@
          '<circle cx="20" cy="20" r="20" fill="#FF6B35"/>' +
          '</svg>');
 
+  // ── Traducciones de bloques (15 idiomas) ─────────────────────────────────
+  const I18N_BLOCKS = {
+    es: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: '¡Robot Jeep Virtual cargado! Busca los bloques al final de la paleta izquierda 👇',
+      block_move_label: '🚙 Movimiento del Jeep',
+      block_move_fwd: 'Mover motor [SIDE] hacia ADELANTE a [PCT]%',
+      block_move_bwd: 'Mover motor [SIDE] hacia ATRAS a [PCT]%',
+      block_stop_motor: 'Detener motor [WHICH]',
+      block_reset_pos: 'reiniciar posición del Jeep',
+      block_sensors_label: '📡 Sensores',
+      block_distance_cm: 'Distancia en cm',
+      block_line_detected: 'Detecta linea',
+      block_leds_label: '💡 LEDs frontales',
+      block_light_on: 'Encender Luz [LED] en color [COLOR]',
+      block_light_off: 'Apagar Luz [LED]',
+      block_audio_label: '🔊 Audio',
+      block_bocina: 'sonar bocina',
+      block_play_note: 'tocar nota [NOTA] por [DUR] seg',
+      motor_left: 'IZQUIERDO / B',
+      motor_right: 'DERECHO / A',
+      stop_both: 'AMBOS',
+      led_all: 'TODAS'
+    },
+    en: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual loaded! Look for the blocks at the bottom of the left palette 👇',
+      block_move_label: '🚙 Jeep Movement',
+      block_move_fwd: 'Move [SIDE] motor FORWARD at [PCT]%',
+      block_move_bwd: 'Move [SIDE] motor BACKWARD at [PCT]%',
+      block_stop_motor: 'Stop [WHICH] motor',
+      block_reset_pos: 'reset Jeep position',
+      block_sensors_label: '📡 Sensors',
+      block_distance_cm: 'distance in cm',
+      block_line_detected: 'line detected',
+      block_leds_label: '💡 Front LEDs',
+      block_light_on: 'Turn on [LED] light with color [COLOR]',
+      block_light_off: 'Turn off [LED] light',
+      block_audio_label: '🔊 Audio',
+      block_bocina: 'sound horn',
+      block_play_note: 'play note [NOTA] for [DUR] s',
+      motor_left: 'LEFT / B',
+      motor_right: 'RIGHT / A',
+      stop_both: 'BOTH',
+      led_all: 'ALL'
+    },
+    pt: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual carregado! Procure os blocos no final da paleta à esquerda 👇',
+      block_move_label: '🚙 Movimento do Jeep',
+      block_move_fwd: 'Mover motor [SIDE] para FRENTE a [PCT]%',
+      block_move_bwd: 'Mover motor [SIDE] para TRÁS a [PCT]%',
+      block_stop_motor: 'Parar motor [WHICH]',
+      block_reset_pos: 'reiniciar posição do Jeep',
+      block_sensors_label: '📡 Sensores',
+      block_distance_cm: 'distância em cm',
+      block_line_detected: 'detecta linha',
+      block_leds_label: '💡 LEDs frontais',
+      block_light_on: 'Acender luz [LED] na cor [COLOR]',
+      block_light_off: 'Apagar luz [LED]',
+      block_audio_label: '🔊 Áudio',
+      block_bocina: 'tocar buzina',
+      block_play_note: 'tocar nota [NOTA] por [DUR] seg',
+      motor_left: 'ESQUERDO / B',
+      motor_right: 'DIREITO / A',
+      stop_both: 'AMBOS',
+      led_all: 'TODAS'
+    },
+    fr: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual chargé ! Retrouve les blocs en bas de la palette à gauche 👇',
+      block_move_label: '🚙 Mouvement du Jeep',
+      block_move_fwd: 'Avancer le moteur [SIDE] à [PCT]%',
+      block_move_bwd: 'Reculer le moteur [SIDE] à [PCT]%',
+      block_stop_motor: 'Arrêter le moteur [WHICH]',
+      block_reset_pos: 'réinitialiser la position du Jeep',
+      block_sensors_label: '📡 Capteurs',
+      block_distance_cm: 'distance en cm',
+      block_line_detected: 'détecte la ligne',
+      block_leds_label: '💡 LEDs frontales',
+      block_light_on: 'Allumer la LED [LED] de couleur [COLOR]',
+      block_light_off: 'Éteindre la LED [LED]',
+      block_audio_label: '🔊 Audio',
+      block_bocina: 'klaxonner',
+      block_play_note: 'jouer la note [NOTA] pendant [DUR] s',
+      motor_left: 'GAUCHE / B',
+      motor_right: 'DROITE / A',
+      stop_both: 'LES DEUX',
+      led_all: 'TOUTES'
+    },
+    de: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual geladen! Die Blöcke findest du unten in der linken Palette 👇',
+      block_move_label: '🚙 Jeep-Bewegung',
+      block_move_fwd: 'Motor [SIDE] um [PCT]% VORWÄRTS bewegen',
+      block_move_bwd: 'Motor [SIDE] um [PCT]% RÜCKWÄRTS bewegen',
+      block_stop_motor: 'Motor [WHICH] stoppen',
+      block_reset_pos: 'Jeep-Position zurücksetzen',
+      block_sensors_label: '📡 Sensoren',
+      block_distance_cm: 'Entfernung in cm',
+      block_line_detected: 'Linie erkannt',
+      block_leds_label: '💡 Front-LEDs',
+      block_light_on: 'LED [LED] in Farbe [COLOR] einschalten',
+      block_light_off: 'LED [LED] ausschalten',
+      block_audio_label: '🔊 Audio',
+      block_bocina: 'Hupe ertönen',
+      block_play_note: 'Note [NOTA] für [DUR] s spielen',
+      motor_left: 'LINKS / B',
+      motor_right: 'RECHTS / A',
+      stop_both: 'BEIDE',
+      led_all: 'ALLE'
+    },
+    it: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual caricato! Cerca i blocchi in fondo alla palette a sinistra 👇',
+      block_move_label: '🚙 Movimento del Jeep',
+      block_move_fwd: 'Muovere il motore [SIDE] in AVANTI al [PCT]%',
+      block_move_bwd: 'Muovere il motore [SIDE] INDIETRO al [PCT]%',
+      block_stop_motor: 'Fermare il motore [WHICH]',
+      block_reset_pos: 'reimposta posizione del Jeep',
+      block_sensors_label: '📡 Sensori',
+      block_distance_cm: 'distanza in cm',
+      block_line_detected: 'rileva linea',
+      block_leds_label: '💡 LED anteriori',
+      block_light_on: 'Accendere luce [LED] di colore [COLOR]',
+      block_light_off: 'Spegnere luce [LED]',
+      block_audio_label: '🔊 Audio',
+      block_bocina: 'suonare clacson',
+      block_play_note: 'suonare nota [NOTA] per [DUR] s',
+      motor_left: 'SINISTRO / B',
+      motor_right: 'DESTRO / A',
+      stop_both: 'ENTRAMBI',
+      led_all: 'TUTTE'
+    },
+    zh: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual 已加载！在左侧积木栏底部查找积木 👇',
+      block_move_label: '🚙 Jeep 移动',
+      block_move_fwd: '以 [PCT]% 向前移动 [SIDE] 电机',
+      block_move_bwd: '以 [PCT]% 向后移动 [SIDE] 电机',
+      block_stop_motor: '停止 [WHICH] 电机',
+      block_reset_pos: '重置 Jeep 位置',
+      block_sensors_label: '📡 传感器',
+      block_distance_cm: '距离（厘米）',
+      block_line_detected: '检测到线',
+      block_leds_label: '💡 前灯',
+      block_light_on: '打开 [LED] 灯，颜色为 [COLOR]',
+      block_light_off: '关闭 [LED] 灯',
+      block_audio_label: '🔊 音频',
+      block_bocina: '鸣笛',
+      block_play_note: '以 [NOTA] 音符播放 [DUR] 秒',
+      motor_left: '左 / B',
+      motor_right: '右 / A',
+      stop_both: '全部',
+      led_all: '全部'
+    },
+    ja: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual が読み込まれました！左のパレットの一番下にブロックがあります 👇',
+      block_move_label: '🚙 Jeep の動き',
+      block_move_fwd: '[SIDE] モーターを [PCT]% で前進させる',
+      block_move_bwd: '[SIDE] モーターを [PCT]% で後退させる',
+      block_stop_motor: '[WHICH] モーターを停止する',
+      block_reset_pos: 'Jeep の位置をリセットする',
+      block_sensors_label: '📡 センサー',
+      block_distance_cm: '距離（cm）',
+      block_line_detected: 'ラインを検出',
+      block_leds_label: '💡 前面 LED',
+      block_light_on: '色 [COLOR] の [LED] ライトをつける',
+      block_light_off: '[LED] ライトを消す',
+      block_audio_label: '🔊 オーディオ',
+      block_bocina: 'クラクションを鳴らす',
+      block_play_note: '音符 [NOTA] を [DUR] 秒鳴らす',
+      motor_left: '左 / B',
+      motor_right: '右 / A',
+      stop_both: '両方',
+      led_all: 'すべて'
+    },
+    ko: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual이(가) 로드되었습니다! 왼쪽 팔레트 하단에서 블록을 찾으세요 👇',
+      block_move_label: '🚙 Jeep 움직임',
+      block_move_fwd: '[SIDE] 모터를 [PCT]%로 전진',
+      block_move_bwd: '[SIDE] 모터를 [PCT]%로 후진',
+      block_stop_motor: '[WHICH] 모터 정지',
+      block_reset_pos: 'Jeep 위치 초기화',
+      block_sensors_label: '📡 센서',
+      block_distance_cm: '거리(cm)',
+      block_line_detected: '라인 감지',
+      block_leds_label: '💡 전방 LED',
+      block_light_on: '[COLOR] 색상으로 [LED] 조명 켜기',
+      block_light_off: '[LED] 조명 끄기',
+      block_audio_label: '🔊 오디오',
+      block_bocina: '경적 소리',
+      block_play_note: '음 [NOTA] 를 [DUR] 초 동안 연주',
+      motor_left: '왼쪽 / B',
+      motor_right: '오른쪽 / A',
+      stop_both: '양쪽',
+      led_all: '전체'
+    },
+    ru: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual загружен! Ищи блоки внизу левой палитры 👇',
+      block_move_label: '🚙 Движение Jeep',
+      block_move_fwd: 'Двигать мотор [SIDE] вперёд на [PCT]%',
+      block_move_bwd: 'Двигать мотор [SIDE] назад на [PCT]%',
+      block_stop_motor: 'Остановить мотор [WHICH]',
+      block_reset_pos: 'сбросить позицию Jeep',
+      block_sensors_label: '📡 Датчики',
+      block_distance_cm: 'расстояние в см',
+      block_line_detected: 'обнаружена линия',
+      block_leds_label: '💡 Передние светодиоды',
+      block_light_on: 'Включить свет [LED] цвета [COLOR]',
+      block_light_off: 'Выключить свет [LED]',
+      block_audio_label: '🔊 Аудио',
+      block_bocina: 'подать сигнал',
+      block_play_note: 'играть ноту [NOTA] [DUR] с',
+      motor_left: 'ЛЕВЫЙ / B',
+      motor_right: 'ПРАВЫЙ / A',
+      stop_both: 'ОБА',
+      led_all: 'ВСЕ'
+    },
+    ar: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'تم تحميل Robot Jeep Virtual! ابحث عن الكتل في أسفل اللوحة اليسرى 👇',
+      block_move_label: '🚙 حركة Jeep',
+      block_move_fwd: 'تحريك المحرك [SIDE] للأمام بنسبة [PCT]%',
+      block_move_bwd: 'تحريك المحرك [SIDE] للخلف بنسبة [PCT]%',
+      block_stop_motor: 'إيقاف المحرك [WHICH]',
+      block_reset_pos: 'إعادة تعيين موضع Jeep',
+      block_sensors_label: '📡 المستشعرات',
+      block_distance_cm: 'المسافة بالسم',
+      block_line_detected: 'اكتشاف الخط',
+      block_leds_label: '💡 المصابيح الأمامية',
+      block_light_on: 'تشغيل ضوء [LED] باللون [COLOR]',
+      block_light_off: 'إطفاء ضوء [LED]',
+      block_audio_label: '🔊 الصوت',
+      block_bocina: 'تشغيل البوق',
+      block_play_note: 'عزف نوتة [NOTA] لمدة [DUR] ث',
+      motor_left: 'يسار / B',
+      motor_right: 'يمين / A',
+      stop_both: 'كلاهما',
+      led_all: 'الكل'
+    },
+    hi: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual लोड हो गया है! बाएँ पैलेट के नीचे ब्लॉक खोजें 👇',
+      block_move_label: '🚙 Jeep की गति',
+      block_move_fwd: '[SIDE] मोटर को [PCT]% पर आगे बढ़ाएं',
+      block_move_bwd: '[SIDE] मोटर को [PCT]% पर पीछे करें',
+      block_stop_motor: '[WHICH] मोटर रोकें',
+      block_reset_pos: 'Jeep की स्थिति रीसेट करें',
+      block_sensors_label: '📡 सेंसर',
+      block_distance_cm: 'दूरी सेमी में',
+      block_line_detected: 'रेखा का पता चला',
+      block_leds_label: '💡 सामने के LED',
+      block_light_on: '[LED] लाइट को [COLOR] रंग में चालू करें',
+      block_light_off: '[LED] लाइट बंद करें',
+      block_audio_label: '🔊 ऑडियो',
+      block_bocina: 'हॉर्न बजाएं',
+      block_play_note: '[NOTA] नोट को [DUR] सेकंड तक बजाएं',
+      motor_left: 'बायाँ / B',
+      motor_right: 'दायाँ / A',
+      stop_both: 'दोनों',
+      led_all: 'सभी'
+    },
+    bn: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual লোড হয়েছে! বাম প্যালেটের নিচে ব্লকগুলো খুঁজুন 👇',
+      block_move_label: '🚙 Jeep এর চলাচল',
+      block_move_fwd: '[SIDE] মোটর [PCT]% এগিয়ে চালান',
+      block_move_bwd: '[SIDE] মোটর [PCT]% পিছিয়ে চালান',
+      block_stop_motor: '[WHICH] মোটর থামান',
+      block_reset_pos: 'Jeep এর অবস্থান পুনরায় সেট করুন',
+      block_sensors_label: '📡 সেন্সর',
+      block_distance_cm: 'সেন্টিমিটারে দূরত্ব',
+      block_line_detected: 'লাইন শনাক্ত হয়েছে',
+      block_leds_label: '💡 সামনের LED',
+      block_light_on: '[LED] আলো [COLOR] রঙে জ্বালান',
+      block_light_off: '[LED] আলো বন্ধ করুন',
+      block_audio_label: '🔊 অডিও',
+      block_bocina: 'হর্ন বাজান',
+      block_play_note: '[DUR] সেকেন্ডের জন্য [NOTA] নোট বাজান',
+      motor_left: 'বাম / B',
+      motor_right: 'ডান / A',
+      stop_both: 'উভয়',
+      led_all: 'সব'
+    },
+    id: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual dimuat! Cari bloknya di bagian bawah palet kiri 👇',
+      block_move_label: '🚙 Gerakan Jeep',
+      block_move_fwd: 'Gerakkan motor [SIDE] MAJU dengan [PCT]%',
+      block_move_bwd: 'Gerakkan motor [SIDE] MUNDUR dengan [PCT]%',
+      block_stop_motor: 'Hentikan motor [WHICH]',
+      block_reset_pos: 'atur ulang posisi Jeep',
+      block_sensors_label: '📡 Sensor',
+      block_distance_cm: 'jarak dalam cm',
+      block_line_detected: 'garis terdeteksi',
+      block_leds_label: '💡 LED depan',
+      block_light_on: 'Nyalakan lampu [LED] dengan warna [COLOR]',
+      block_light_off: 'Matikan lampu [LED]',
+      block_audio_label: '🔊 Audio',
+      block_bocina: 'bunyikan klakson',
+      block_play_note: 'mainkan nada [NOTA] selama [DUR] dtk',
+      motor_left: 'KIRI / B',
+      motor_right: 'KANAN / A',
+      stop_both: 'KEDUANYA',
+      led_all: 'SEMUA'
+    },
+    tr: {
+      ext_title: 'Robot Jeep Virtual',
+      jeep_loaded_msg: 'Robot Jeep Virtual yüklendi! Blokları sol paletin en altında bulun 👇',
+      block_move_label: '🚙 Jeep Hareketi',
+      block_move_fwd: '[SIDE] motorunu [PCT]% ile İLERİ hareket ettir',
+      block_move_bwd: '[SIDE] motorunu [PCT]% ile GERİ hareket ettir',
+      block_stop_motor: '[WHICH] motorunu durdur',
+      block_reset_pos: 'Jeep konumunu sıfırla',
+      block_sensors_label: '📡 Sensörler',
+      block_distance_cm: 'mesafe cm cinsinden',
+      block_line_detected: 'çizgi algılandı',
+      block_leds_label: '💡 Ön LEDler',
+      block_light_on: '[LED] ışığını [COLOR] renginde aç',
+      block_light_off: '[LED] ışığını kapat',
+      block_audio_label: '🔊 Ses',
+      block_bocina: 'korna çal',
+      block_play_note: '[NOTA] notasını [DUR] sn çal',
+      motor_left: 'SOL / B',
+      motor_right: 'SAĞ / A',
+      stop_both: 'İKİSİ',
+      led_all: 'TÜMÜ'
+    }
+  };
+
+  // ── Toast de extensión cargada ──────────────────────────────────────────
+  let jeepToastCssInjected = false;
+  function injectJeepToastCSS() {
+    if (jeepToastCssInjected) return;
+    jeepToastCssInjected = true;
+    const style = document.createElement('style');
+    style.id = 'rec-jeep-toast-css';
+    style.textContent =
+      '#rec-jeep-toast {' +
+      '  position: fixed;' +
+      '  bottom: 1rem;' +
+      '  left: 1rem;' +
+      '  z-index: 9999;' +
+      '  max-width: 320px;' +
+      '  background: rgba(40,40,40,0.95);' +
+      '  color: #fff;' +
+      '  border-left: 4px solid #FF6B35;' +
+      '  border-radius: 0.75rem;' +
+      '  padding: 0.75rem 1rem;' +
+      '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;' +
+      '  font-size: 0.95rem;' +
+      '  line-height: 1.4;' +
+      '  box-shadow: 0 6px 20px rgba(0,0,0,0.25);' +
+      '  opacity: 0;' +
+      '  transform: translateY(20px);' +
+      '  transition: opacity 0.4s ease, transform 0.4s ease;' +
+      '  pointer-events: none;' +
+      '}' +
+      '#rec-jeep-toast.rec-jeep-toast-visible {' +
+      '  opacity: 1;' +
+      '  transform: translateY(0);' +
+      '}' +
+      '#rec-jeep-toast.rec-jeep-toast-hiding {' +
+      '  opacity: 0;' +
+      '  transform: translateY(10px);' +
+      '}' +
+      '#rec-jeep-toast .rec-jeep-toast-icon {' +
+      '  display: inline-block;' +
+      '  margin-right: 0.5rem;' +
+      '  font-size: 1.1rem;' +
+      '  vertical-align: middle;' +
+      '}' +
+      '#rec-jeep-toast .rec-jeep-toast-text {' +
+      '  vertical-align: middle;' +
+      '  display: inline;' +
+      '}';
+    document.head.appendChild(style);
+  }
+
+  function showJeepLoadedToast() {
+    if (!document.body) return;
+    injectJeepToastCSS();
+
+    const existing = document.getElementById('rec-jeep-toast');
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+
+    const locale = window.currentRecLocale || 'es';
+    const dict = I18N_BLOCKS[locale] || I18N_BLOCKS['es'];
+    const msg = dict.jeep_loaded_msg || I18N_BLOCKS['es'].jeep_loaded_msg;
+
+    const toast = document.createElement('div');
+    toast.id = 'rec-jeep-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+
+    const icon = document.createElement('span');
+    icon.className = 'rec-jeep-toast-icon';
+    icon.textContent = '🚙';
+
+    const text = document.createElement('span');
+    text.className = 'rec-jeep-toast-text';
+    text.textContent = msg;
+
+    toast.appendChild(icon);
+    toast.appendChild(text);
+
+    document.body.appendChild(toast);
+
+    // Forzar reflow para la transición
+    if (toast.offsetWidth) {
+      // no-op
+    }
+
+    toast.classList.add('rec-jeep-toast-visible');
+
+    setTimeout(() => {
+      toast.classList.remove('rec-jeep-toast-visible');
+      toast.classList.add('rec-jeep-toast-hiding');
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 400);
+    }, 4500);
+  }
+
   // ── Clase de extensión ───────────────────────────────────────────────────
   class RobotJeepVirtualREC {
     constructor() {
+      // Bandera para evitar duplicados del toast de carga
+      this.jeepToastMostrado = false;
+
       // Intentar enlazar al sprite preexistente (con reintentos)
       const tryLink = () => {
         if (!syncAndStart()) setTimeout(tryLink, 500);
@@ -333,24 +770,33 @@
           }
         }, 300);
       }
+
     }
 
     getInfo() {
+      // Mostrar toast de carga solo cuando el usuario activa la extensión (no al inicio)
+      if (!this.jeepToastMostrado) {
+        showJeepLoadedToast();
+        this.jeepToastMostrado = true;
+      }
+
+      const locale = window.currentRecLocale || 'es';
+      const t = key => (I18N_BLOCKS[locale] && I18N_BLOCKS[locale][key]) || I18N_BLOCKS['es'][key] || key;
       const base = new URL('extensionesrec/', document.baseURI).href;
       return {
-        id:          'robotJeepVirtualREC',
-        name:        'Robot Jeep Virtual',
-        color1:      '#FF6B35',
-        color2:      '#E84315',
-        color3:      '#BF360C',
+        id: 'robotJeepVirtualREC',
+        name: t('ext_title'),
+        color1: '#FF6B35',
+        color2: '#E84315',
+        color3: '#BF360C',
         menuIconURI: MENU_ICON_URI,
-        iconURL:     base + 'RobotJeepvirtual.png',
+        iconURL: base + 'RobotJeepvirtual.png',
         blocks: [
-          { blockType: Scratch.BlockType.LABEL, text: '🚙 Movimiento del Jeep' },
+          { blockType: Scratch.BlockType.LABEL, text: t('block_move_label') },
           {
             opcode: 'moveForward',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Mover motor [SIDE] hacia ADELANTE a [PCT]%',
+            text: t('block_move_fwd'),
             arguments: {
               SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
               PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
@@ -359,7 +805,7 @@
           {
             opcode: 'moveBackward',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Mover motor [SIDE] hacia ATRAS a [PCT]%',
+            text: t('block_move_bwd'),
             arguments: {
               SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
               PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
@@ -368,39 +814,39 @@
           {
             opcode: 'stopMotor',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Detener motor [WHICH]',
+            text: t('block_stop_motor'),
             arguments: {
               WHICH: { type: Scratch.ArgumentType.STRING, menu: 'stopWhich', defaultValue: 'AMBOS' }
             }
           },
-          { opcode: 'resetPos', blockType: Scratch.BlockType.COMMAND, text: 'reiniciar posición del Jeep' },
-          { blockType: Scratch.BlockType.LABEL, text: '📡 Sensores' },
-          { opcode: 'distanceCm',   blockType: Scratch.BlockType.REPORTER, text: 'Distancia en cm' },
-          { opcode: 'lineDetected', blockType: Scratch.BlockType.BOOLEAN,  text: 'Detecta linea' },
-          { blockType: Scratch.BlockType.LABEL, text: '💡 LEDs frontales' },
+          { opcode: 'resetPos', blockType: Scratch.BlockType.COMMAND, text: t('block_reset_pos') },
+          { blockType: Scratch.BlockType.LABEL, text: t('block_sensors_label') },
+          { opcode: 'distanceCm', blockType: Scratch.BlockType.REPORTER, text: t('block_distance_cm') },
+          { opcode: 'lineDetected', blockType: Scratch.BlockType.BOOLEAN, text: t('block_line_detected') },
+          { blockType: Scratch.BlockType.LABEL, text: t('block_leds_label') },
           {
             opcode: 'lightOn',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Encender Luz [LED] en color [COLOR]',
+            text: t('block_light_on'),
             arguments: {
-              LED:   { type: Scratch.ArgumentType.STRING, menu: 'ledWhich', defaultValue: 'TODAS' },
-              COLOR: { type: Scratch.ArgumentType.COLOR,  defaultValue: '#ffff00' }
+              LED: { type: Scratch.ArgumentType.STRING, menu: 'ledWhich', defaultValue: 'TODAS' },
+              COLOR: { type: Scratch.ArgumentType.COLOR, defaultValue: '#ffff00' }
             }
           },
           {
             opcode: 'lightOff',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'Apagar Luz [LED]',
+            text: t('block_light_off'),
             arguments: {
               LED: { type: Scratch.ArgumentType.STRING, menu: 'ledWhich', defaultValue: 'TODAS' }
             }
           },
-          { blockType: Scratch.BlockType.LABEL, text: '🔊 Audio' },
-          { opcode: 'bocina', blockType: Scratch.BlockType.COMMAND, text: 'sonar bocina' },
+          { blockType: Scratch.BlockType.LABEL, text: t('block_audio_label') },
+          { opcode: 'bocina', blockType: Scratch.BlockType.COMMAND, text: t('block_bocina') },
           {
             opcode: 'tocarNota',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'tocar nota [NOTA] por [DUR] seg',
+            text: t('block_play_note'),
             arguments: {
               NOTA: { type: Scratch.ArgumentType.STRING, menu: 'menuNotas', defaultValue: 'DO' },
               DUR:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 0.5 }
@@ -411,20 +857,27 @@
           motorSide: {
             acceptReporters: false,
             items: [
-              { text: 'IZQUIERDO / B', value: 'IZQ' },
-              { text: 'DERECHO / A',   value: 'DER' }
+              { text: t('motor_left'), value: 'IZQ' },
+              { text: t('motor_right'), value: 'DER' }
             ]
           },
           stopWhich: {
             acceptReporters: false,
             items: [
-              { text: 'IZQUIERDO / B', value: 'IZQ' },
-              { text: 'DERECHO / A',   value: 'DER' },
-              { text: 'AMBOS',         value: 'AMBOS' }
+              { text: t('motor_left'), value: 'IZQ' },
+              { text: t('motor_right'), value: 'DER' },
+              { text: t('stop_both'), value: 'AMBOS' }
             ]
           },
-          ledWhich:  { acceptReporters: false, items: ['1', '2', 'TODAS'] },
-          menuNotas: { acceptReporters: true,  items: ['DO','RE','MI','FA','SOL','LA','SI','DO5'] }
+          ledWhich: {
+            acceptReporters: false,
+            items: [
+              '1',
+              '2',
+              { text: t('led_all'), value: 'TODAS' }
+            ]
+          },
+          menuNotas: { acceptReporters: true, items: ['DO','RE','MI','FA','SOL','LA','SI','DO5'] }
         }
       };
     }
@@ -482,8 +935,11 @@
       jeep.vR  = 0;
       const t = getTarget();
       if (t) {
+        t.rotationStyle = 'all around';
         t.setXY(homePos.x, homePos.y);
         t.setDirection(homePos.dir);
+        // Sincronizar con la propiedad nativa por si setDirection normalizó
+        jeep.dir = t.direction;
         lastSetX = homePos.x;
         lastSetY = homePos.y;
       }
