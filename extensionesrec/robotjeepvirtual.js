@@ -35,6 +35,7 @@
   let lastSetX  = 0;
   let lastSetY  = 0;
   let lastTs    = null;
+  let resetting = false;  // Bandera para evitar interferencia del bucle de física durante reset
 
   // ── Estado de LEDs ─────────────────────────────────────────────────────────
   // LED 1 = faro DERECHO  (cy=16 en el SVG, parte superior de la imagen)
@@ -205,6 +206,12 @@
   function physicsStep(dt) {
     const t = getTarget();
     if (!t) return;
+
+    // Si estamos en proceso de reset, no actualizar física para evitar interferencia
+    if (resetting) {
+      resetting = false;
+      return;
+    }
 
     // Leer la dirección nativa del sprite para que los bloques nativos
     // "apuntar en dirección" / "apuntar hacia" tengan efecto.
@@ -928,20 +935,41 @@
 
     // ── Control ───────────────────────────────────────────────────────────
     resetPos () {
+      // Activar bandera para evitar interferencia del bucle de física
+      resetting = true;
+      
+      // Detener motores
+      jeep.vL  = 0;
+      jeep.vR  = 0;
+      
+      // Restaurar posición y rotación del estado interno
       jeep.x   = homePos.x;
       jeep.y   = homePos.y;
       jeep.dir = homePos.dir;
-      jeep.vL  = 0;
-      jeep.vR  = 0;
+      
       const t = getTarget();
       if (t) {
+        // Forzar estilo de rotación
         t.rotationStyle = 'all around';
+        
+        // Sincronizar posición con el motor de Scratch
         t.setXY(homePos.x, homePos.y);
+        
+        // Sincronizar dirección con el motor de Scratch
         t.setDirection(homePos.dir);
-        // Sincronizar con la propiedad nativa por si setDirection normalizó
-        jeep.dir = t.direction;
+        
+        // Sincronizar estado interno con la dirección normalizada de Scratch
+        jeep.dir = (((t.direction % 360) + 360) % 360);
+        
+        // Actualizar lastSetX/Y para evitar detección falsa de arrastre
         lastSetX = homePos.x;
         lastSetY = homePos.y;
+        
+        // Forzar redibujado para que los cambios sean visibles inmediatamente
+        const vm = getVM();
+        if (vm && vm.runtime) {
+          vm.runtime.requestRedraw();
+        }
       }
     }
   }
