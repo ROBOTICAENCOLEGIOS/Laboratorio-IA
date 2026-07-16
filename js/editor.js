@@ -41305,6 +41305,10 @@ const jeepIconURL = (function() {
 })();
 window.__recJeepIconURL = jeepIconURL;
 const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
+const iotIconURL = _isLocalDev
+  ? 'extensionesrec/extensionIoT.png'
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/extensionesrec/extensionIoT.png';
+const iotExtURL = _recLocalBase + 'extensioniot.js';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {
@@ -41318,6 +41322,17 @@ const jeepExtURL  = _recLocalBase + 'robotjeepvirtual.js';
   useUnsandboxed: true,
   extensionURL: jeepExtURL,
   tags: ['@roboticaencolegios']
+}, {
+  name: 'Módulo IoT REC',
+  extensionId: 'moduloIoTREC',
+  iconURL: iotIconURL,
+  description: 'Conecta tus proyectos a la nube y envía telemetría en tiempo real.',
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  useUnsandboxed: true,
+  extensionURL: iotExtURL,
+  tags: ['@roboticaencolegios', 'internet']
 }, {
   name: 'Manos Robóticas',
   extensionId: 'iamanos',
