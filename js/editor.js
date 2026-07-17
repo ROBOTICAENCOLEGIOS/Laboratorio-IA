@@ -28797,10 +28797,24 @@ class ExtensionLibrary extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Pure
     }
     const url = item.extensionURL ? item.extensionURL : extensionId;
     if (!item.disabled) {
-      if (this.props.vm.extensionManager.isExtensionLoaded(extensionId)) {
+      var _vm = this.props.vm;
+      var _alreadyLoaded = _vm.extensionManager.isExtensionLoaded(extensionId);
+      if (!_alreadyLoaded && url) {
+        var _filename = url.split('/').pop().split('?')[0];
+        var _isScriptInDOM = Array.from(document.querySelectorAll('script')).some(function(s) {
+          return s.src && s.src.includes(_filename);
+        });
+        if (_isScriptInDOM) {
+          _alreadyLoaded = true;
+        }
+      }
+      if (_alreadyLoaded) {
+        // eslint-disable-next-line no-alert
+        alert('Esta extensión ya se encuentra cargada en el proyecto.');
         this.props.onCategorySelected(extensionId);
+        return;
       } else {
-        this.props.vm.extensionManager.loadExtensionURL(url).then(() => {
+        _vm.extensionManager.loadExtensionURL(url).then(() => {
           this.props.onCategorySelected(extensionId);
         }).catch(err => {
           _lib_log__WEBPACK_IMPORTED_MODULE_5__["default"].error(err);
