@@ -6,7 +6,7 @@
     <meta name="google" value="notranslate">
     <meta name="description" content="Plataforma interactiva de robótica educativa (Laboratorio REC). Incluye extensiones exclusivas de Inteligencia Artificial (IAMANOS, Señales de Tránsito, Órdenes de Voz) integradas con Scratch para mover objetos en pantalla en vivo y programar el robot Auto Jeep por Bluetooth." />
     <meta name="keywords" content="robotica educativa, scratch inteligencia artificial, iamanos, programacion en bloques escuelas, robot auto jeep bluetooth, scratch argentina">
-    <title>@roboticaencolegios I.A. ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR</title>
+    <title>LABORATORIO REC - @roboticaencolegios I.A. ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR</title>
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="icon" href="faviconrec.ico" type="image/x-icon">
     <link rel="canonical" href="https://laboratoriorec.com.ar/">
@@ -79,6 +79,26 @@
     </style>
   </head>
   <body allow="serial; microphone; camera">
+    <div id="rec-mobile-block" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background:#111827;color:#fff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;box-sizing:border-box;">
+      <div style="font-size:3rem;margin-bottom:1rem;">💻🚀</div>
+      <h1 style="font-size:1.8rem;font-weight:bold;margin-bottom:1.5rem;max-width:600px;">¡PRÓXIMAMENTE LA APP MÓVIL!</h1>
+      <p style="font-size:1.1rem;line-height:1.6;max-width:500px;margin-bottom:1.5rem;color:#d1d5db;">El Laboratorio REC está optimizado para computadoras (Windows, Mac y Chromebooks). Para trabajar con los bloques, cámara e Inteligencia Artificial, ingresa desde una PC o Notebook.</p>
+      <p style="font-size:0.9rem;color:#9ca3af;">www.laboratoriorec.com.ar • @roboticaencolegios</p>
+    </div>
+    <script>
+      (function() {
+        function isMobileOrTablet() {
+          const ua = navigator.userAgent || navigator.vendor || window.opera;
+          const isMobileUA = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+          const isiPad = /iPad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+          return isMobileUA || isiPad;
+        }
+        if (isMobileOrTablet()) {
+          var block = document.getElementById('rec-mobile-block');
+          if (block) block.style.display = 'flex';
+        }
+      })();
+    </script>
     <noscript>
       <div class="splash-screen">
         <div>
@@ -191,7 +211,7 @@
     <div id="app"></div>
   <script src="js/vendors~addon-settings~credits~editor~embed~fullscreen~player.js"></script><script src="js/vendors~editor~embed~fullscreen~player.js"></script><script src="js/addon-settings~addons~editor~fullscreen~player.js"></script><script src="js/addon-settings~editor~embed~fullscreen~player.js"></script><script src="js/editor.js"></script>
   <script>
-    const t = "@roboticaencolegios I.A. ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
+    const t = "LABORATORIO REC - @roboticaencolegios I.A. ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
     document.title = t;
     new MutationObserver(() => {
       if (document.title !== t) document.title = t;
