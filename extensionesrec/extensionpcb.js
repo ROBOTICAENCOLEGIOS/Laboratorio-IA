@@ -12,8 +12,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: '¡ROBOT 1 Arduino (Bluetooth-USB) cargado! Busca los bloques al final de la paleta izquierda 👇',
     btn_connect: 'Conectar Robot',
     check_connection: 'Check Connection',
-    block_move_fwd: 'Mover motor [SIDE] hacia ADELANTE a [PCT]%',
-    block_move_bwd: 'Mover motor [SIDE] hacia ATRAS a [PCT]%',
+    block_move_motor: 'Mover motor [SIDE] hacia [DIR] a [PCT]%',
+    motor_dir_fwd: 'ADELANTE',
+    motor_dir_bwd: 'ATRAS',
     block_stop_motor: 'Detener motor [WHICH]',
     block_light_on: 'Encender Luz [LED] en color [COLOR]',
     block_light_off: 'Apagar Luz [LED]',
@@ -42,8 +43,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) loaded! Look for the blocks at the bottom of the left palette 👇',
     btn_connect: 'Connect Robot',
     check_connection: 'Check Connection',
-    block_move_fwd: 'Move [SIDE] motor FORWARD at [PCT]%',
-    block_move_bwd: 'Move [SIDE] motor BACKWARD at [PCT]%',
+    block_move_motor: 'Move [SIDE] motor [DIR] at [PCT]%',
+    motor_dir_fwd: 'FORWARD',
+    motor_dir_bwd: 'BACKWARD',
     block_stop_motor: 'Stop [WHICH] motor',
     block_light_on: 'Turn on [LED] light with color [COLOR]',
     block_light_off: 'Turn off [LED] light',
@@ -72,8 +74,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) carregado! Procure os blocos no final da paleta à esquerda 👇',
     btn_connect: 'Conectar Robot',
     check_connection: 'Verificar Conexão',
-    block_move_fwd: 'Mover motor [SIDE] para FRENTE a [PCT]%',
-    block_move_bwd: 'Mover motor [SIDE] para TRÁS a [PCT]%',
+    block_move_motor: 'Mover motor [SIDE] para [DIR] a [PCT]%',
+    motor_dir_fwd: 'FRENTE',
+    motor_dir_bwd: 'TRÁS',
     block_stop_motor: 'Parar motor [WHICH]',
     block_light_on: 'Acender luz [LED] na cor [COLOR]',
     block_light_off: 'Apagar luz [LED]',
@@ -102,8 +105,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) chargé ! Retrouve les blocs en bas de la palette à gauche 👇',
     btn_connect: 'Connecter le Robot',
     check_connection: 'Vérifier la connexion',
-    block_move_fwd: 'Avancer le moteur [SIDE] à [PCT]%',
-    block_move_bwd: 'Reculer le moteur [SIDE] à [PCT]%',
+    block_move_motor: 'Moteur [SIDE] [DIR] à [PCT]%',
+    motor_dir_fwd: 'AVANT',
+    motor_dir_bwd: 'ARRIÈRE',
     block_stop_motor: 'Arrêter le moteur [WHICH]',
     block_light_on: 'Allumer la LED [LED] de couleur [COLOR]',
     block_light_off: 'Éteindre la LED [LED]',
@@ -132,8 +136,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) geladen! Die Blöcke findest du unten in der linken Palette 👇',
     btn_connect: 'Roboter verbinden',
     check_connection: 'Verbindung prüfen',
-    block_move_fwd: 'Motor [SIDE] um [PCT]% VORWÄRTS bewegen',
-    block_move_bwd: 'Motor [SIDE] um [PCT]% RÜCKWÄRTS bewegen',
+    block_move_motor: 'Motor [SIDE] [DIR] mit [PCT]%',
+    motor_dir_fwd: 'VORWÄRTS',
+    motor_dir_bwd: 'RÜCKWÄRTS',
     block_stop_motor: 'Motor [WHICH] stoppen',
     block_light_on: 'LED [LED] in Farbe [COLOR] einschalten',
     block_light_off: 'LED [LED] ausschalten',
@@ -162,8 +167,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) caricato! Cerca i blocchi in fondo alla palette a sinistra 👇',
     btn_connect: 'Connetti Robot',
     check_connection: 'Controlla connessione',
-    block_move_fwd: 'Muovere il motore [SIDE] in AVANTI al [PCT]%',
-    block_move_bwd: 'Muovere il motore [SIDE] INDIETRO al [PCT]%',
+    block_move_motor: 'Motore [SIDE] [DIR] al [PCT]%',
+    motor_dir_fwd: 'AVANTI',
+    motor_dir_bwd: 'INDIETRO',
     block_stop_motor: 'Fermare il motore [WHICH]',
     block_light_on: 'Accendere luce [LED] di colore [COLOR]',
     block_light_off: 'Spegnere luce [LED]',
@@ -192,8 +198,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino（Bluetooth-USB）已加载！在左侧积木栏底部查找积木 👇',
     btn_connect: '连接机器人',
     check_connection: '检查连接',
-    block_move_fwd: '以 [PCT]% 向前移动 [SIDE] 电机',
-    block_move_bwd: '以 [PCT]% 向后移动 [SIDE] 电机',
+    block_move_motor: '以 [PCT]% [DIR] 移动 [SIDE] 电机',
+    motor_dir_fwd: '前进',
+    motor_dir_bwd: '后退',
     block_stop_motor: '停止 [WHICH] 电机',
     block_light_on: '打开 [LED] 灯，颜色为 [COLOR]',
     block_light_off: '关闭 [LED] 灯',
@@ -222,8 +229,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino（Bluetooth-USB）が読み込まれました！左のパレットの一番下にブロックがあります 👇',
     btn_connect: 'ロボットを接続',
     check_connection: '接続を確認',
-    block_move_fwd: '[SIDE] モーターを [PCT]% で前進させる',
-    block_move_bwd: '[SIDE] モーターを [PCT]% で後退させる',
+    block_move_motor: '[SIDE] モーターを [PCT]% で [DIR]',
+    motor_dir_fwd: '前進',
+    motor_dir_bwd: '後退',
     block_stop_motor: '[WHICH] モーターを停止する',
     block_light_on: '色 [COLOR] の [LED] ライトをつける',
     block_light_off: '[LED] ライトを消す',
@@ -252,8 +260,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino(Bluetooth-USB)이(가) 로드되었습니다! 왼쪽 팔레트 하단에서 블록을 찾으세요 👇',
     btn_connect: '로봇 연결',
     check_connection: '연결 확인',
-    block_move_fwd: '[SIDE] 모터를 [PCT]%로 전진',
-    block_move_bwd: '[SIDE] 모터를 [PCT]%로 후진',
+    block_move_motor: '[SIDE] 모터를 [PCT]%로 [DIR]',
+    motor_dir_fwd: '전진',
+    motor_dir_bwd: '후진',
     block_stop_motor: '[WHICH] 모터 정지',
     block_light_on: '[COLOR] 색상으로 [LED] 조명 켜기',
     block_light_off: '[LED] 조명 끄기',
@@ -282,8 +291,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) загружен! Ищи блоки внизу левой палитры 👇',
     btn_connect: 'Подключить робота',
     check_connection: 'Проверить подключение',
-    block_move_fwd: 'Двигать мотор [SIDE] вперёд на [PCT]%',
-    block_move_bwd: 'Двигать мотор [SIDE] назад на [PCT]%',
+    block_move_motor: 'Двигать мотор [SIDE] [DIR] на [PCT]%',
+    motor_dir_fwd: 'ВПЕРЁД',
+    motor_dir_bwd: 'НАЗАД',
     block_stop_motor: 'Остановить мотор [WHICH]',
     block_light_on: 'Включить свет [LED] цвета [COLOR]',
     block_light_off: 'Выключить свет [LED]',
@@ -312,8 +322,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'تم تحميل ROBOT 1 Arduino (Bluetooth-USB)! ابحث عن الكتل في أسفل اللوحة اليسرى 👇',
     btn_connect: 'توصيل الروبوت',
     check_connection: 'التحقق من الاتصال',
-    block_move_fwd: 'تحريك المحرك [SIDE] للأمام بنسبة [PCT]%',
-    block_move_bwd: 'تحريك المحرك [SIDE] للخلف بنسبة [PCT]%',
+    block_move_motor: 'تحريك المحرك [SIDE] [DIR] بنسبة [PCT]%',
+    motor_dir_fwd: 'للأمام',
+    motor_dir_bwd: 'للخلف',
     block_stop_motor: 'إيقاف المحرك [WHICH]',
     block_light_on: 'تشغيل ضوء [LED] باللون [COLOR]',
     block_light_off: 'إطفاء ضوء [LED]',
@@ -342,8 +353,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) लोड हो गया है! बाएँ पैलेट के नीचे ब्लॉक खोजें 👇',
     btn_connect: 'रोबोट कनेक्ट करें',
     check_connection: 'कनेक्शन जांचें',
-    block_move_fwd: '[SIDE] मोटर को [PCT]% पर आगे बढ़ाएं',
-    block_move_bwd: '[SIDE] मोटर को [PCT]% पर पीछे करें',
+    block_move_motor: '[SIDE] मोटर को [PCT]% पर [DIR]',
+    motor_dir_fwd: 'आगे',
+    motor_dir_bwd: 'पीछे',
     block_stop_motor: '[WHICH] मोटर रोकें',
     block_light_on: '[LED] लाइट को [COLOR] रंग में चालू करें',
     block_light_off: '[LED] लाइट बंद करें',
@@ -372,8 +384,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) लोड हो গया है! বাম প্যালেটের নিচে ব্লকগুলো খুঁজুন 👇',
     btn_connect: 'রোবট সংযোগ করুন',
     check_connection: 'সংযোগ পরীক্ষা করুন',
-    block_move_fwd: '[SIDE] মোটর [PCT]% এগিয়ে চালান',
-    block_move_bwd: '[SIDE] মোটর [PCT]% পিছিয়ে চালান',
+    block_move_motor: '[SIDE] মোটর [PCT]% [DIR]',
+    motor_dir_fwd: 'এগিয়ে',
+    motor_dir_bwd: 'পিছিয়ে',
     block_stop_motor: '[WHICH] মোটর থামান',
     block_light_on: '[LED] আলো [COLOR] রঙে জ্বালান',
     block_light_off: '[LED] আলো বন্ধ করুন',
@@ -402,8 +415,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) dimuat! Cari bloknya di bagian bawah palet kiri 👇',
     btn_connect: 'Hubungkan Robot',
     check_connection: 'Periksa Koneksi',
-    block_move_fwd: 'Gerakkan motor [SIDE] MAJU dengan [PCT]%',
-    block_move_bwd: 'Gerakkan motor [SIDE] MUNDUR dengan [PCT]%',
+    block_move_motor: 'Gerakkan motor [SIDE] [DIR] dengan [PCT]%',
+    motor_dir_fwd: 'MAJU',
+    motor_dir_bwd: 'MUNDUR',
     block_stop_motor: 'Hentikan motor [WHICH]',
     block_light_on: 'Nyalakan lampu [LED] dengan warna [COLOR]',
     block_light_off: 'Matikan lampu [LED]',
@@ -432,8 +446,9 @@ const I18N_BLOCKS = {
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) yüklendi! Blokları sol paletin en altında bulun 👇',
     btn_connect: 'Robotu Bağla',
     check_connection: 'Bağlantıyı Kontrol Et',
-    block_move_fwd: '[SIDE] motorunu [PCT]% ile İLERİ hareket ettir',
-    block_move_bwd: '[SIDE] motorunu [PCT]% ile GERİ hareket ettir',
+    block_move_motor: '[SIDE] motorunu [PCT]% ile [DIR]',
+    motor_dir_fwd: 'İLERİ',
+    motor_dir_bwd: 'GERİ',
     block_stop_motor: '[WHICH] motorunu durdur',
     block_light_on: '[LED] ışığını [COLOR] renginde aç',
     block_light_off: '[LED] ışığını kapat',
@@ -574,22 +589,36 @@ getInfo() {
       { opcode: 'checkConnection', blockType: Scratch.BlockType.REPORTER, text: t.check_connection },
       '---',
       {
+        opcode: 'moveMotor',
+        blockType: Scratch.BlockType.COMMAND,
+        text: t.block_move_motor,
+        arguments: {
+          SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
+          DIR:  { type: Scratch.ArgumentType.STRING, menu: 'motorDir', defaultValue: 'FWD' },
+          PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
+        }
+      },
+      {
         opcode: 'moveForward',
         blockType: Scratch.BlockType.COMMAND,
-        text: t.block_move_fwd,
-        arguments: { 
-          SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' }, 
-          PCT: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } 
-        }
+        text: t.block_move_motor,
+        arguments: {
+          SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
+          DIR:  { type: Scratch.ArgumentType.STRING, menu: 'motorDir', defaultValue: 'FWD' },
+          PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
+        },
+        hideFromPalette: true
       },
       {
         opcode: 'moveBackward',
         blockType: Scratch.BlockType.COMMAND,
-        text: t.block_move_bwd,
-        arguments: { 
-          SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' }, 
-          PCT: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 } 
-        }
+        text: t.block_move_motor,
+        arguments: {
+          SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
+          DIR:  { type: Scratch.ArgumentType.STRING, menu: 'motorDir', defaultValue: 'BWD' },
+          PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
+        },
+        hideFromPalette: true
       },
       {
         opcode: 'stopMotor',
@@ -641,7 +670,8 @@ getInfo() {
       { opcode: 'restaurarFirmware', blockType: Scratch.BlockType.COMMAND, text: t.block_restore_firmware }
     ],
     menus: {
-      motorSide: { items: [{ text: t.motor_left, value: 'IZQ' }, { text: t.motor_right, value: 'DER' }] },
+      motorSide: { items: [{ text: t.motor_left, value: 'IZQ' }, { text: t.motor_right, value: 'DER' }, { text: t.stop_both, value: 'AMBOS' }] },
+      motorDir: { items: [{ text: t.motor_dir_fwd, value: 'FWD' }, { text: t.motor_dir_bwd, value: 'BWD' }] },
       stopWhich: { items: [{ text: t.motor_left, value: 'IZQ' }, { text: t.motor_right, value: 'DER' }, { text: t.stop_both, value: 'AMBOS' }] },
       ledWhich: { items: ['1', '2', t.led_all] },
       dhtMenu: { items: [{ text: t.dht_temp, value: 'TEMP' }, { text: t.dht_hum, value: 'HUM' }] },
@@ -747,8 +777,18 @@ async _setMotor(side, value) {
   await this._sendLine(`AT+M_${side}=${value}`);
 }
 
-async moveForward(args) { await this._setMotor(args.SIDE, Math.round((Math.abs(args.PCT) / 100) * 255)); }
-async moveBackward(args) { await this._setMotor(args.SIDE, Math.round((Math.abs(args.PCT) / 100) * 255) * -1); }
+async moveMotor(args) {
+  const val = Math.round((Math.abs(args.PCT) / 100) * 255);
+  const signed = args.DIR === 'BWD' ? -val : val;
+  if (args.SIDE === 'AMBOS') {
+    await this._setMotor('IZQ', signed);
+    await this._setMotor('DER', signed);
+  } else {
+    await this._setMotor(args.SIDE, signed);
+  }
+}
+async moveForward(args) { await this.moveMotor({ SIDE: args.SIDE, DIR: 'FWD', PCT: args.PCT }); }
+async moveBackward(args) { await this.moveMotor({ SIDE: args.SIDE, DIR: 'BWD', PCT: args.PCT }); }
 
 async stopMotor(args) {
   if (args.WHICH === 'AMBOS') {
