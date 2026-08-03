@@ -8,19 +8,22 @@
     <title>@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR</title>
     <script>
       (function() {
-        const TARGET_TITLE = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
-        document.title = TARGET_TITLE;
-        const observer = new MutationObserver(function() {
-          if (document.title !== TARGET_TITLE) {
-            document.title = TARGET_TITLE;
-          }
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-          const titleEl = document.querySelector('title');
-          if (titleEl) {
-            observer.observe(titleEl, { childList: true, characterData: true, subtree: true });
-          }
-        });
+        const T = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
+        document.title = T;
+        try {
+          Object.defineProperty(document, 'title', {
+            get: function() { return T; },
+            set: function() {},
+            configurable: false
+          });
+        } catch(e) {
+          const obs = new MutationObserver(function() { if (document.title !== T) document.title = T; });
+          document.addEventListener('DOMContentLoaded', function() {
+            var el = document.querySelector('title');
+            if (el) obs.observe(el, { childList: true, characterData: true, subtree: true });
+          });
+          setInterval(function() { if (document.title !== T) document.title = T; }, 500);
+        }
       })();
     </script>
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -202,25 +205,5 @@
 
     <div id="app"></div>
   <script src="js/vendors~addon-settings~credits~editor~embed~fullscreen~player.js"></script><script src="js/vendors~editor~embed~fullscreen~player.js"></script><script src="js/addon-settings~addons~editor~fullscreen~player.js"></script><script src="js/addon-settings~editor~embed~fullscreen~player.js"></script><script src="js/fullscreen.js"></script>
-  <script>
-     (function() {
-       const TARGET_TITLE = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
-       document.title = TARGET_TITLE;
-       
-       // Observer para bloquear cualquier intento de React de cambiar el título al formato viejo
-       const observer = new MutationObserver(function() {
-         if (document.title !== TARGET_TITLE) {
-           document.title = TARGET_TITLE;
-         }
-       });
-       
-       document.addEventListener("DOMContentLoaded", function() {
-         const titleEl = document.querySelector('title');
-         if (titleEl) {
-           observer.observe(titleEl, { childList: true, characterData: true, subtree: true });
-         }
-       });
-     })();
-   </script>
 </body>
 </html>
