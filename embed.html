@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" value="notranslate">
-    <title>@roboticaencolegios I.A - ROBOTICA y PROGRAMACION en un solo lugar</title>
+    <title>@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR</title>
+    <script>
+      (function() {
+        const TARGET_TITLE = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
+        document.title = TARGET_TITLE;
+        const observer = new MutationObserver(function() {
+          if (document.title !== TARGET_TITLE) {
+            document.title = TARGET_TITLE;
+          }
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+          const titleEl = document.querySelector('title');
+          if (titleEl) {
+            observer.observe(titleEl, { childList: true, characterData: true, subtree: true });
+          }
+        });
+      })();
+    </script>
     <style>
       .splash-screen {
         position: absolute;
@@ -67,11 +84,24 @@
     <div id="app"></div>
   <script src="js/vendors~addon-settings~credits~editor~embed~fullscreen~player.js"></script><script src="js/vendors~editor~embed~fullscreen~player.js"></script><script src="js/addon-settings~editor~embed~fullscreen~player.js"></script><script src="js/embed.js"></script>
   <script>
-    const t = "@roboticaencolegios I.A - ROBOTICA y PROGRAMACION en un solo lugar";
-    document.title = t;
-    new MutationObserver(() => {
-      if (document.title !== t) document.title = t;
-    }).observe(document.querySelector('title'), { childList: true });
-  </script>
+     (function() {
+       const TARGET_TITLE = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
+       document.title = TARGET_TITLE;
+       
+       // Observer para bloquear cualquier intento de React de cambiar el título al formato viejo
+       const observer = new MutationObserver(function() {
+         if (document.title !== TARGET_TITLE) {
+           document.title = TARGET_TITLE;
+         }
+       });
+       
+       document.addEventListener("DOMContentLoaded", function() {
+         const titleEl = document.querySelector('title');
+         if (titleEl) {
+           observer.observe(titleEl, { childList: true, characterData: true, subtree: true });
+         }
+       });
+     })();
+   </script>
 </body>
 </html>

@@ -98988,15 +98988,7 @@ class Interface extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
 
   handleUpdateProjectTitle(title, isDefault) {
 
-    if (isDefault || !title) {
-
-      document.title = "".concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_27__["APP_NAME"], " - ").concat(this.props.intl.formatMessage(messages.defaultTitle));
-
-    } else {
-
-      document.title = "".concat(title, " - ").concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_27__["APP_NAME"]);
-
-    }
+    document.title = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
 
   }
 

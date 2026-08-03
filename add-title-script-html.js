@@ -6,13 +6,13 @@ const htmlDir = 'c:/Users/colegios/Desktop/backup dorado/Laboratorio-IA';
 const titleScript = `
     <script>
         // Forzar el título correcto de forma continua y segura sin romper las rutas de React
-        document.title = "@roboticaencolegios - I.A. ROBOTICA y PROGRAMACION en un mismo lugar";
+        document.title = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
         
         // Evitar que el JS interno lo sobrescriba con textos residuales
         Object.defineProperty(document, 'title', {
             enumerable: true,
             configurable: true,
-            value: "@roboticaencolegios - I.A. ROBOTICA y PROGRAMACION en un mismo lugar",
+            value: "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR",
             writable: false // Bloquea cualquier intento del sistema de cambiar el título
         });
     </script>`;

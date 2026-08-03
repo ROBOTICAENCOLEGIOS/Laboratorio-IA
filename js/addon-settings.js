@@ -1298,7 +1298,7 @@ if (locale !== 'en') {
     Object.assign(settingsTranslations, messages);
   }
 }
-document.title = "".concat(settingsTranslations.title, " - ").concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_21__["APP_NAME"]);
+document.title = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
 const theme = Object(_lib_themes_themePersistance_js__WEBPACK_IMPORTED_MODULE_19__["detectTheme"])();
 Object(_lib_themes_guiHelpers_js__WEBPACK_IMPORTED_MODULE_20__["applyGuiColors"])(theme);
 let _throttleTimeout;

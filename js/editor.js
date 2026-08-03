@@ -49616,11 +49616,7 @@ class Interface extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
     }
   }
   handleUpdateProjectTitle(title, isDefault) {
-    if (isDefault || !title) {
-      document.title = "".concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_27__["APP_NAME"], " - ").concat(this.props.intl.formatMessage(messages.defaultTitle));
-    } else {
-      document.title = "".concat(title, " - ").concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_27__["APP_NAME"]);
-    }
+    document.title = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
   }
   render() {
     if (isInvalidEmbed) {
@@ -53219,7 +53215,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
   if (typeof window.REC_STRINGS === 'undefined') {
     window.REC_STRINGS = {
       es: {
-        bar_title: '@roboticaencolegios IA, Robótica y programación en un solo lugar',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Cómo usar la I.A.',
         btn_instagram: 'Instagram REC',
@@ -53227,7 +53223,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Simulador virtual del Robot Jeep para programar sin hardware.'
       },
       en: {
-        bar_title: '@roboticaencolegios AI, Robotics and programming in one place',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - AI, ROBOTICS AND PROGRAMMING IN ONE PLACE',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'How to use AI',
         btn_instagram: 'Instagram REC',
@@ -53235,7 +53231,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Virtual Robot Jeep simulator for programming without hardware.'
       },
       pt: {
-        bar_title: '@roboticaencolegios IA, Robótica e programação em um só lugar',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA E PROGRAMACAO EM UM SO LUGAR',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Como usar a IA',
         btn_instagram: 'Instagram REC',
@@ -53243,7 +53239,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Simulador virtual do Robot Jeep para programar sem hardware.'
       },
       fr: {
-        bar_title: '@roboticaencolegios IA, Robotique et programmation en un seul endroit',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - IA, ROBOTIQUE ET PROGRAMMATION EN UN SEUL ENDROIT',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Comment utiliser l\'IA',
         btn_instagram: 'Instagram REC',
@@ -53251,7 +53247,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Simulateur virtuel du Robot Jeep pour programmer sans matériel.'
       },
       de: {
-        bar_title: '@roboticaencolegios KI, Robotik und Programmierung an einem Ort',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - KI, ROBOTIK UND PROGRAMMIERUNG AN EINEM ORT',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Wie man KI nutzt',
         btn_instagram: 'Instagram REC',
@@ -53259,7 +53255,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Virtueller Robot Jeep-Simulator zum Programmieren ohne Hardware.'
       },
       it: {
-        bar_title: '@roboticaencolegios IA, Robotica e programmazione in un unico luogo',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA E PROGRAMMAZIONE IN UN UNICO LUOGO',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Come usare l\'IA',
         btn_instagram: 'Instagram REC',
@@ -53267,7 +53263,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Simulatore virtuale del Robot Jeep per programmare senza hardware.'
       },
       zh: {
-        bar_title: '@roboticaencolegios 人工智能、机器人与编程一站式平台',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - 人工智能、机器人与编程一站式平台',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: '如何使用人工智能',
         btn_instagram: 'Instagram REC',
@@ -53275,7 +53271,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Robot Jeep 虚拟模拟器，无需硬件即可编程。'
       },
       ja: {
-        bar_title: '@roboticaencolegios AI、ロボット、プログラミングのすべてがここに',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - AI、ロボット、プログラミングのすべてがここに',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'AIの使い方',
         btn_instagram: 'Instagram REC',
@@ -53283,7 +53279,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'ハードウェアなしでプログラミングできる Robot Jeep 仮想シミュレーター。'
       },
       ko: {
-        bar_title: '@roboticaencolegios AI, 로봇 및 프로그래밍을 한 곳에서',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - AI, 로봇 및 프로그래밍을 한 곳에서',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'AI 사용 방법',
         btn_instagram: 'Instagram REC',
@@ -53291,7 +53287,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: '하드웨어 없이 프로그래밍할 수 있는 Robot Jeep 가상 시뮬레이터입니다.'
       },
       ru: {
-        bar_title: '@roboticaencolegios ИИ, робототехника и программирование в одном месте',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - ИИ, РОБОТОТЕХНИКА И ПРОГРАММИРОВАНИЕ В ОДНОМ МЕСТЕ',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Как использовать ИИ',
         btn_instagram: 'Instagram REC',
@@ -53299,7 +53295,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Виртуальный симулятор Robot Jeep для программирования без оборудования.'
       },
       ar: {
-        bar_title: '@roboticaencolegios الذكاء الاصطناعي والروبوتات والبرمجة في مكان واحد',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - الذكاء الاصطناعي والروبوتات والبرمجة في مكان واحد',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'كيفية استخدام الذكاء الاصطناعي',
         btn_instagram: 'Instagram REC',
@@ -53307,7 +53303,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'محاكاة روبوت جيب الافتراضية للبرمجة دون أجهزة.'
       },
       hi: {
-        bar_title: '@roboticaencolegios AI, रोबोटिक्स और प्रोग्रामिंग एक ही जगह पर',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - AI, रोबोटिक्स और प्रोग्रामिंग एक ही जगह पर',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'AI का उपयोग कैसे करें',
         btn_instagram: 'Instagram REC',
@@ -53315,7 +53311,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Robot Jeep का वर्चुअल सिम्युलेटर, बिना हार्डवेयर के प्रोग्रामिंग के लिए।'
       },
       bn: {
-        bar_title: '@roboticaencolegios AI, রোবোটিক্স এবং প্রোগ্রামিং এক জায়গায়',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - AI, রোবোটিক্স এবং প্রোগ্রামিং এক জায়গায়',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'AI কীভাবে ব্যবহার করবেন',
         btn_instagram: 'Instagram REC',
@@ -53323,7 +53319,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Robot Jeep-এর ভার্চুয়াল সিমুলেটর, হার্ডওয়্যার ছাড়াই প্রোগ্রামিং করতে।'
       },
       id: {
-        bar_title: '@roboticaencolegios AI, Robotika, dan Pemrograman dalam satu tempat',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - AI, ROBOTIKA, DAN PEMROGRAMAN DALAM SATU TEMPAT',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Cara menggunakan AI',
         btn_instagram: 'Instagram REC',
@@ -53331,7 +53327,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         ext_jeep_desc: 'Simulator virtual Robot Jeep untuk memrogram tanpa perangkat keras.'
       },
       tr: {
-        bar_title: '@roboticaencolegios Yapay Zeka, Robotik ve Programlama tek yerde',
+        bar_title: '@roboticaencolegios - LABORATORIO REC - YAPAY ZEKA, ROBOTIK VE PROGRAMLAMA TEK YERDE',
         btn_jeep: 'ROBOT JEEP VIRTUAL',
         btn_ia: 'Yapay zeka nasıl kullanılır',
         btn_instagram: 'Instagram REC',
@@ -53379,7 +53375,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
   function getTitleTarget(locale) {
     var normalized = locale || currentRecLocale || FALLBACK_LOCALE;
     var strings = getStrings(normalized);
-    return strings && strings.bar_title ? strings.bar_title : document.title;
+    return "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
   }
 
   function setupTitleObserver() {
@@ -53401,11 +53397,11 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
       document.head.appendChild(newTitle);
     }
     startTitleObserver(newTitle);
-    document.title = target;
+    document.title = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
   }
 
   function forceRECTitle() {
-    var target = getTitleTarget();
+    var target = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
     if (document.title !== target) {
       document.title = target;
     }
@@ -53659,7 +53655,7 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
     var strings = getStrings(normalized);
     if (!strings) return;
 
-    document.title = strings.bar_title;
+    document.title = "@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA Y PROGRAMACION EN UN SOLO LUGAR";
     ensureRECButtonsExist(normalized);
     updateLibraryCard(strings);
   };
