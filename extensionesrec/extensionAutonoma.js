@@ -286,8 +286,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMO",
       "arduino_autonomo_loaded_msg": "¡ROBOT 1 Arduino AUTONOMO cargado! Busca los bloques al final de la paleta izquierda 👇",
       "hat_inicio": "INICIO 🚀",
-      "block_move_fwd": "Mover motor [SIDE] hacia ADELANTE a [PCT]%",
-      "block_move_bwd": "Mover motor [SIDE] hacia ATRAS a [PCT]%",
+      "block_move_motor": "mover motor [MOTOR] hacia [DIRECCION] a velocidad [VELOCIDAD] %",
+      "motor_a": "Motor A",
+      "motor_b": "Motor B",
+      "motor_both": "AMBOS / TODOS",
+      "dir_forward": "ADELANTE",
+      "dir_backward": "ATRÁS",
       "block_stop_motor": "Detener motor [WHICH]",
       "block_light_on": "Luz [LED] → color [COLOR]",
       "block_light_off": "Apagar luz [LED]",
@@ -300,9 +304,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Descargar Compilador (Windows)",
       "block_upload_status": "📡 estado de carga",
       "block_log": "🪲 registro de errores",
-      "motor_left": "IZQUIERDO / B",
-      "motor_right": "DERECHO / A",
-      "stop_both": "AMBOS",
       "led_all": "TODAS",
       "dht_temp": "Temperatura (°C)",
       "dht_hum": "Humedad (%)",
@@ -319,8 +320,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMO",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMO loaded! Look for the blocks at the bottom of the left palette 👇",
       "hat_inicio": "START 🚀",
-      "block_move_fwd": "Move [SIDE] motor FORWARD at [PCT]%",
-      "block_move_bwd": "Move [SIDE] motor BACKWARD at [PCT]%",
+      "block_move_motor": "move motor [MOTOR] [DIRECCION] at [VELOCIDAD] % speed",
+      "motor_a": "Motor A",
+      "motor_b": "Motor B",
+      "motor_both": "BOTH / ALL",
+      "dir_forward": "FORWARD",
+      "dir_backward": "BACKWARD",
       "block_stop_motor": "Stop [WHICH] motor",
       "block_light_on": "Light [LED] → color [COLOR]",
       "block_light_off": "Turn off light [LED]",
@@ -333,9 +338,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Download Compiler (Windows)",
       "block_upload_status": "📡 upload status",
       "block_log": "🪲 error log",
-      "motor_left": "LEFT / B",
-      "motor_right": "RIGHT / A",
-      "stop_both": "BOTH",
       "led_all": "ALL",
       "dht_temp": "Temperature (°C)",
       "dht_hum": "Humidity (%)",
@@ -352,8 +354,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMO",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMO carregado! Procure os blocos no final da paleta à esquerda 👇",
       "hat_inicio": "INÍCIO 🚀",
-      "block_move_fwd": "Mover motor [SIDE] para FRENTE a [PCT]%",
-      "block_move_bwd": "Mover motor [SIDE] para TRÁS a [PCT]%",
+      "block_move_motor": "mover motor [MOTOR] para [DIRECCION] a [VELOCIDAD] %",
+      "motor_a": "Motor A",
+      "motor_b": "Motor B",
+      "motor_both": "AMBOS / TODOS",
+      "dir_forward": "FRENTE",
+      "dir_backward": "TRÁS",
       "block_stop_motor": "Parar motor [WHICH]",
       "block_light_on": "Luz [LED] → cor [COLOR]",
       "block_light_off": "Apagar luz [LED]",
@@ -366,9 +372,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Baixar Compilador (Windows)",
       "block_upload_status": "📡 estado de carregamento",
       "block_log": "🪲 registro de erros",
-      "motor_left": "ESQUERDO / B",
-      "motor_right": "DIREITO / A",
-      "stop_both": "AMBOS",
       "led_all": "TODAS",
       "dht_temp": "Temperatura (°C)",
       "dht_hum": "Umidade (%)",
@@ -385,8 +388,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMO",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMO chargé ! Retrouve les blocs en bas de la palette à gauche 👇",
       "hat_inicio": "DÉMARRAGE 🚀",
-      "block_move_fwd": "Avancer le moteur [SIDE] à [PCT]%",
-      "block_move_bwd": "Reculer le moteur [SIDE] à [PCT]%",
+      "block_move_motor": "moteur [MOTOR] [DIRECCION] à [VELOCIDAD] %",
+      "motor_a": "Moteur A",
+      "motor_b": "Moteur B",
+      "motor_both": "LES DEUX / TOUS",
+      "dir_forward": "EN AVANT",
+      "dir_backward": "EN ARRIÈRE",
       "block_stop_motor": "Arrêter le moteur [WHICH]",
       "block_light_on": "Lumière [LED] → couleur [COLOR]",
       "block_light_off": "Éteindre la lumière [LED]",
@@ -399,9 +406,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Télécharger le Compilateur (Windows)",
       "block_upload_status": "📡 état de chargement",
       "block_log": "🪲 journal d'erreurs",
-      "motor_left": "GAUCHE / B",
-      "motor_right": "DROITE / A",
-      "stop_both": "LES DEUX",
       "led_all": "TOUTES",
       "dht_temp": "Température (°C)",
       "dht_hum": "Humidité (%)",
@@ -418,8 +422,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMO",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMO geladen! Die Blöcke findest du unten in der linken Palette 👇",
       "hat_inicio": "START 🚀",
-      "block_move_fwd": "Motor [SIDE] um [PCT]% VORWÄRTS bewegen",
-      "block_move_bwd": "Motor [SIDE] um [PCT]% RÜCKWÄRTS bewegen",
+      "block_move_motor": "Motor [MOTOR] [DIRECCION] mit [VELOCIDAD] %",
+      "motor_a": "Motor A",
+      "motor_b": "Motor B",
+      "motor_both": "BEIDE / ALLE",
+      "dir_forward": "VORWÄRTS",
+      "dir_backward": "RÜCKWÄRTS",
       "block_stop_motor": "Motor [WHICH] stoppen",
       "block_light_on": "Licht [LED] → Farbe [COLOR]",
       "block_light_off": "Licht [LED] ausschalten",
@@ -432,9 +440,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Compiler herunterladen (Windows)",
       "block_upload_status": "📡 Upload-Status",
       "block_log": "🪲 Fehlerprotokoll",
-      "motor_left": "LINKS / B",
-      "motor_right": "RECHTS / A",
-      "stop_both": "BEIDE",
       "led_all": "ALLE",
       "dht_temp": "Temperatur (°C)",
       "dht_hum": "Luftfeuchtigkeit (%)",
@@ -451,8 +456,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMO",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMO caricato! Cerca i blocchi in fondo alla palette a sinistra 👇",
       "hat_inicio": "INIZIO 🚀",
-      "block_move_fwd": "Muovere il motore [SIDE] in AVANTI al [PCT]%",
-      "block_move_bwd": "Muovere il motore [SIDE] INDIETRO al [PCT]%",
+      "block_move_motor": "muovere motore [MOTOR] [DIRECCION] a [VELOCIDAD] %",
+      "motor_a": "Motore A",
+      "motor_b": "Motore B",
+      "motor_both": "ENTRAMBI / TUTTI",
+      "dir_forward": "AVANTI",
+      "dir_backward": "INDIETRO",
       "block_stop_motor": "Fermare il motore [WHICH]",
       "block_light_on": "Luce [LED] → colore [COLOR]",
       "block_light_off": "Spegnere luce [LED]",
@@ -465,9 +474,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Scarica Compilatore (Windows)",
       "block_upload_status": "📡 stato caricamento",
       "block_log": "🪲 registro errori",
-      "motor_left": "SINISTRO / B",
-      "motor_right": "DESTRO / A",
-      "stop_both": "ENTRAMBI",
       "led_all": "TUTTE",
       "dht_temp": "Temperatura (°C)",
       "dht_hum": "Umidità (%)",
@@ -484,8 +490,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino 自动驾驶",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino 自动驾驶已加载！在左侧积木栏底部查找积木 👇",
       "hat_inicio": "开始 🚀",
-      "block_move_fwd": "以 [PCT]% 向前移动 [SIDE] 电机",
-      "block_move_bwd": "以 [PCT]% 向后移动 [SIDE] 电机",
+      "block_move_motor": "以 [VELOCIDAD]% [DIRECCION] 移动 [MOTOR] 电机",
+      "motor_a": "电机 A",
+      "motor_b": "电机 B",
+      "motor_both": "全部",
+      "dir_forward": "前进",
+      "dir_backward": "后退",
       "block_stop_motor": "停止 [WHICH] 电机",
       "block_light_on": "灯 [LED] → 颜色 [COLOR]",
       "block_light_off": "关闭灯 [LED]",
@@ -498,9 +508,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ 下载编译器 (Windows)",
       "block_upload_status": "📡 上传状态",
       "block_log": "🪲 错误日志",
-      "motor_left": "左 / B",
-      "motor_right": "右 / A",
-      "stop_both": "全部",
       "led_all": "全部",
       "dht_temp": "温度（°C）",
       "dht_hum": "湿度（%）",
@@ -517,8 +524,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino 自動走行",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino 自動走行版が読み込まれました！左のパレットの一番下にブロックがあります 👇",
       "hat_inicio": "開始 🚀",
-      "block_move_fwd": "[SIDE] モーターを [PCT]% で前進させる",
-      "block_move_bwd": "[SIDE] モーターを [PCT]% で後退させる",
+      "block_move_motor": "[MOTOR] モーターを [DIRECCION] に [VELOCIDAD]% で移動",
+      "motor_a": "モーター A",
+      "motor_b": "モーター B",
+      "motor_both": "両方 / すべて",
+      "dir_forward": "前進",
+      "dir_backward": "後退",
       "block_stop_motor": "[WHICH] モーターを停止する",
       "block_light_on": "ライト [LED] → 色 [COLOR]",
       "block_light_off": "ライト [LED] を消す",
@@ -531,9 +542,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ コンパイラをダウンロード (Windows)",
       "block_upload_status": "📡 アップロード状態",
       "block_log": "🪲 エラーログ",
-      "motor_left": "左 / B",
-      "motor_right": "右 / A",
-      "stop_both": "両方",
       "led_all": "すべて",
       "dht_temp": "温度（°C）",
       "dht_hum": "湿度（%）",
@@ -550,8 +558,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino 자율주행",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino 자율주행 로딩됨! 왼쪽 팔레트 하단에서 블록을 찾으세요 👇",
       "hat_inicio": "시작 🚀",
-      "block_move_fwd": "[SIDE] 모터를 [PCT]%로 전진",
-      "block_move_bwd": "[SIDE] 모터를 [PCT]%로 후진",
+      "block_move_motor": "[MOTOR] 모터를 [DIRECCION]로 [VELOCIDAD]% 이동",
+      "motor_a": "모터 A",
+      "motor_b": "모터 B",
+      "motor_both": "양쪽 / 전체",
+      "dir_forward": "전진",
+      "dir_backward": "후진",
       "block_stop_motor": "[WHICH] 모터 정지",
       "block_light_on": "조명 [LED] → 색상 [COLOR]",
       "block_light_off": "조명 [LED] 끄기",
@@ -564,9 +576,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ 컴파일러 다운로드 (Windows)",
       "block_upload_status": "📡 업로드 상태",
       "block_log": "🪲 오류 로그",
-      "motor_left": "왼쪽 / B",
-      "motor_right": "오른쪽 / A",
-      "stop_both": "양쪽",
       "led_all": "전체",
       "dht_temp": "온도(°C)",
       "dht_hum": "습도(%)",
@@ -583,8 +592,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino АВТОНОМНЫЙ",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino АВТОНОМНЫЙ загружен! Ищи блоки внизу левой палитры 👇",
       "hat_inicio": "СТАРТ 🚀",
-      "block_move_fwd": "Двигать мотор [SIDE] вперёд на [PCT]%",
-      "block_move_bwd": "Двигать мотор [SIDE] назад на [PCT]%",
+      "block_move_motor": "Двигать мотор [MOTOR] [DIRECCION] на [VELOCIDAD]%",
+      "motor_a": "Мотор A",
+      "motor_b": "Мотор B",
+      "motor_both": "ОБА / ВСЕ",
+      "dir_forward": "ВПЕРЁД",
+      "dir_backward": "НАЗАД",
       "block_stop_motor": "Остановить мотор [WHICH]",
       "block_light_on": "Свет [LED] → цвет [COLOR]",
       "block_light_off": "Выключить свет [LED]",
@@ -597,9 +610,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Скачать компилятор (Windows)",
       "block_upload_status": "📡 статус загрузки",
       "block_log": "🪲 журнал ошибок",
-      "motor_left": "ЛЕВЫЙ / B",
-      "motor_right": "ПРАВЫЙ / A",
-      "stop_both": "ОБА",
       "led_all": "ВСЕ",
       "dht_temp": "Температура (°C)",
       "dht_hum": "Влажность (%)",
@@ -616,8 +626,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMOUS",
       "arduino_autonomo_loaded_msg": "تم تحميل ROBOT 1 Arduino AUTONOMOUS! ابحث عن الكتل في أسفل اللوحة اليسرى 👇",
       "hat_inicio": "ابدأ 🚀",
-      "block_move_fwd": "تحريك المحرك [SIDE] للأمام بنسبة [PCT]%",
-      "block_move_bwd": "تحريك المحرك [SIDE] للخلف بنسبة [PCT]%",
+      "block_move_motor": "تحريك المحرك [MOTOR] [DIRECCION] بسرعة [VELOCIDAD]%",
+      "motor_a": "محرك A",
+      "motor_b": "محرك B",
+      "motor_both": "كلاهما / الكل",
+      "dir_forward": "للأمام",
+      "dir_backward": "للخلف",
       "block_stop_motor": "إيقاف المحرك [WHICH]",
       "block_light_on": "ضوء [LED] → لون [COLOR]",
       "block_light_off": "إطفاء ضوء [LED]",
@@ -630,9 +644,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ تنزيل المترجم (Windows)",
       "block_upload_status": "📡 حالة الرفع",
       "block_log": "🪲 سجل الأخطاء",
-      "motor_left": "يسار / B",
-      "motor_right": "يمين / A",
-      "stop_both": "كلاهما",
       "led_all": "الكل",
       "dht_temp": "درجة الحرارة (°C)",
       "dht_hum": "الرطوبة (%)",
@@ -649,8 +660,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMOUS",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMOUS लोड हो गया है! बाएँ पैलेट के नीचे ब्लॉक खोजें 👇",
       "hat_inicio": "शुरू 🚀",
-      "block_move_fwd": "[SIDE] मोटर को [PCT]% पर आगे बढ़ाएं",
-      "block_move_bwd": "[SIDE] मोटर को [PCT]% पर पीछे करें",
+      "block_move_motor": "[MOTOR] मोटर को [DIRECCION] [VELOCIDAD]% पर चलाएं",
+      "motor_a": "मोटर A",
+      "motor_b": "मोटर B",
+      "motor_both": "दोनों / सभी",
+      "dir_forward": "आगे",
+      "dir_backward": "पीछे",
       "block_stop_motor": "[WHICH] मोटर रोकें",
       "block_light_on": "रोशनी [LED] → रंग [COLOR]",
       "block_light_off": "रोशनी [LED] बंद करें",
@@ -663,9 +678,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ कंपाइलर डाउनलोड करें (Windows)",
       "block_upload_status": "📡 अपलोड स्थिति",
       "block_log": "🪲 त्रुटि लॉग",
-      "motor_left": "बायाँ / B",
-      "motor_right": "दायाँ / A",
-      "stop_both": "दोनों",
       "led_all": "सभी",
       "dht_temp": "तापमान (°C)",
       "dht_hum": "नमी (%)",
@@ -682,8 +694,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMOUS",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMOUS লোড হয়ে গেছে! বাম প্যালেটের নিচে ব্লকগুলো খুঁজুন 👇",
       "hat_inicio": "শুরু 🚀",
-      "block_move_fwd": "[SIDE] মোটর [PCT]% এগিয়ে চালান",
-      "block_move_bwd": "[SIDE] মোটর [PCT]% পিছিয়ে চালান",
+      "block_move_motor": "[MOTOR] মোটর [DIRECCION] [VELOCIDAD]% চালান",
+      "motor_a": "মোটর A",
+      "motor_b": "মোটর B",
+      "motor_both": "উভয় / সব",
+      "dir_forward": "সামনে",
+      "dir_backward": "পিছনে",
       "block_stop_motor": "[WHICH] মোটর থামান",
       "block_light_on": "আলো [LED] → রঙ [COLOR]",
       "block_light_off": "আলো [LED] বন্ধ করুন",
@@ -696,9 +712,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ কম্পাইলার ডাউনলোড করুন (Windows)",
       "block_upload_status": "📡 আপলোডের অবস্থা",
       "block_log": "🪲 ত্রুটি লগ",
-      "motor_left": "বাম / B",
-      "motor_right": "ডান / A",
-      "stop_both": "উভয়",
       "led_all": "সব",
       "dht_temp": "তাপমাত্রা (°C)",
       "dht_hum": "আর্দ্রতা (%)",
@@ -715,8 +728,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino AUTONOMO",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino AUTONOMO dimuat! Cari bloknya di bagian bawah palet kiri 👇",
       "hat_inicio": "MULAI 🚀",
-      "block_move_fwd": "Gerakkan motor [SIDE] MAJU dengan [PCT]%",
-      "block_move_bwd": "Gerakkan motor [SIDE] MUNDUR dengan [PCT]%",
+      "block_move_motor": "Gerakkan motor [MOTOR] [DIRECCION] dengan [VELOCIDAD]%",
+      "motor_a": "Motor A",
+      "motor_b": "Motor B",
+      "motor_both": "KEDUANYA / SEMUA",
+      "dir_forward": "MAJU",
+      "dir_backward": "MUNDUR",
       "block_stop_motor": "Hentikan motor [WHICH]",
       "block_light_on": "Lampu [LED] → warna [COLOR]",
       "block_light_off": "Matikan lampu [LED]",
@@ -729,9 +746,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Unduh Compiler (Windows)",
       "block_upload_status": "📡 status unggahan",
       "block_log": "🪲 log kesalahan",
-      "motor_left": "KIRI / B",
-      "motor_right": "KANAN / A",
-      "stop_both": "KEDUANYA",
       "led_all": "SEMUA",
       "dht_temp": "Suhu (°C)",
       "dht_hum": "Kelembaban (%)",
@@ -748,8 +762,12 @@ class _STK500Flasher {
       "ext_title": "ROBOT 1 Arduino OTOMON",
       "arduino_autonomo_loaded_msg": "ROBOT 1 Arduino OTOMON yüklendi! Blokları sol paletin en altında bulun 👇",
       "hat_inicio": "BAŞLA 🚀",
-      "block_move_fwd": "[SIDE] motorunu [PCT]% ile İLERİ hareket ettir",
-      "block_move_bwd": "[SIDE] motorunu [PCT]% ile GERİ hareket ettir",
+      "block_move_motor": "[MOTOR] motorunu [DIRECCION] [VELOCIDAD]% ile hareket ettir",
+      "motor_a": "Motor A",
+      "motor_b": "Motor B",
+      "motor_both": "İKİSİ / TÜMÜ",
+      "dir_forward": "İLERİ",
+      "dir_backward": "GERİ",
       "block_stop_motor": "[WHICH] motorunu durdur",
       "block_light_on": "Işık [LED] → renk [COLOR]",
       "block_light_off": "Işık [LED] kapat",
@@ -762,9 +780,6 @@ class _STK500Flasher {
       "block_download_agent": "⬇️ Derleyiciyi İndir (Windows)",
       "block_upload_status": "📡 yükleme durumu",
       "block_log": "🪲 hata günlüğü",
-      "motor_left": "SOL / B",
-      "motor_right": "SAĞ / A",
-      "stop_both": "İKİSİ",
       "led_all": "TÜMÜ",
       "dht_temp": "Sıcaklık (°C)",
       "dht_hum": "Nem (%)",
@@ -813,21 +828,13 @@ class _STK500Flasher {
           // ── MOTORES (homologados con REC PCB1 Arduino) ─────────────────
           '---',
           {
-            opcode: 'moveForward',
+            opcode: 'moveMotor',
             blockType: Scratch.BlockType.COMMAND,
-            text: t('block_move_fwd'),
+            text: t('block_move_motor'),
             arguments: {
-              SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
-              PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
-            }
-          },
-          {
-            opcode: 'moveBackward',
-            blockType: Scratch.BlockType.COMMAND,
-            text: t('block_move_bwd'),
-            arguments: {
-              SIDE: { type: Scratch.ArgumentType.STRING, menu: 'motorSide', defaultValue: 'IZQ' },
-              PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
+              MOTOR:     { type: Scratch.ArgumentType.STRING, menu: 'motorMenu',     defaultValue: 'AMBOS' },
+              DIRECCION: { type: Scratch.ArgumentType.STRING, menu: 'directionMenu', defaultValue: 'FWD' },
+              VELOCIDAD: { type: Scratch.ArgumentType.NUMBER, defaultValue: 100 }
             }
           },
           {
@@ -835,7 +842,7 @@ class _STK500Flasher {
             blockType: Scratch.BlockType.COMMAND,
             text: t('block_stop_motor'),
             arguments: {
-              WHICH: { type: Scratch.ArgumentType.STRING, menu: 'stopWhich', defaultValue: 'AMBOS' }
+              WHICH: { type: Scratch.ArgumentType.STRING, menu: 'motorMenu', defaultValue: 'AMBOS' }
             }
           },
 
@@ -890,8 +897,8 @@ class _STK500Flasher {
         ],
 
         menus: {
-          motorSide: { acceptReporters: false, items: [{ text: t('motor_left'), value: 'IZQ' }, { text: t('motor_right'), value: 'DER' }] },
-          stopWhich: { acceptReporters: false, items: [{ text: t('motor_left'), value: 'IZQ' }, { text: t('motor_right'), value: 'DER' }, { text: t('stop_both'), value: 'AMBOS' }] },
+          motorMenu: { acceptReporters: false, items: [{ text: t('motor_a'), value: 'DER' }, { text: t('motor_b'), value: 'IZQ' }, { text: t('motor_both'), value: 'AMBOS' }] },
+          directionMenu: { acceptReporters: false, items: [{ text: t('dir_forward'), value: 'FWD' }, { text: t('dir_backward'), value: 'BWD' }] },
           ledMenu: { acceptReporters: false, items: ['1', '2', { text: t('led_all'), value: 'TODAS' }] },
           dhtMenu: {
             acceptReporters: false,
@@ -928,17 +935,12 @@ class _STK500Flasher {
     // _pct2pwm convierte porcentaje (0-100) al rango PWM (0-255) del ATmega328P
     _pct2pwm(pct) { return Math.round(Math.min(Math.abs(Number(pct)), 100) / 100 * 255); }
 
-    // Positivo = adelante, negativo = atrás (freno activo con abs+dir en TB6612FNG)
-    moveForward(args) {
-      const v = this._pct2pwm(args.PCT);
-      if (args.SIDE === 'IZQ') this._codeLines.push(`REC_MotorIzquierdo(${v});`);
-      else                     this._codeLines.push(`REC_MotorDerecho(${v});`);
-    }
-
-    moveBackward(args) {
-      const v = this._pct2pwm(args.PCT);
-      if (args.SIDE === 'IZQ') this._codeLines.push(`REC_MotorIzquierdo(-${v});`);
-      else                     this._codeLines.push(`REC_MotorDerecho(-${v});`);
+    // Unificado: motor + dirección + velocidad en un solo bloque
+    moveMotor(args) {
+      const v = this._pct2pwm(args.VELOCIDAD);
+      const sign = args.DIRECCION === 'BWD' ? '-' : '';
+      if (args.MOTOR === 'IZQ' || args.MOTOR === 'AMBOS') this._codeLines.push(`REC_MotorIzquierdo(${sign}${v});`);
+      if (args.MOTOR === 'DER' || args.MOTOR === 'AMBOS') this._codeLines.push(`REC_MotorDerecho(${sign}${v});`);
     }
 
     // 0 = freno activo (IN1=L, IN2=L, PWM=255 en driver TB6612FNG)
@@ -1179,6 +1181,16 @@ class _STK500Flasher {
         }
 
         // ── Motores ─────────────────────────────────────────────────────────
+        case 'jeepAutonomo_moveMotor': {
+          const v = p2v(NUM('VELOCIDAD'));
+          const sign = F('DIRECCION') === 'BWD' ? '-' : '';
+          const motor = F('MOTOR');
+          if (motor === 'IZQ' || motor === 'AMBOS') lines.push(`${indent}REC_MotorIzquierdo(${sign}${v});`);
+          if (motor === 'DER' || motor === 'AMBOS') lines.push(`${indent}REC_MotorDerecho(${sign}${v});`);
+          break;
+        }
+
+        // Retrocompatibilidad con proyectos guardados con bloques antiguos
         case 'jeepAutonomo_moveForward': {
           const v = p2v(NUM('PCT'));
           lines.push(F('SIDE') === 'IZQ'
