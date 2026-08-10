@@ -71536,9 +71536,17 @@ url.startsWith('https://roboticaencolegios.github.io/') ||
 
 url.startsWith('https://cdn.jsdelivr.net/') ||
 
+// Trust laboratoriorec.com.ar production domain (extensiones locales unsandboxed).
+
+url.startsWith('https://laboratoriorec.com.ar/') ||
+
+// Trust same-origin extension URLs (local extensions served from the same host).
+
+url.startsWith(window.location.origin + '/') ||
+
 // For development.
 
-url.startsWith('http://localhost:8000/') || extensionsTrustedByUser.has(url);
+url.startsWith('http://localhost:') || url.startsWith('http://127.0.0.1:') || extensionsTrustedByUser.has(url);
 
 
 
@@ -82520,7 +82528,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laborat
 
   name: 'Manos Robóticas',
 
-  extensionId: 'iamanos',
+  extensionId: 'iaVisionRECPro',
 
   iconURL: manosIconURL,
 
@@ -82534,7 +82542,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laborat
 
   useUnsandboxed: true,
 
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iamanos.js?t=' + Date.now(),
+  extensionURL: new URL('extensionesrec/iamanos.js', document.baseURI).href,
 
   tags: ['@roboticaencolegios']
 
@@ -82542,7 +82550,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laborat
 
   name: 'Señales de Tránsito',
 
-  extensionId: 'senialestransito',
+  extensionId: 'iaSenalesTransitoV7',
 
   iconURL: transitoIconURL,
 
@@ -82556,7 +82564,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laborat
 
   useUnsandboxed: true,
 
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/senialestransito.js?t=' + Date.now(),
+  extensionURL: new URL('extensionesrec/senialestransito.js', document.baseURI).href,
 
   tags: ['@roboticaencolegios']
 
@@ -82564,7 +82572,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laborat
 
   name: 'Voz a Texto',
 
-  extensionId: 'vozatexto',
+  extensionId: 'vozTextoREC',
 
   iconURL: vozIconURL,
 
@@ -82578,7 +82586,7 @@ const vozIconURL = 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laborat
 
   useUnsandboxed: true,
 
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/vozatexto.js?t=' + Date.now(),
+  extensionURL: new URL('extensionesrec/vozatexto.js', document.baseURI).href,
 
   tags: ['@roboticaencolegios']
 

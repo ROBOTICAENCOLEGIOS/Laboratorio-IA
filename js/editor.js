@@ -35801,6 +35801,8 @@ url.startsWith('https://roboticaencolegios.github.io/') ||
 url.startsWith('https://cdn.jsdelivr.net/') ||
 // Trust laboratoriorec.com.ar production domain (extensiones locales unsandboxed).
 url.startsWith('https://laboratoriorec.com.ar/') ||
+// Trust same-origin extension URLs (local extensions served from the same host).
+url.startsWith(window.location.origin + '/') ||
 // For development.
 url.startsWith('http://localhost:') || url.startsWith('http://127.0.0.1:') || extensionsTrustedByUser.has(url);
 
@@ -41349,36 +41351,36 @@ const iotExtURL = _recLocalBase + 'extensioniot.js';
   tags: ['@roboticaencolegios', 'internet']
 }, {
   name: 'Manos Robóticas',
-  extensionId: 'iamanos',
+  extensionId: 'iaVisionRECPro',
   iconURL: manosIconURL,
   description: 'Controla manos robóticas con gestos y movimientos.',
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iamanos.js?t=' + Date.now(),
+  extensionURL: _recLocalBase + 'iamanos.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Señales de Tránsito',
-  extensionId: 'senialestransito',
+  extensionId: 'iaSenalesTransitoV7',
   iconURL: transitoIconURL,
   description: 'Reconocimiento de señales de tránsito usando inteligencia artificial.',
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/senialestransito.js?t=' + Date.now(),
+  extensionURL: _recLocalBase + 'senialestransito.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'Voz a Texto',
-  extensionId: 'vozatexto',
+  extensionId: 'vozTextoREC',
   iconURL: vozIconURL,
   description: 'Convierte voz en texto para controlar tus proyectos.',
   featured: true,
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/vozatexto.js?t=' + Date.now(),
+  extensionURL: _recLocalBase + 'vozatexto.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'IA: Emociones Rostro',
@@ -41389,9 +41391,7 @@ const iotExtURL = _recLocalBase + 'extensioniot.js';
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: _isLocalDev
-    ? window.location.origin + '/Laboratorio-IA/extensionesrec/iaemociones.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iaemociones.js?t=' + Date.now(),
+  extensionURL: _recLocalBase + 'iaemociones.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'IA: Detección de Objetos',
@@ -41402,9 +41402,7 @@ const iotExtURL = _recLocalBase + 'extensioniot.js';
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: _isLocalDev
-    ? window.location.origin + '/Laboratorio-IA/extensionesrec/iaobjetos.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iaobjetos.js?t=' + Date.now(),
+  extensionURL: _recLocalBase + 'iaobjetos.js',
   tags: ['@roboticaencolegios']
 }, {
   name: 'IA: Teachable Machine',
@@ -41415,11 +41413,10 @@ const iotExtURL = _recLocalBase + 'extensioniot.js';
   incompatibleWithScratch: true,
   unsandboxed: true,
   useUnsandboxed: true,
-  extensionURL: _isLocalDev
-    ? window.location.origin + '/Laboratorio-IA/extensionesrec/iateachable.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/iateachable.js?t=' + Date.now(),
+  extensionURL: _recLocalBase + 'iateachable.js',
   tags: ['@roboticaencolegios']
-}, {
+},
+  {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
     defaultMessage: "Music",
     id: "gui.extension.music.name"

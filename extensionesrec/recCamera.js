@@ -53,7 +53,7 @@
       try {
         const vd = Scratch.vm.runtime.ioDevices.video;
         vd.enableVideo();
-        vd.mirror = true;
+        vd.mirror = _mirror;
       } catch (e) {
         console.warn('RECCamera: VM no disponible para AR —', e);
       }

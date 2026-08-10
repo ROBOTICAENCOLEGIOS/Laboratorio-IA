@@ -185137,7 +185137,7 @@ class ExtensionManager {
       const workerId = +serviceName.split('.')[1];
       const extensionURL = this.workerURLs[workerId];
       if (typeof extensionURL === 'string') {
-        extensionURLs[extensionId] = extensionURL;
+        extensionURLs[extensionId] = extensionURL.split('?')[0];
       }
     }
     return extensionURLs;
@@ -185228,6 +185228,29 @@ const defaults = {
   // https://scratch.mit.edu/discuss/topic/842592/
   faceSensing: 'https://extensions.turbowarp.org/lab/face-sensing.js'
 };
+
+// REC: Mapeo por defecto de extensiones locales de extensionesrec/.
+// Permite que proyectos .sb3 (viejos o nuevos) que referencian estos IDs
+// sin URL (o con URL inválida) puedan resolver la extensión localmente,
+// evitando el error "Unknown extension" y la pantalla en blanco.
+try {
+  const _recBase = new URL('extensionesrec/', document.baseURI).href;
+  Object.assign(defaults, {
+    jeepAutonomo: _recBase + 'extensionAutonoma.js',
+    iaVisionRECPro: _recBase + 'iamanos.js',
+    moduloIoTREC: _recBase + 'extensioniot.js',
+    robotJeepVirtualREC: _recBase + 'robotjeepvirtual.js',
+    vozTextoREC: _recBase + 'vozatexto.js',
+    iaEmocionesREC: _recBase + 'iaemociones.js',
+    iaObjetosREC: _recBase + 'iaobjetos.js',
+    iaTeachableREC: _recBase + 'iateachable.js',
+    iaSenalesTransitoV7: _recBase + 'senialestransito.js',
+    recpcb1arduino: _recBase + 'extensionpcb.js'
+  });
+} catch (e) {
+  // document/baseURI not available in this context (e.g. worker); skip.
+}
+
 module.exports = defaults;
 
 /***/ }),

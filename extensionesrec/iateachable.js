@@ -290,9 +290,7 @@
     return (I18N_BLOCKS[locale] && I18N_BLOCKS[locale][key]) || I18N_BLOCKS['es'][key] || key;
   };
 
-  const _REC_CAMERA_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
-    ? window.location.origin + '/Laboratorio-IA/extensionesrec/recCamera.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/recCamera.js';
+  const _REC_CAMERA_URL = new URL('extensionesrec/recCamera.js', document.baseURI).href;
 
   class IATeachableREC {
     constructor() {
@@ -352,9 +350,6 @@
           },
           { opcode: 'detenerCamara', blockType: Scratch.BlockType.COMMAND, text: t('block_cam_off') },
           "---",
-          { opcode: 'getCamaraX', blockType: Scratch.BlockType.REPORTER, text: t('reporter_cam_x') },
-          { opcode: 'getCamaraY', blockType: Scratch.BlockType.REPORTER, text: t('reporter_cam_y') },
-          "---",
           { opcode: 'getClass',      blockType: Scratch.BlockType.REPORTER, text: t('reporter_class') },
           { opcode: 'getConfidence', blockType: Scratch.BlockType.REPORTER, text: t('reporter_confidence') },
           {
@@ -368,7 +363,6 @@
         menus: {
           MODO_CAMARA: {
             items: [
-              { text: t('menu_mode_fixed'), value: 'FLOTANTE FIJA' },
               { text: t('menu_mode_draggable'), value: 'FLOTANTE ARRASTRABLE' },
               { text: t('menu_mode_ar'), value: 'FONDO DE ESCENARIO (REALIDAD AUMENTADA)' }
             ]
@@ -460,8 +454,6 @@
       requestAnimationFrame(() => this._loop());
     }
 
-    getCamaraX()    { return window.RECCamera ? Math.round(window.RECCamera.camaraX) : 0; }
-    getCamaraY()    { return window.RECCamera ? Math.round(window.RECCamera.camaraY) : 0; }
     getClass()      { return this.detectedClass; }
     getConfidence() { return this.confidence; }
     isClass(args)   { return this.detectedClass === args.CLASE; }

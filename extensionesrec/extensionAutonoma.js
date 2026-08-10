@@ -845,6 +845,30 @@ class _STK500Flasher {
               WHICH: { type: Scratch.ArgumentType.STRING, menu: 'motorMenu', defaultValue: 'AMBOS' }
             }
           },
+          // Retrocompatibilidad: bloques antiguos usados por proyectos .sb3 guardados
+          // antes de la unificación en moveMotor. No se muestran destacados en el
+          // toolbox pero deben existir en getInfo() para que Blockly pueda
+          // reconstruir estos bloques al cargar proyectos viejos sin crashear.
+          {
+            opcode: 'moveForward',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'Mover motor [SIDE] adelante [PCT] %',
+            hideFromPalette: true,
+            arguments: {
+              SIDE: { type: Scratch.ArgumentType.STRING, menu: 'sideMenu', defaultValue: 'IZQ' },
+              PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 100 }
+            }
+          },
+          {
+            opcode: 'moveBackward',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'Mover motor [SIDE] atrás [PCT] %',
+            hideFromPalette: true,
+            arguments: {
+              SIDE: { type: Scratch.ArgumentType.STRING, menu: 'sideMenu', defaultValue: 'IZQ' },
+              PCT:  { type: Scratch.ArgumentType.NUMBER, defaultValue: 100 }
+            }
+          },
 
           // ── LUCES ────────────────────────────────────────────────────────
           '---',
@@ -899,6 +923,8 @@ class _STK500Flasher {
         menus: {
           motorMenu: { acceptReporters: false, items: [{ text: t('motor_a'), value: 'DER' }, { text: t('motor_b'), value: 'IZQ' }, { text: t('motor_both'), value: 'AMBOS' }] },
           directionMenu: { acceptReporters: false, items: [{ text: t('dir_forward'), value: 'FWD' }, { text: t('dir_backward'), value: 'BWD' }] },
+          // Retrocompatibilidad: usado por moveForward/moveBackward (bloques antiguos)
+          sideMenu: { acceptReporters: true, items: [{ text: 'Izquierdo', value: 'IZQ' }, { text: 'Derecho', value: 'DER' }] },
           ledMenu: { acceptReporters: false, items: ['1', '2', { text: t('led_all'), value: 'TODAS' }] },
           dhtMenu: {
             acceptReporters: false,
@@ -941,6 +967,20 @@ class _STK500Flasher {
       const sign = args.DIRECCION === 'BWD' ? '-' : '';
       if (args.MOTOR === 'IZQ' || args.MOTOR === 'AMBOS') this._codeLines.push(`REC_MotorIzquierdo(${sign}${v});`);
       if (args.MOTOR === 'DER' || args.MOTOR === 'AMBOS') this._codeLines.push(`REC_MotorDerecho(${sign}${v});`);
+    }
+
+    // Retrocompatibilidad: bloques antiguos moveForward/moveBackward (proyectos .sb3
+    // guardados antes de la unificación en moveMotor). Reutilizan la lógica de motores.
+    moveForward(args) {
+      const v = this._pct2pwm(args.PCT);
+      if (args.SIDE === 'IZQ') this._codeLines.push(`REC_MotorIzquierdo(${v});`);
+      else this._codeLines.push(`REC_MotorDerecho(${v});`);
+    }
+
+    moveBackward(args) {
+      const v = this._pct2pwm(args.PCT);
+      if (args.SIDE === 'IZQ') this._codeLines.push(`REC_MotorIzquierdo(-${v});`);
+      else this._codeLines.push(`REC_MotorDerecho(-${v});`);
     }
 
     // 0 = freno activo (IN1=L, IN2=L, PWM=255 en driver TB6612FNG)

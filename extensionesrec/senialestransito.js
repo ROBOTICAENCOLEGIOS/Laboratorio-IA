@@ -359,9 +359,7 @@
     }
   };
 
-  const _REC_CAMERA_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
-    ? window.location.origin + '/Laboratorio-IA/extensionesrec/recCamera.js'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/recCamera.js';
+  const _REC_CAMERA_URL = new URL('extensionesrec/recCamera.js', document.baseURI).href;
 
   const t = key => {
     const locale = window.currentRecLocale || 'es';
