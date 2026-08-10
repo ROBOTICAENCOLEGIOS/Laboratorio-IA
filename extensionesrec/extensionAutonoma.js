@@ -1119,6 +1119,10 @@ class _STK500Flasher {
       return [
         '#include <RoboticaEnColegios.h>',
         '',
+        'bool REC_LineaDetectada() {',
+        '    return digitalRead(3) == HIGH;',
+        '}',
+        '',
         'void setup() {',
         '    REC_InicializarPlaca();',
         '}',
