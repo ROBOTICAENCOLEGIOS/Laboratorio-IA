@@ -128,18 +128,22 @@ class _STK500Flasher {
   }
 
   // Solicita el puerto USB al usuario (Chrome muestra diálogo de selección)
-  // y resetea el Arduino mediante toggle de la señal DTR para activar Optiboot
   async connect(onProgress) {
     onProgress && onProgress('⏳ Esperando selección de puerto COM...');
     this._port = await navigator.serial.requestPort();
     await this._port.open({ baudRate: _STK500Flasher.BAUD_RATE });
     this._writer = this._port.writable.getWriter();
     this._startReadLoop();
-    onProgress && onProgress('🔄 Reiniciando Arduino (DTR)...');
-    await this._port.setSignals({ dataTerminalReady: false });
-    await this._sleep(250);
-    await this._port.setSignals({ dataTerminalReady: true });
-    await this._sleep(50);
+  }
+
+  // Envía pulso de reset vía DTR+RTS para activar bootloader Optiboot
+  async resetBoard(onProgress) {
+    onProgress && onProgress('🔄 Reiniciando Arduino (DTR+RTS)...');
+    await this._port.setSignals({ dataTerminalReady: false, requestToSend: false });
+    await new Promise(r => setTimeout(r, 100));
+    await this._port.setSignals({ dataTerminalReady: true, requestToSend: true });
+    await new Promise(r => setTimeout(r, 50));
+    await this._port.setSignals({ dataTerminalReady: false, requestToSend: false });
   }
 
   _sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -1120,7 +1124,7 @@ class _STK500Flasher {
         '#include <RoboticaEnColegios.h>',
         '',
         'bool REC_LineaDetectada() {',
-        '    return digitalRead(3) == HIGH;',
+        '    return digitalRead(3) == LOW;',
         '}',
         '',
         'void setup() {',
@@ -1409,7 +1413,8 @@ class _STK500Flasher {
           throw e;
         }
 
-        // ── PASO 3: Flasheo STK500v1 vía Web Serial ──────────────────────
+        // ── PASO 3: Reset + Flasheo STK500v1 vía Web Serial ───────────────
+        await flasher.resetBoard(onProgress);
         await flasher.sync(onProgress);
         await flasher.enterProgramMode(onProgress);
         await flasher.flashBinary(binary, onProgress);

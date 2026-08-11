@@ -22,7 +22,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'Obtener [TIPO]',
     block_distance_cm: 'Distancia en cm',
     block_line_detected: 'Detecta linea',
-    block_restore_firmware: 'Restaurar firmware original 🔄',
+    block_restore_firmware: 'Restaurar firmware bluetooth 🔄',
     motor_left: 'IZQUIERDO / B',
     motor_right: 'DERECHO / A',
     stop_both: 'AMBOS',
@@ -53,7 +53,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'Get [TIPO]',
     block_distance_cm: 'distance in cm',
     block_line_detected: 'line detected',
-    block_restore_firmware: 'Restore original firmware 🔄',
+    block_restore_firmware: 'Restore Bluetooth firmware 🔄',
     motor_left: 'LEFT / B',
     motor_right: 'RIGHT / A',
     stop_both: 'BOTH',
@@ -84,7 +84,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'Obter [TIPO]',
     block_distance_cm: 'distância em cm',
     block_line_detected: 'detecta linha',
-    block_restore_firmware: 'Restaurar firmware original 🔄',
+    block_restore_firmware: 'Restaurar firmware Bluetooth 🔄',
     motor_left: 'ESQUERDO / B',
     motor_right: 'DIREITO / A',
     stop_both: 'AMBOS',
@@ -115,7 +115,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'Obtenir [TIPO]',
     block_distance_cm: 'distance en cm',
     block_line_detected: 'détecte la ligne',
-    block_restore_firmware: 'Restaurer le firmware original 🔄',
+    block_restore_firmware: 'Restaurer le firmware Bluetooth 🔄',
     motor_left: 'GAUCHE / B',
     motor_right: 'DROITE / A',
     stop_both: 'LES DEUX',
@@ -146,7 +146,7 @@ const I18N_BLOCKS = {
     block_get_dht: '[TIPO] abrufen',
     block_distance_cm: 'Entfernung in cm',
     block_line_detected: 'Linie erkannt',
-    block_restore_firmware: 'Original-Firmware wiederherstellen 🔄',
+    block_restore_firmware: 'Bluetooth-Firmware wiederherstellen 🔄',
     motor_left: 'LINKS / B',
     motor_right: 'RECHTS / A',
     stop_both: 'BEIDE',
@@ -177,7 +177,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'Ottieni [TIPO]',
     block_distance_cm: 'distanza in cm',
     block_line_detected: 'rileva linea',
-    block_restore_firmware: 'Ripristina firmware originale 🔄',
+    block_restore_firmware: 'Ripristina firmware Bluetooth 🔄',
     motor_left: 'SINISTRO / B',
     motor_right: 'DESTRO / A',
     stop_both: 'ENTRAMBI',
@@ -208,7 +208,7 @@ const I18N_BLOCKS = {
     block_get_dht: '获取 [TIPO]',
     block_distance_cm: '距离（厘米）',
     block_line_detected: '检测到线',
-    block_restore_firmware: '恢复原始固件 🔄',
+    block_restore_firmware: '恢复蓝牙固件 🔄',
     motor_left: '左 / B',
     motor_right: '右 / A',
     stop_both: '全部',
@@ -239,7 +239,7 @@ const I18N_BLOCKS = {
     block_get_dht: '[TIPO] を取得',
     block_distance_cm: '距離（cm）',
     block_line_detected: 'ラインを検出',
-    block_restore_firmware: '元のファームウェアを復元 🔄',
+    block_restore_firmware: 'Bluetoothファームウェアを復元 🔄',
     motor_left: '左 / B',
     motor_right: '右 / A',
     stop_both: '両方',
@@ -270,7 +270,7 @@ const I18N_BLOCKS = {
     block_get_dht: '[TIPO] 가져오기',
     block_distance_cm: '거리(cm)',
     block_line_detected: '라인 감지',
-    block_restore_firmware: '원래 펌웨어 복원 🔄',
+    block_restore_firmware: '블루투스 펌웨어 복원 🔄',
     motor_left: '왼쪽 / B',
     motor_right: '오른쪽 / A',
     stop_both: '양쪽',
@@ -301,7 +301,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'Получить [TIPO]',
     block_distance_cm: 'расстояние в см',
     block_line_detected: 'обнаружена линия',
-    block_restore_firmware: 'Восстановить исходную прошивку 🔄',
+    block_restore_firmware: 'Восстановить прошивку Bluetooth 🔄',
     motor_left: 'ЛЕВЫЙ / B',
     motor_right: 'ПРАВЫЙ / A',
     stop_both: 'ОБА',
@@ -332,7 +332,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'الحصول على [TIPO]',
     block_distance_cm: 'المسافة بالسم',
     block_line_detected: 'اكتشاف الخط',
-    block_restore_firmware: 'استعادة البرامج الثابتة الأصلية 🔄',
+    block_restore_firmware: 'استعادة برنامج Bluetooth الثابت 🔄',
     motor_left: 'يسار / B',
     motor_right: 'يمين / A',
     stop_both: 'كلاهما',
@@ -363,7 +363,7 @@ const I18N_BLOCKS = {
     block_get_dht: '[TIPO] प्राप्त करें',
     block_distance_cm: 'दूरी सेमी में',
     block_line_detected: 'रेखा का पता चला',
-    block_restore_firmware: 'मूल फर्मवेयर पुनर्स्थापित करें 🔄',
+    block_restore_firmware: 'ब्लूटूथ फर्मवेयर पुनर्स्थापित करें 🔄',
     motor_left: 'बायाँ / B',
     motor_right: 'दायाँ / A',
     stop_both: 'दोनों',
@@ -394,7 +394,7 @@ const I18N_BLOCKS = {
     block_get_dht: '[TIPO] পান',
     block_distance_cm: 'সেন্টিমিটারে দূরত্ব',
     block_line_detected: 'লাইন শনাক্ত হয়েছে',
-    block_restore_firmware: 'মূল ফার্মওয়্যার পুনরুদ্ধার করুন 🔄',
+    block_restore_firmware: 'ব্লুটুথ ফার্মওয়্যার পুনরুদ্ধার করুন 🔄',
     motor_left: 'বাম / B',
     motor_right: 'ডান / A',
     stop_both: 'উভয়',
@@ -425,7 +425,7 @@ const I18N_BLOCKS = {
     block_get_dht: 'Dapatkan [TIPO]',
     block_distance_cm: 'jarak dalam cm',
     block_line_detected: 'garis terdeteksi',
-    block_restore_firmware: 'Pulihkan firmware asli 🔄',
+    block_restore_firmware: 'Pulihkan firmware Bluetooth 🔄',
     motor_left: 'KIRI / B',
     motor_right: 'KANAN / A',
     stop_both: 'KEDUANYA',
@@ -456,7 +456,7 @@ const I18N_BLOCKS = {
     block_get_dht: '[TIPO] Al',
     block_distance_cm: 'mesafe cm cinsinden',
     block_line_detected: 'çizgi algılandı',
-    block_restore_firmware: "Orijinal firmware'i geri yükle 🔄",
+    block_restore_firmware: "Bluetooth firmware'ini geri yükle 🔄",
     motor_left: 'SOL / B',
     motor_right: 'SAĞ / A',
     stop_both: 'İKİSİ',
@@ -882,9 +882,7 @@ _parseIntelHex(hexStr) {
 // Flashea el binario firmware_rec_blindado.hex directamente al robot vía STK500v1.
 // El alumno recupera el modo En Vivo / IA con un solo clic, sin necesidad de Arduino IDE.
 async restaurarFirmware() {
-  const HEX_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')
-    ? window.location.origin + '/Laboratorio-IA/extensionesrec/firmdata/firmware_rec_blindado.hex'
-    : 'https://cdn.jsdelivr.net/gh/ROBOTICAENCOLEGIOS/Laboratorio-IA@main/extensionesrec/firmdata/firmware_rec_blindado.hex';
+  const HEX_URL = new URL('extensionesrec/firmdata/firmware_rec_blindado.hex', document.baseURI).href;
 
   const log = (m) => console.info('[RestaurarFirmware]', m);
   let port = null, writer = null, looping = false;
@@ -940,11 +938,12 @@ async restaurarFirmware() {
       }
     })();
 
-    log('Reiniciando Arduino (DTR)...');
-    await port.setSignals({ dataTerminalReady: false });
-    await sleep(250);
-    await port.setSignals({ dataTerminalReady: true });
+    log('Reiniciando Arduino (DTR+RTS)...');
+    await port.setSignals({ dataTerminalReady: false, requestToSend: false });
+    await sleep(100);
+    await port.setSignals({ dataTerminalReady: true, requestToSend: true });
     await sleep(50);
+    await port.setSignals({ dataTerminalReady: false, requestToSend: false });
 
     // ── 3. Sincronizar con bootloader ─────────────────────────────────────
     log('Sincronizando con Optiboot...');
