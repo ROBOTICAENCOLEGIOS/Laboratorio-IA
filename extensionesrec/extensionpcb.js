@@ -11,6 +11,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: '¡ROBOT 1 Arduino (Bluetooth-USB) cargado! Busca los bloques al final de la paleta izquierda 👇',
     btn_connect: 'Conectar Robot',
+    btn_reset_port: '🔄 Reiniciar Puerto',
+    msg_reset_success: '¡Puerto liberado y reseteado exitosamente!',
     check_connection: 'Check Connection',
     block_move_motor: 'Mover motor [SIDE] hacia [DIR] a [PCT]%',
     motor_dir_fwd: 'ADELANTE',
@@ -42,6 +44,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) loaded! Look for the blocks at the bottom of the left palette 👇',
     btn_connect: 'Connect Robot',
+    btn_reset_port: '🔄 Reset Port',
+    msg_reset_success: 'Port successfully reset and released!',
     check_connection: 'Check Connection',
     block_move_motor: 'Move [SIDE] motor [DIR] at [PCT]%',
     motor_dir_fwd: 'FORWARD',
@@ -73,6 +77,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) carregado! Procure os blocos no final da paleta à esquerda 👇',
     btn_connect: 'Conectar Robot',
+    btn_reset_port: '🔄 Reiniciar Porta',
+    msg_reset_success: 'Porta liberada e reiniciada com sucesso!',
     check_connection: 'Verificar Conexão',
     block_move_motor: 'Mover motor [SIDE] para [DIR] a [PCT]%',
     motor_dir_fwd: 'FRENTE',
@@ -104,6 +110,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) chargé ! Retrouve les blocs en bas de la palette à gauche 👇',
     btn_connect: 'Connecter le Robot',
+    btn_reset_port: '🔄 Réinitialiser le Port',
+    msg_reset_success: 'Port libéré et réinitialisé avec succès!',
     check_connection: 'Vérifier la connexion',
     block_move_motor: 'Moteur [SIDE] [DIR] à [PCT]%',
     motor_dir_fwd: 'AVANT',
@@ -135,6 +143,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) geladen! Die Blöcke findest du unten in der linken Palette 👇',
     btn_connect: 'Roboter verbinden',
+    btn_reset_port: '🔄 Port zurücksetzen',
+    msg_reset_success: 'Port erfolgreich zurückgesetzt und freigegeben!',
     check_connection: 'Verbindung prüfen',
     block_move_motor: 'Motor [SIDE] [DIR] mit [PCT]%',
     motor_dir_fwd: 'VORWÄRTS',
@@ -166,6 +176,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) caricato! Cerca i blocchi in fondo alla palette a sinistra 👇',
     btn_connect: 'Connetti Robot',
+    btn_reset_port: '🔄 Ripristina Porta',
+    msg_reset_success: 'Porta rilasciata e ripristinata con successo!',
     check_connection: 'Controlla connessione',
     block_move_motor: 'Motore [SIDE] [DIR] al [PCT]%',
     motor_dir_fwd: 'AVANTI',
@@ -197,6 +209,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino（Bluetooth-USB）',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino（Bluetooth-USB）已加载！在左侧积木栏底部查找积木 👇',
     btn_connect: '连接机器人',
+    btn_reset_port: '🔄 重置端口',
+    msg_reset_success: '端口已成功重置并释放！',
     check_connection: '检查连接',
     block_move_motor: '以 [PCT]% [DIR] 移动 [SIDE] 电机',
     motor_dir_fwd: '前进',
@@ -228,6 +242,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino（Bluetooth-USB）',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino（Bluetooth-USB）が読み込まれました！左のパレットの一番下にブロックがあります 👇',
     btn_connect: 'ロボットを接続',
+    btn_reset_port: '🔄 ポートをリセット',
+    msg_reset_success: 'ポートが正常にリセットされ解放されました！',
     check_connection: '接続を確認',
     block_move_motor: '[SIDE] モーターを [PCT]% で [DIR]',
     motor_dir_fwd: '前進',
@@ -259,6 +275,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino(Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino(Bluetooth-USB)이(가) 로드되었습니다! 왼쪽 팔레트 하단에서 블록을 찾으세요 👇',
     btn_connect: '로봇 연결',
+    btn_reset_port: '🔄 포特 재설정',
+    msg_reset_success: '포트가 성공적으로 재설정되고 해제되었습니다!',
     check_connection: '연결 확인',
     block_move_motor: '[SIDE] 모터를 [PCT]%로 [DIR]',
     motor_dir_fwd: '전진',
@@ -290,6 +308,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) загружен! Ищи блоки внизу левой палитры 👇',
     btn_connect: 'Подключить робота',
+    btn_reset_port: '🔄 Сбросить порт',
+    msg_reset_success: 'Порт успешно сброшен и освобожден!',
     check_connection: 'Проверить подключение',
     block_move_motor: 'Двигать мотор [SIDE] [DIR] на [PCT]%',
     motor_dir_fwd: 'ВПЕРЁД',
@@ -321,6 +341,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'تم تحميل ROBOT 1 Arduino (Bluetooth-USB)! ابحث عن الكتل في أسفل اللوحة اليسرى 👇',
     btn_connect: 'توصيل الروبوت',
+    btn_reset_port: '🔄 إعادة ضبط المنفذ',
+    msg_reset_success: 'تمت إعادة ضبط المنفذ وتحريره بنجاح!',
     check_connection: 'التحقق من الاتصال',
     block_move_motor: 'تحريك المحرك [SIDE] [DIR] بنسبة [PCT]%',
     motor_dir_fwd: 'للأمام',
@@ -352,6 +374,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) लोड हो गया है! बाएँ पैलेट के नीचे ब्लॉक खोजें 👇',
     btn_connect: 'रोबोट कनेक्ट करें',
+    btn_reset_port: '🔄 पोर्ट रीसेट करें',
+    msg_reset_success: 'पोर्ट सफलतापूर्वक रीसेट और मुक्त कर दिया गया!',
     check_connection: 'कनेक्शन जांचें',
     block_move_motor: '[SIDE] मोटर को [PCT]% पर [DIR]',
     motor_dir_fwd: 'आगे',
@@ -383,6 +407,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) लोड हो গया है! বাম প্যালেটের নিচে ব্লকগুলো খুঁজুন 👇',
     btn_connect: 'রোবট সংযোগ করুন',
+    btn_reset_port: '🔄 পোর্ট রিমোটে সেট',
+    msg_reset_success: 'পোর্ট সফলভাবে রিমোট এবং মুক্ত করা হয়েছে!',
     check_connection: 'সংযোগ পরীক্ষা করুন',
     block_move_motor: '[SIDE] মোটর [PCT]% [DIR]',
     motor_dir_fwd: 'এগিয়ে',
@@ -414,6 +440,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) dimuat! Cari bloknya di bagian bawah palet kiri 👇',
     btn_connect: 'Hubungkan Robot',
+    btn_reset_port: '🔄 Reset Port',
+    msg_reset_success: 'Port berhasil direset dan dilepaskan!',
     check_connection: 'Periksa Koneksi',
     block_move_motor: 'Gerakkan motor [SIDE] [DIR] dengan [PCT]%',
     motor_dir_fwd: 'MAJU',
@@ -445,6 +473,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) yüklendi! Blokları sol paletin en altında bulun 👇',
     btn_connect: 'Robotu Bağla',
+    btn_reset_port: '🔄 Portu Sıfırla',
+    msg_reset_success: 'Port başarıyla sıfırlandı ve serbest bırakıldı!',
     check_connection: 'Bağlantıyı Kontrol Et',
     block_move_motor: '[SIDE] motorunu [PCT]% ile [DIR]',
     motor_dir_fwd: 'İLERİ',
@@ -476,6 +506,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) załadowany! Szukaj bloków na dole lewej palety 👇',
     btn_connect: 'Połącz Robota',
+    btn_reset_port: '🔄 Resetuj Port',
+    msg_reset_success: 'Port został pomyślnie zresetowany i zwolniony!',
     check_connection: 'Sprawdź Połączenie',
     block_move_motor: 'Porusz silnikiem [SIDE] [DIR] z [PCT]%',
     motor_dir_fwd: 'DO PRZODU',
@@ -507,6 +539,8 @@ const I18N_BLOCKS = {
     ext_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
     arduino_bt_loaded_msg: 'ROBOT 1 Arduino (Bluetooth-USB) geladen! Zoek de blokken onderaan het linkerpalet 👇',
     btn_connect: 'Robot Verbinden',
+    btn_reset_port: '🔄 Poort Resetten',
+    msg_reset_success: 'Poort succesvol gereset en vrijgegeven!',
     check_connection: 'Verbinding Controleren',
     block_move_motor: 'Beweeg motor [SIDE] [DIR] met [PCT]%',
     motor_dir_fwd: 'VOORUIT',
@@ -648,6 +682,7 @@ getInfo() {
     color3: '#2f3514',
     blocks: [
       { func: 'connectRobot', blockType: Scratch.BlockType.BUTTON, text: t.btn_connect, callFunc: this.connectRobot.bind(this) },
+      { func: 'resetPort', blockType: Scratch.BlockType.BUTTON, text: t.btn_reset_port, callFunc: this.resetPort.bind(this) },
       { opcode: 'checkConnection', blockType: Scratch.BlockType.REPORTER, text: t.check_connection },
       '---',
       {
@@ -752,6 +787,10 @@ _connected() { return !!(this._activePort && this._activePort.readable && this._
 checkConnection() { return this._connected() ? 'Connected' : 'Disconnected'; }
 
 async connectRobot() {
+  if (this._connected()) {
+    console.log('[connectRobot] Ya conectado, ignorando clic');
+    return;
+  }
   try {
     this.port = await navigator.serial.requestPort();
     await this._disconnect();
@@ -762,6 +801,27 @@ async connectRobot() {
     console.error("Error al conectar:", e);
     this._activePort = null; 
   }
+}
+
+async resetPort() {
+    try {
+        await this._disconnect();
+        this.port = null;
+        this._rxRemainder = '';
+        if (Array.isArray(this._lineWaiters)) {
+            this._lineWaiters.forEach(w => { 
+                if (w && w.timer) clearTimeout(w.timer); 
+                if (w && typeof w.reject === 'function') w.reject(new Error('Port reset')); 
+            });
+            this._lineWaiters = [];
+        }
+        this._serialQueue = Promise.resolve();
+        console.log('[resetPort] Puerto e hilos de lectura liberados exitosamente');
+        const t = I18N_BLOCKS[window.currentRecLocale || 'es'] || I18N_BLOCKS['es'];
+        alert(t.msg_reset_success);
+    } catch (e) {
+        console.error('[resetPort] Error al reiniciar puerto:', e);
+    }
 }
 
 async _disconnect() {
