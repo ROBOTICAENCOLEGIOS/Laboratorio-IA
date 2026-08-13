@@ -125,6 +125,22 @@
       'block_clear': 'wis herkende tekst',
       'block_last': 'laatst herkende tekst',
       'block_is_listening': 'aan het luisteren?'
+    },
+    'bn': {
+      'ext_name': 'ভয়েস থেকে টেক্সট',
+      'block_start': 'ভয়েস শোনা শুরু করুন',
+      'block_stop': 'মাইক্রোফোন বন্ধ করুন',
+      'block_clear': 'শনাক্ত করা টেক্সট মুছুন',
+      'block_last': 'শেষ শনাক্ত করা টেক্সট',
+      'block_is_listening': 'শুনছে?'
+    },
+    'id': {
+      'ext_name': 'Suara ke Teks',
+      'block_start': 'mulai mendengarkan suara',
+      'block_stop': 'hentikan mikrofon',
+      'block_clear': 'hapus teks yang dikenali',
+      'block_last': 'teks terakhir yang dikenali',
+      'block_is_listening': 'mendengarkan?'
     }
   };
 

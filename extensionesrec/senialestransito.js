@@ -714,6 +714,98 @@
 
       status_nothing: 'YOK'
 
+    },
+
+    pl: {
+
+      ext_title: 'AI Znaki Drogowe',
+
+      block_load_model: '☁️ WCZYTAJ MODEL ONLINE',
+
+      block_camera_on: '📷 włącz kamerę w trybie: [MODO]',
+
+      block_camera_off: '❌ WYŁĄCZ KAMERĘ',
+
+      block_signal: 'wykryty sygnał',
+
+      block_confidence: 'dokładność %',
+
+      block_is_stable: 'widzi [SIG] z [CONF]% przez [TIME] sekund?',
+
+      menu_mode_draggable: 'PRZESUWALNE UNOSZĄCE',
+
+      menu_mode_background: 'TŁO SCENY (RZECZYWISTOŚĆ ROZSZERZONA)',
+
+      sign_avanzar: 'NAPRZÓD',
+
+      sign_retroceder: 'WSTECZ',
+
+      sign_stop: 'STOP',
+
+      sign_despacio: 'WOLNO',
+
+      sign_izquierda: 'LEWO',
+
+      sign_derecha: 'PRAWO',
+
+      status_ready: 'GOTOWY: WCZYTAJ MODEL',
+
+      status_downloading: 'POBIERANIE MÓZGU...',
+
+      status_loaded: 'MODEL WCZYTANY',
+
+      status_error: 'BŁĄD POBIERANIA',
+
+      status_camera_off: 'KAMERA WYŁĄCZONA',
+
+      status_nothing: 'BRAK'
+
+    },
+
+    nl: {
+
+      ext_title: 'AI Verkeersborden',
+
+      block_load_model: '☁️ MODEL ONLINE LADEN',
+
+      block_camera_on: '📷 camera aanzetten in modus: [MODO]',
+
+      block_camera_off: '❌ CAMERA UITZETTEN',
+
+      block_signal: 'gedetecteerd signaal',
+
+      block_confidence: 'nauwkeurigheid %',
+
+      block_is_stable: 'ziet [SIG] met [CONF]% gedurende [TIME] seconden?',
+
+      menu_mode_draggable: 'SLEEPBARE DRIJVENDE',
+
+      menu_mode_background: 'PODIUMACHTERGROND (AUGMENTED REALITY)',
+
+      sign_avanzar: 'VOORUIT',
+
+      sign_retroceder: 'ACHTERUIT',
+
+      sign_stop: 'STOP',
+
+      sign_despacio: 'LANGZAAM',
+
+      sign_izquierda: 'LINKS',
+
+      sign_derecha: 'RECHTS',
+
+      status_ready: 'KLAAR: MODEL LADEN',
+
+      status_downloading: 'BREIN DOWNLOADEN...',
+
+      status_loaded: 'MODEL GELADEN',
+
+      status_error: 'DOWNLOADFOUT',
+
+      status_camera_off: 'CAMERA UIT',
+
+      status_nothing: 'NIETS'
+
     }
 
   };

@@ -110,6 +110,20 @@
       'block_connect': 'Verbinden met Firebase URL: [URL] Sleutel: [CLAVE]',
       'block_send': 'Verstuur naar IoT Label: [ETIQUETA] Waarde: [VALOR]',
       'block_read': 'Lees van IoT Label: [ETIQUETA]'
+    },
+    'bn': {
+      'ext_name': 'IoT REC মডিউল',
+      'ext_description': 'আপনার প্রকল্পগুলিকে ক্লাউডের সাথে সংযুক্ত করুন এবং রিয়েল টাইমে টেলিমেট্রি পাঠান।',
+      'block_connect': 'Firebase এ সংযোগ করুন URL: [URL] কী: [CLAVE]',
+      'block_send': 'IoT তে পাঠান লেবেল: [ETIQUETA] মান: [VALOR]',
+      'block_read': 'IoT থেকে পড়ুন লেবেল: [ETIQUETA]'
+    },
+    'id': {
+      'ext_name': 'Modul IoT REC',
+      'ext_description': 'Hubungkan proyek Anda ke cloud dan kirim telemetri secara real time.',
+      'block_connect': 'Hubungkan ke Firebase URL: [URL] Kunci: [CLAVE]',
+      'block_send': 'Kirim ke IoT Label: [ETIQUETA] Nilai: [VALOR]',
+      'block_read': 'Baca dari IoT Label: [ETIQUETA]'
     }
   };
 

@@ -664,6 +664,90 @@
 
       status_nothing: 'NIETS'
 
+    },
+
+    bn: {
+
+      ext_name: 'AI: বস্তু সনাক্তকরণ',
+
+      block_load_model: '⏳ অবজেক্ট মডেল লোড করুন',
+
+      block_cam_on: '📷 মোডে ক্যামেরা চালু করুন: [MODO]',
+
+      block_cam_off: '❌ ক্যামেরা বন্ধ করুন',
+
+      block_object: 'সনাক্ত করা বস্তু',
+
+      block_confidence: 'নির্ভুলতা %',
+
+      block_category: 'বিভাগ [CATEGORIA] দেখছে?',
+
+      block_pos_x: 'বস্তুর X অবস্থান',
+
+      block_pos_y: 'বস্তুর Y অবস্থান',
+
+      mode_draggable: 'টানা যায় এমন ভাসমান',
+
+      mode_ar: 'মঞ্চের পটভূমি (অগমেন্টেড রিয়েলিটি)',
+
+      cat_person: 'ব্যক্তি',
+
+      cat_animal: 'প্রাণী',
+
+      cat_vehicle: 'যানবাহন',
+
+      cat_food: 'খাবার',
+
+      cat_electronics: 'ইলেকট্রনিক্স',
+
+      cat_furniture: 'আসবাবপত্র',
+
+      cat_sport: 'খেলা',
+
+      status_nothing: 'কিছুই না'
+
+    },
+
+    id: {
+
+      ext_name: 'AI: Deteksi Objek',
+
+      block_load_model: '⏳ MUAT MODEL OBJEK',
+
+      block_cam_on: '📷 nyalakan kamera dalam mode: [MODO]',
+
+      block_cam_off: '❌ MATIKAN KAMERA OBJEK',
+
+      block_object: 'objek terdeteksi',
+
+      block_confidence: 'akurasi %',
+
+      block_category: 'melihat kategori [CATEGORIA]?',
+
+      block_pos_x: 'posisi X objek',
+
+      block_pos_y: 'posisi Y objek',
+
+      mode_draggable: 'MENGAMBANG DAPAT DISERET',
+
+      mode_ar: 'LATAR BELAKANG PANGGUNG (REALITAS TAMBAHAN)',
+
+      cat_person: 'ORANG',
+
+      cat_animal: 'HEWAN',
+
+      cat_vehicle: 'KENDARAAN',
+
+      cat_food: 'MAKANAN',
+
+      cat_electronics: 'ELEKTRONIK',
+
+      cat_furniture: 'PERABOT',
+
+      cat_sport: 'OLAHRAGA',
+
+      status_nothing: 'TIDAK ADA'
+
     }
 
   };

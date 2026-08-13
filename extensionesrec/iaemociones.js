@@ -534,6 +534,74 @@
 
       emotion_none: 'YOK'
 
+    },
+
+    pl: {
+
+      ext_title: 'AI: Emocje Twarzy',
+
+      block_camera_on: '📷 włącz kamerę w trybie: [MODO]',
+
+      block_camera_off: '❌ WYŁĄCZ KAMERĘ',
+
+      block_emotion: 'wykryta emocja',
+
+      block_confidence: 'dokładność %',
+
+      block_is_emotion: 'twarz [EMOCION]?',
+
+      block_mouth_open: 'usta otwarte / krzyczy?',
+
+      menu_mode_draggable: 'PRZESUWALNE UNOSZĄCE',
+
+      menu_mode_background: 'TŁO SCENY (RZECZYWISTOŚĆ ROZSZERZONA)',
+
+      emotion_happy: 'SZCZĘŚLIWY',
+
+      emotion_sad: 'SMUTNY',
+
+      emotion_angry: 'ZŁY',
+
+      emotion_surprised: 'ZASKOCZONY',
+
+      emotion_neutral: 'NEUTRALNY',
+
+      emotion_none: 'BRAK'
+
+    },
+
+    nl: {
+
+      ext_title: 'AI: Gezichtsemoties',
+
+      block_camera_on: '📷 camera aanzetten in modus: [MODO]',
+
+      block_camera_off: '❌ CAMERA UITZETTEN',
+
+      block_emotion: 'gedetecteerde emotie',
+
+      block_confidence: 'nauwkeurigheid %',
+
+      block_is_emotion: 'gezicht [EMOCION]?',
+
+      block_mouth_open: 'mond open / schreeuwt?',
+
+      menu_mode_draggable: 'SLEEPBARE DRIJVENDE',
+
+      menu_mode_background: 'PODIUMACHTERGROND (AUGMENTED REALITY)',
+
+      emotion_happy: 'BLIJ',
+
+      emotion_sad: 'VERDRIETIG',
+
+      emotion_angry: 'BOOS',
+
+      emotion_surprised: 'VERRAST',
+
+      emotion_neutral: 'NEUTRAAL',
+
+      emotion_none: 'NIETS'
+
     }
 
   };

@@ -282,6 +282,42 @@
       'menu_mode_ar': 'PODIUMACHTERGROND (AUGMENTED REALITY)',
       'status_nothing': 'NIETS',
       'status_waiting_model': 'WACHTEN OP MODEL'
+    },
+    'bn': {
+      'ext_name': 'AI: Teachable Machine',
+      'block_load_local': '📁 স্থানীয় ফাইল লোড করুন (.json এবং .bin)',
+      'block_load_url': '🌐 URL থেকে মডেল লোড করুন [LINK]',
+      'block_cam_on': '📷 মোডে ক্যামেরা চালু করুন: [MODO]',
+      'block_cam_off': '❌ ক্যামেরা বন্ধ করুন',
+      'reporter_cam_x': '📷 ক্যামেরা X স্থানাঙ্ক',
+      'reporter_cam_y': '📷 ক্যামেরা Y স্থানাঙ্ক',
+      'reporter_class': 'সনাক্ত করা শ্রেণী',
+      'reporter_confidence': 'নির্ভুলতা %',
+      'boolean_is_class': 'শ্রেণী [CLASE] দেখছে?',
+      'reporter_labels': 'প্রশিক্ষিত শ্রেণীর তালিকা',
+      'menu_mode_fixed': 'স্থির ভাসমান',
+      'menu_mode_draggable': 'টানা যায় এমন ভাসমান',
+      'menu_mode_ar': 'মঞ্চের পটভূমি (অগমেন্টেড রিয়েলিটি)',
+      'status_nothing': 'কিছুই না',
+      'status_waiting_model': 'মডেলের জন্য অপেক্ষা করছে'
+    },
+    'id': {
+      'ext_name': 'AI: Teachable Machine',
+      'block_load_local': '📁 MUAT FILE LOKAL (.json dan .bin)',
+      'block_load_url': '🌐 MUAT MODEL DARI URL [LINK]',
+      'block_cam_on': '📷 nyalakan kamera dalam mode: [MODO]',
+      'block_cam_off': '❌ MATIKAN KAMERA',
+      'reporter_cam_x': '📷 koordinat X kamera',
+      'reporter_cam_y': '📷 koordinat Y kamera',
+      'reporter_class': 'kelas terdeteksi',
+      'reporter_confidence': 'akurasi %',
+      'boolean_is_class': 'melihat kelas [CLASE]?',
+      'reporter_labels': 'daftar kelas yang dilatih',
+      'menu_mode_fixed': 'MENGAMBANG TETAP',
+      'menu_mode_draggable': 'MENGAMBANG DAPAT DISERET',
+      'menu_mode_ar': 'LATAR BELAKANG PANGGUNG (REALITAS TAMBAHAN)',
+      'status_nothing': 'TIDAK ADA',
+      'status_waiting_model': 'MENUNGGU MODEL'
     }
   };
 

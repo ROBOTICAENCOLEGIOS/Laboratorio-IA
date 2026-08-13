@@ -266,6 +266,40 @@
       status_loading: 'YZ yükleniyor...',
       status_ready: 'Algılamaya hazır',
       status_error: 'Hata: Kamera yok'
+    },
+    pl: {
+      ext_title: 'AI: Wizja REC Pro',
+      block_camera_on: '📷 włącz kamerę w trybie: [MODO]',
+      block_camera_off: '❌ WYŁĄCZ kamerę i AI',
+      block_status: 'status AI',
+      block_faces: 'liczba twarzy',
+      block_hands: 'liczba rąk',
+      block_pinch: 'palce ściśnięte?',
+      block_index_x: 'pozycja X palca wskazującego',
+      block_index_y: 'pozycja Y palca wskazującego',
+      menu_mode_draggable: 'PRZESUWALNE UNOSZĄCE',
+      menu_mode_background: 'TŁO SCENY (RZECZYWISTOŚĆ ROZSZERZONA)',
+      status_off: 'Wyłączone',
+      status_loading: 'Ładowanie AI...',
+      status_ready: 'Gotowy do wykrywania',
+      status_error: 'Błąd: Brak kamery'
+    },
+    nl: {
+      ext_title: 'AI: Vision REC Pro',
+      block_camera_on: '📷 camera aanzetten in modus: [MODO]',
+      block_camera_off: '❌ camera en AI UITZETTEN',
+      block_status: 'AI status',
+      block_faces: 'aantal gezichten',
+      block_hands: 'aantal handen',
+      block_pinch: 'vingers knijpen?',
+      block_index_x: 'wijsvinger X-positie',
+      block_index_y: 'wijsvinger Y-positie',
+      menu_mode_draggable: 'SLEEPBARE DRIJVENDE',
+      menu_mode_background: 'PODIUMACHTERGROND (AUGMENTED REALITY)',
+      status_off: 'Uit',
+      status_loading: 'AI wordt geladen...',
+      status_ready: 'Gereed om te detecteren',
+      status_error: 'Fout: Geen camera'
     }
   };
 
