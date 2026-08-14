@@ -11,7 +11,8 @@
 
   // ── Constantes ──────────────────────────────────────────────────────────
   const MAX_V        = 160;   // Scratch units/s al 100 %
-  const TURN_SCALE   = 1.8;   // grados/s por unidad de diferencia (vR - vL)
+  const TURN_SCALE   = 1.125;   // grados/s por unidad de diferencia (vR - vL)
+  const FIXED_DT     = 1 / 60; // paso de tiempo fijo determinista por tic
   const SENSOR_DIST  = 36;    // Scratch units al frente del centro (sensor de piso)
   const LINE_THRESH  = 60;    // umbral RGB para considerar color negro/línea
   const BORDER_OFFSET = 10;   // cm a restar cuando el rayo impacta el borde del escenario
@@ -26,7 +27,7 @@
   const SPRITE_NAME = 'RECRobotJeepAuto';
 
   // ── Estado del Jeep ─────────────────────────────────────────────────────
-  const jeep = { x: 0, y: 0, dir: 90, vL: 0, vR: 0 };
+  const jeep = { x: 0, y: 0, dir: 90, vL: 0, vR: 0, totalDeg: 90 };
   let homePos   = { x: 0, y: 0, dir: 90 };
   let ultraDist = 100;
   let onLine    = false;
@@ -181,12 +182,43 @@
     jeep.x   = t.x;
     jeep.y   = t.y;
     jeep.dir = (((t.direction % 360) + 360) % 360);
+    jeep.totalDeg = jeep.dir;
     homePos  = { x: t.x, y: t.y, dir: jeep.dir };
     lastSetX = t.x;
     lastSetY = t.y;
     lastPenPos = { x: t.x, y: t.y };
     t.draggable = true;
     t.rotationStyle = 'all around';
+
+    // ── Control por teclado (flechas izq/der) ───────────────────────────────
+    let kbSteerActive = false;
+    document.addEventListener('keydown', function(e) {
+        if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
+            if (!kbSteerActive) {
+                kbSteerActive = true;
+                jeep.vL = MAX_V * 0.5;
+                jeep.vR = -MAX_V * 0.5;
+            }
+            e.preventDefault();
+        } else if (e.code === 'ArrowRight' || e.code === 'KeyD') {
+            if (!kbSteerActive) {
+                kbSteerActive = true;
+                jeep.vR = MAX_V * 0.5;
+                jeep.vL = -MAX_V * 0.5;
+            }
+            e.preventDefault();
+        }
+    });
+
+    document.addEventListener('keyup', function(e) {
+        if (e.code === 'ArrowLeft' || e.code === 'KeyA' ||
+            e.code === 'ArrowRight' || e.code === 'KeyD') {
+            kbSteerActive = false;
+            jeep.vL = 0;
+            jeep.vR = 0;
+        }
+    });
+
     if (!rafId) startPhysics();
     fetchBaseSvg(t).catch(() => {});
     return true;
@@ -194,13 +226,10 @@
 
   function startPhysics() {
     if (rafId) return;
-    lastTs = null;
-    (function loop(ts) {
+    (function loop() {
       rafId = requestAnimationFrame(loop);
-      const dt = lastTs ? Math.min((ts - lastTs) / 1000, 0.05) : 0.016;
-      lastTs = ts;
-      physicsStep(dt);
-    })(performance.now());
+      physicsStep(FIXED_DT);
+    })();
   }
 
   // ── Cinemática + Trazado de Lápiz ────────────────────────────────────────
@@ -214,7 +243,7 @@
     }
 
     t.rotationStyle = 'all around';
-    jeep.dir = (((t.direction % 360) + 360) % 360);
+    // jeep.dir = (((t.direction % 360) + 360) % 360); // Desactivado para evitar bucle con el renderer de Scratch al cambiar escala
 
     const v    = (jeep.vL + jeep.vR) / 2;
     const wDeg = (jeep.vR - jeep.vL) * TURN_SCALE;
@@ -225,7 +254,10 @@
 
     jeep.x  += v * Math.sin(rad) * dt;
     jeep.y  += v * Math.cos(rad) * dt;
-    jeep.dir = (((jeep.dir + wDeg * dt) % 360) + 360) % 360;
+    if (jeep.totalDeg === undefined) jeep.totalDeg = jeep.dir;
+    const deltaDeg = wDeg * dt;
+    jeep.totalDeg += deltaDeg;
+    jeep.dir = (((jeep.totalDeg % 360) + 360) % 360);
 
     jeep.x = Math.max(-230, Math.min(230, jeep.x));
     jeep.y = Math.max(-170, Math.min(170, jeep.y));
@@ -1016,6 +1048,13 @@
     moveForward ({ SIDE, PCT }) { this.moveMotor({ SIDE, DIR: 'FWD', PCT }); }
     moveBackward ({ SIDE, PCT }) { this.moveMotor({ SIDE, DIR: 'BWD', PCT }); }
     stopMotor ({ WHICH }) {
+      if (jeep.vL !== jeep.vR && jeep.totalDeg !== undefined) {
+          const nearest45 = Math.round(jeep.totalDeg / 45) * 45;
+          if (Math.abs(jeep.totalDeg - nearest45) <= 12) {
+              jeep.totalDeg = nearest45;
+              jeep.dir = (((nearest45 % 360) + 360) % 360);
+          }
+      }
       if (WHICH === 'AMBOS') { jeep.vL = 0; jeep.vR = 0; }
       else if (WHICH === 'IZQ') jeep.vR = 0;
       else jeep.vL = 0;
@@ -1081,6 +1120,7 @@
       jeep.x   = homePos.x;
       jeep.y   = homePos.y;
       jeep.dir = homePos.dir;
+      jeep.totalDeg = jeep.dir;
       lastPenPos = { x: homePos.x, y: homePos.y };
       
       const t = getTarget();
@@ -1089,6 +1129,7 @@
         t.setXY(homePos.x, homePos.y);
         t.setDirection(homePos.dir);
         jeep.dir = (((t.direction % 360) + 360) % 360);
+        jeep.totalDeg = jeep.dir;
         lastSetX = homePos.x;
         lastSetY = homePos.y;
         

@@ -1191,6 +1191,8 @@ class _STK500Flasher {
       return [
         '#include <RoboticaEnColegios.h>',
         '',
+        'bool _rec_done = false;',
+        '',
         'bool REC_LineaDetectada() {',
         '    return digitalRead(3) == LOW;',
         '}',
@@ -1200,7 +1202,10 @@ class _STK500Flasher {
         '}',
         '',
         'void loop() {',
+        '    if (!_rec_done) {',
         ...lines,
+        '        _rec_done = true;',
+        '    }',
         '}'
       ].join('\n');
     }
