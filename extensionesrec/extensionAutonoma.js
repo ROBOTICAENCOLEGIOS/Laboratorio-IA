@@ -906,7 +906,7 @@ class _STK500Flasher {
             arguments: {
               MOTOR:     { type: Scratch.ArgumentType.STRING, menu: 'motorMenu',     defaultValue: 'AMBOS' },
               DIRECCION: { type: Scratch.ArgumentType.STRING, menu: 'directionMenu', defaultValue: 'FWD' },
-              VELOCIDAD: { type: Scratch.ArgumentType.NUMBER, defaultValue: 100 }
+              VELOCIDAD: { type: Scratch.ArgumentType.NUMBER, defaultValue: 50 }
             }
           },
           {

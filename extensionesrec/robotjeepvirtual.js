@@ -384,8 +384,8 @@
       block_audio_label: '🔊 Audio',
       block_bocina: 'sonar bocina',
       block_play_note: 'tocar nota [NOTA] por [DUR] seg',
-      motor_left: 'IZQUIERDO / B',
-      motor_right: 'DERECHO / A',
+      motor_left: 'Motor B',
+      motor_right: 'Motor A',
       stop_both: 'AMBOS',
       led_all: 'TODAS'
     },
