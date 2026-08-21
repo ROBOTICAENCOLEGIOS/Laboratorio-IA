@@ -868,6 +868,7 @@
   // ── Clase de extensión ───────────────────────────────────────────────────
   class RobotJeepVirtualREC {
     constructor() {
+      window.REC_ROBOT_VIRTUAL = this;
       this.jeepToastMostrado = false;
       const tryLink = () => {
         if (!syncAndStart()) setTimeout(tryLink, 500);

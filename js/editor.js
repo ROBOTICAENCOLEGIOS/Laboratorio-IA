@@ -10417,7 +10417,7 @@ const GUIComponent = props => {
     }) : null, backdropLibraryVisible ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_containers_backdrop_library_jsx__WEBPACK_IMPORTED_MODULE_19__["default"], {
       vm: vm,
       onRequestClose: onRequestCloseBackdropLibrary
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_menu_bar_menu_bar_jsx__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {style:{background:'linear-gradient(90deg, #1A2980 0%, #26D0CE 100%)',color:'#ffffff',display:'flex',alignItems:'center',justifyContent:'center',padding:'6px 12px',fontSize:'13px',fontWeight:'500',zIndex:492,position:'relative'}},"🎓 ¡Curso Gratuito para Docentes (🇦🇷 🇻🇪)! Programa desde CERO el Robot Jeep Virtual en el aula. ",/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("a",{href:"https://forms.gle/EHmZRPKvjQY5zjWg8",target:"_blank",rel:"noopener noreferrer",style:{background:'#ffb703',color:'#000',padding:'3px 10px',borderRadius:'12px',marginLeft:'10px',textDecoration:'none',fontWeight:'bold'}},"Inscribirme"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("span",{onClick:function(e){e.target.parentElement.style.display='none';},style:{cursor:'pointer',marginLeft:'12px',fontWeight:'bold',fontSize:'15px'}},"✕")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_menu_bar_menu_bar_jsx__WEBPACK_IMPORTED_MODULE_17__["default"], {
       accountNavOpen: accountNavOpen,
       authorId: authorId,
       authorThumbnailUrl: authorThumbnailUrl,
@@ -41325,6 +41325,10 @@ const iotIconURL = _isLocalDev
   ? 'extensionesrec/extensionIoT.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/extensionesrec/extensionIoT.png';
 const iotExtURL = _recLocalBase + 'extensioniot.js';
+const r2d2IconURL = _isLocalDev
+  ? 'extensionesrec/arturburbujas.png'
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/extensionesrec/arturburbujas.png';
+const r2d2ExtURL = _recLocalBase + 'extensionr2d2.js';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {
@@ -41361,6 +41365,23 @@ const iotExtURL = _recLocalBase + 'extensioniot.js';
   useUnsandboxed: true,
   extensionURL: iotExtURL,
   tags: ['@roboticaencolegios', 'internet']
+}, {
+  name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
+    defaultMessage: "ROBOT ARTURITO R2D2",
+    id: "gui.extension.recr2d2arduino.name"
+  }),
+  extensionId: 'recr2d2arduino',
+  iconURL: r2d2IconURL,
+  description: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
+    defaultMessage: "Programa nuestro Robot Arturito para moverlo, girar la cabeza, encender el neon, hacer sonidos y disparar el burbujero!",
+    id: "gui.extension.recr2d2arduino.description"
+  }),
+  featured: true,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  useUnsandboxed: true,
+  extensionURL: r2d2ExtURL,
+  tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
     defaultMessage: "Manos Robóticas",

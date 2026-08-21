@@ -663,7 +663,7 @@ function showArduinoLoadedToast() {
   }, 4500);
 }
 
-class RecPcb1Arduino { constructor(runtime) { this.runtime = runtime; this.port = null; this._activePort = null; this.encoder = new TextEncoder(); this.decoder = new TextDecoder(); this._rxRemainder = ''; this._lineWaiters = []; this._readLoopRunning = false; this._serialQueue = Promise.resolve();
+class RecPcb1Arduino { constructor(runtime) { window.REC_ROBOT_FISICO = this; this.runtime = runtime; this.port = null; this._activePort = null; this.encoder = new TextEncoder(); this.decoder = new TextDecoder(); this._rxRemainder = ''; this._lineWaiters = []; this._readLoopRunning = false; this._serialQueue = Promise.resolve();
   this._distanceEma = null;
   this._distanceLastMs = 0;
   this._distanceLastDisplay = null;
