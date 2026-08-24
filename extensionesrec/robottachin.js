@@ -63,6 +63,7 @@
       note_sol: 'SOL (G4)',
       note_la: 'LA (A4)',
       note_si: 'SI (B4)',
+      note_do5: 'DO (C5)',
       status_connected: 'Conectado',
       status_disconnected: 'Desconectado',
       msg_reset_success: 'Puerto reseteado correctamente.'
@@ -101,6 +102,7 @@
       note_sol: 'G (G4)',
       note_la: 'A (A4)',
       note_si: 'B (B4)',
+      note_do5: 'C (C5)',
       status_connected: 'Connected',
       status_disconnected: 'Disconnected',
       msg_reset_success: 'Port successfully reset.'
@@ -139,6 +141,7 @@
       note_sol: 'SOL (G4)',
       note_la: 'LÁ (A4)',
       note_si: 'SI (B4)',
+      note_do5: 'DÓ (C5)',
       status_connected: 'Conectado',
       status_disconnected: 'Desconectado',
       msg_reset_success: 'Porta reiniciada com sucesso.'
@@ -177,6 +180,7 @@
       note_sol: 'SOL (G4)',
       note_la: 'LA (A4)',
       note_si: 'SI (B4)',
+      note_do5: 'DO (C5)',
       status_connected: 'Connecté',
       status_disconnected: 'Déconnecté',
       msg_reset_success: 'Port réinitialisé avec succès.'
@@ -215,6 +219,7 @@
       note_sol: 'G (G4)',
       note_la: 'A (A4)',
       note_si: 'H (B4)',
+      note_do5: 'C (C5)',
       status_connected: 'Verbunden',
       status_disconnected: 'Getrennt',
       msg_reset_success: 'Port erfolgreich zurückgesetzt.'
@@ -253,6 +258,7 @@
       note_sol: 'SOL (G4)',
       note_la: 'LA (A4)',
       note_si: 'SI (B4)',
+      note_do5: 'DO (C5)',
       status_connected: 'Connesso',
       status_disconnected: 'Disconnesso',
       msg_reset_success: 'Porta reimpostata con successo.'
@@ -291,6 +297,7 @@
       note_sol: 'G (G4)',
       note_la: 'A (A4)',
       note_si: 'B (B4)',
+      note_do5: 'C (C5)',
       status_connected: '已连接',
       status_disconnected: '已断开',
       msg_reset_success: '端口已成功重置。'
@@ -329,6 +336,7 @@
       note_sol: 'ソ (G4)',
       note_la: 'ラ (A4)',
       note_si: 'シ (B4)',
+      note_do5: 'ド (C5)',
       status_connected: '接続済み',
       status_disconnected: '切断済み',
       msg_reset_success: 'ポートが正常にリセットされました。'
@@ -367,6 +375,7 @@
       note_sol: '솔 (G4)',
       note_la: '라 (A4)',
       note_si: '시 (B4)',
+      note_do5: '도 (C5)',
       status_connected: '연결됨',
       status_disconnected: '연결 끊김',
       msg_reset_success: '포트가 성공적으로 재설정되었습니다.'
@@ -405,6 +414,7 @@
       note_sol: 'СОЛЬ (G4)',
       note_la: 'ЛЯ (A4)',
       note_si: 'СИ (B4)',
+      note_do5: 'ДО (C5)',
       status_connected: 'Подключено',
       status_disconnected: 'Отключено',
       msg_reset_success: 'Порт успешно сброшен.'
@@ -443,6 +453,7 @@
       note_sol: 'صول (G4)',
       note_la: 'لا (A4)',
       note_si: 'سي (B4)',
+      note_do5: 'دو (C5)',
       status_connected: 'متصل',
       status_disconnected: 'غير متصل',
       msg_reset_success: 'تمت إعادة ضبط المنفذ بنجاح.'
@@ -481,7 +492,8 @@
       note_sol: 'सोल (G4)',
       note_la: 'ला (A4)',
       note_si: 'सी (B4)',
-      status_connected: 'जुड़ा हुआ',
+      note_do5: 'डो (C5)',
+      status_connected: 'जुड़़ा हुआ',
       status_disconnected: 'डिस्कनेक्ट किया गया',
       msg_reset_success: 'पोर्ट सफलतापूर्वक रीसेट किया गया।'
     },
@@ -519,6 +531,7 @@
       note_sol: 'SOL (G4)',
       note_la: 'LA (A4)',
       note_si: 'Sİ (B4)',
+      note_do5: 'DO (C5)',
       status_connected: 'Bağlı',
       status_disconnected: 'Bağlantı Kesildi',
       msg_reset_success: 'Port başarıyla sıfırlandı.'
@@ -557,6 +570,7 @@
       note_sol: 'SOL (G4)',
       note_la: 'LA (A4)',
       note_si: 'SI (B4)',
+      note_do5: 'DO (C5)',
       status_connected: 'Połączono',
       status_disconnected: 'Rozłączono',
       msg_reset_success: 'Port pomyślnie zresetowany.'
@@ -595,6 +609,7 @@
       note_sol: 'G (G4)',
       note_la: 'A (A4)',
       note_si: 'B (B4)',
+      note_do5: 'DO (C5)',
       status_connected: 'Verbonden',
       status_disconnected: 'Niet Verbonden',
       msg_reset_success: 'Poort succesvol gereset.'
@@ -633,6 +648,7 @@
       note_sol: 'সল (G4)',
       note_la: 'লা (A4)',
       note_si: 'সি (B4)',
+      note_do5: 'ডো (C5)',
       status_connected: 'সংযুক্ত',
       status_disconnected: 'সংযোগ বিচ্ছিন্ন',
       msg_reset_success: 'পোর্ট সফলভাবে রিসেট করা হয়েছে।'
@@ -671,6 +687,7 @@
       note_sol: 'SOL (G4)',
       note_la: 'LA (A4)',
       note_si: 'SI (B4)',
+      note_do5: 'DO (C5)',
       status_connected: 'Terhubung',
       status_disconnected: 'Terputus',
       msg_reset_success: 'Port berhasil direset.'
@@ -809,7 +826,8 @@
               { text: t('note_fa'), value: '349' },
               { text: t('note_sol'), value: '392' },
               { text: t('note_la'), value: '440' },
-              { text: t('note_si'), value: '494' }
+              { text: t('note_si'), value: '494' },
+              { text: t('note_do5'), value: '523' }
             ]
           }
         }

@@ -33,6 +33,7 @@ const I18N_BLOCKS = {
     note_sol: 'SOL (G4)',
     note_la: 'LA (A4)',
     note_si: 'SI (B4)',
+    note_do5: 'DO (C5)',
     state_on: 'ENCENDIDO',
     state_off: 'APAGADO'
   },
@@ -62,6 +63,7 @@ const I18N_BLOCKS = {
     note_sol: 'G (G4)',
     note_la: 'A (A4)',
     note_si: 'B (B4)',
+    note_do5: 'C (C5)',
     state_on: 'ON',
     state_off: 'OFF'
   },
@@ -91,6 +93,7 @@ const I18N_BLOCKS = {
     note_sol: 'SOL (G4)',
     note_la: 'LÁ (A4)',
     note_si: 'SI (B4)',
+    note_do5: 'DÓ (C5)',
     state_on: 'LIGADO',
     state_off: 'DESLIGADO'
   },
@@ -120,6 +123,7 @@ const I18N_BLOCKS = {
     note_sol: 'SOL (G4)',
     note_la: 'LA (A4)',
     note_si: 'SI (B4)',
+    note_do5: 'DO (C5)',
     state_on: 'ALLUMÉ',
     state_off: 'ÉTEINT'
   },
@@ -149,6 +153,7 @@ const I18N_BLOCKS = {
     note_sol: 'G (G4)',
     note_la: 'A (A4)',
     note_si: 'H (B4)',
+    note_do5: 'C (C5)',
     state_on: 'AN',
     state_off: 'AUS'
   },
@@ -178,6 +183,7 @@ const I18N_BLOCKS = {
     note_sol: 'SOL (G4)',
     note_la: 'LA (A4)',
     note_si: 'SI (B4)',
+    note_do5: 'DO (C5)',
     state_on: 'ACCESO',
     state_off: 'SPENTO'
   },
@@ -207,6 +213,7 @@ const I18N_BLOCKS = {
     note_sol: 'G (G4)',
     note_la: 'A (A4)',
     note_si: 'B (B4)',
+    note_do5: 'C (C5)',
     state_on: '开',
     state_off: '关'
   },
@@ -236,6 +243,7 @@ const I18N_BLOCKS = {
     note_sol: 'ソ (G4)',
     note_la: 'ラ (A4)',
     note_si: 'シ (B4)',
+    note_do5: 'ド (C5)',
     state_on: 'オン',
     state_off: 'オフ'
   },
@@ -265,6 +273,7 @@ const I18N_BLOCKS = {
     note_sol: '솔 (G4)',
     note_la: '라 (A4)',
     note_si: '시 (B4)',
+    note_do5: '도 (C5)',
     state_on: '켜짐',
     state_off: '꺼짐'
   },
@@ -294,6 +303,7 @@ const I18N_BLOCKS = {
     note_sol: 'СОЛЬ (G4)',
     note_la: 'ЛЯ (A4)',
     note_si: 'СИ (B4)',
+    note_do5: 'ДО (C5)',
     state_on: 'ВКЛ',
     state_off: 'ВЫКЛ'
   },
@@ -323,6 +333,7 @@ const I18N_BLOCKS = {
     note_sol: 'صول (G4)',
     note_la: 'لا (A4)',
     note_si: 'سي (B4)',
+    note_do5: 'دو (C5)',
     state_on: 'يعمل',
     state_off: 'متوقف'
   },
@@ -352,6 +363,7 @@ const I18N_BLOCKS = {
     note_sol: 'सोल (G4)',
     note_la: 'ला (A4)',
     note_si: 'सी (B4)',
+    note_do5: 'डो (C5)',
     state_on: 'चालू',
     state_off: 'बंद'
   },
@@ -381,6 +393,7 @@ const I18N_BLOCKS = {
     note_sol: 'SOL (G4)',
     note_la: 'LA (A4)',
     note_si: 'Sİ (B4)',
+    note_do5: 'DO (C5)',
     state_on: 'AÇIK',
     state_off: 'KAPALI'
   },
@@ -410,6 +423,7 @@ const I18N_BLOCKS = {
     note_sol: 'SOL (G4)',
     note_la: 'LA (A4)',
     note_si: 'SI (B4)',
+    note_do5: 'DO (C5)',
     state_on: 'WŁĄCZONY',
     state_off: 'WYŁĄCZONY'
   },
@@ -439,6 +453,7 @@ const I18N_BLOCKS = {
     note_sol: 'G (G4)',
     note_la: 'A (A4)',
     note_si: 'B (B4)',
+    note_do5: 'DO (C5)',
     state_on: 'AAN',
     state_off: 'UIT'
   },
@@ -468,6 +483,7 @@ const I18N_BLOCKS = {
     note_sol: 'সল (G4)',
     note_la: 'লা (A4)',
     note_si: 'সি (B4)',
+    note_do5: 'ডো (C5)',
     state_on: 'চালু',
     state_off: 'বন্ধ'
   },
@@ -497,6 +513,7 @@ const I18N_BLOCKS = {
     note_sol: 'SOL (G4)',
     note_la: 'LA (A4)',
     note_si: 'SI (B4)',
+    note_do5: 'DO (C5)',
     state_on: 'NYALA',
     state_off: 'MATI'
   }
@@ -718,7 +735,8 @@ class RecR2D2Arduino {
             { text: t('note_fa'), value: '349' },
             { text: t('note_sol'), value: '392' },
             { text: t('note_la'), value: '440' },
-            { text: t('note_si'), value: '494' }
+            { text: t('note_si'), value: '494' },
+            { text: t('note_do5'), value: '523' }
           ]
         }
       }
