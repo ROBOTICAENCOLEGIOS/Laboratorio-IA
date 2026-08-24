@@ -1093,7 +1093,11 @@ class _STK500Flasher {
     }
 
     tocarNota(args) {
-      this._codeLines.push(`REC_Buzzer(${Math.round(Number(args.NOTE))}, ${Math.max(0, Math.round(Number(args.MS)))});`);
+      const ms = Math.max(0, Math.round(Number(args.MS)));
+      const silenceMs = Math.max(60, Math.round(ms * 0.15));
+      const soundMs = Math.max(10, ms - silenceMs);
+      this._codeLines.push(`REC_Buzzer(${Math.round(Number(args.NOTE))}, ${soundMs});`);
+      this._codeLines.push(`delay(${silenceMs});`);
     }
 
     // ── SENSORES ──────────────────────────────────────────────────────────
@@ -1363,8 +1367,11 @@ class _STK500Flasher {
 
         case 'jeepAutonomo_tocarNota': {
           const note = NUM('NOTE');
-          const ms   = NUM('MS');
-          lines.push(`${indent}REC_Buzzer(${Math.round(note)}, ${Math.max(0, Math.round(ms))});`);
+          const ms   = Math.max(0, Math.round(NUM('MS')));
+          const silenceMs = Math.max(60, Math.round(ms * 0.15));
+          const soundMs = Math.max(10, ms - silenceMs);
+          lines.push(`${indent}REC_Buzzer(${Math.round(note)}, ${soundMs});`);
+          lines.push(`${indent}delay(${silenceMs});`);
           break;
         }
 

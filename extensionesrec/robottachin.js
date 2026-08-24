@@ -954,7 +954,13 @@
     }
 
     async playNote(args) {
-      await this._sendLine(`AT+NOTE=${Math.round(args.NOTE)},${Math.max(0, Math.round(args.MS))}`);
+      const ms = Math.max(0, Math.round(args.MS));
+      const silenceMs = Math.max(60, Math.round(ms * 0.15));
+      const soundMs = Math.max(10, ms - silenceMs);
+
+      await this._sendLine(`AT+NOTE=${Math.round(args.NOTE)},${soundMs}`);
+
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
   }
 

@@ -1111,7 +1111,13 @@
     }
     tocarNota ({ NOTA, DUR }) {
       const freq = NOTES[String(NOTA).toUpperCase()] || 440;
-      playTone(freq, 'sine', Math.max(0.05, Number(DUR) || 0.5));
+      const ms = Math.round(Math.max(0.05, Number(DUR) || 0.5) * 1000);
+      const silenceMs = Math.max(60, Math.round(ms * 0.15));
+      const soundMs = Math.max(10, ms - silenceMs);
+
+      playTone(freq, 'sine', soundMs / 1000);
+
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     // ── Control ───────────────────────────────────────────────────────────
