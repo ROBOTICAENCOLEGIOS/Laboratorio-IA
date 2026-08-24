@@ -822,9 +822,11 @@
 
   const t = key => {
 
-    const locale = window.currentRecLocale || 'es';
+    const rawLocale = window.currentRecLocale || 'es';
 
-    return (I18N_BLOCKS[locale] && I18N_BLOCKS[locale][key]) || I18N_BLOCKS['es'][key] || key;
+    const lang = rawLocale.split(/[-_]/)[0].toLowerCase();
+
+    return (I18N_BLOCKS[lang] && I18N_BLOCKS[lang][key]) || (I18N_BLOCKS['es'] && I18N_BLOCKS['es'][key]) || key;
 
   };
 

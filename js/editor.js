@@ -41329,6 +41329,10 @@ const r2d2IconURL = _isLocalDev
   ? 'extensionesrec/arturburbujas.png'
   : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/extensionesrec/arturburbujas.png';
 const r2d2ExtURL = _recLocalBase + 'extensionr2d2.js';
+const tachinIconURL = _isLocalDev
+  ? 'extensionesrec/robottachin.png'
+  : 'https://raw.githubusercontent.com/ROBOTICAENCOLEGIOS/Laboratorio-IA/main/extensionesrec/robottachin.png';
+const tachinExtURL = _recLocalBase + 'robottachin.js';
 /* harmony default export */ __webpack_exports__["default"] = ([
 // Extensiones @roboticaencolegios - Prioridad al inicio
 {
@@ -41381,6 +41385,31 @@ const r2d2ExtURL = _recLocalBase + 'extensionr2d2.js';
   unsandboxed: true,
   useUnsandboxed: true,
   extensionURL: r2d2ExtURL,
+  tags: ['@roboticaencolegios']
+}, {
+  name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
+    defaultMessage: "Robot Tachín",
+    id: "gui.extension.robottachov4.name"
+  }),
+  extensionId: 'robottachov4',
+  iconURL: tachinIconURL,
+  insetIconURL: null,
+  description: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
+    defaultMessage: "Robot Tachin: para los mas peques, responde a caminos y gestos con I.A.!",
+    id: "gui.extension.robottachov4.description"
+  }),
+  featured: true,
+  disabled: false,
+  bluetoothRequired: false,
+  internetConnectionRequired: false,
+  launchInNewTab: false,
+  useAutoLoad: false,
+  incompatibleWithScratch: true,
+  unsandboxed: true,
+  useUnsandboxed: true,
+  extensionURL: tachinExtURL,
+  featuredDescriptionKey: 'ext_tachin_desc',
+  featuredTitleKey: 'ext_tachin_title',
   tags: ['@roboticaencolegios']
 }, {
   name: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_1__["FormattedMessage"], {
@@ -53286,7 +53315,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Cómo usar la I.A.',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Simulador virtual del Robot Jeep para programar sin hardware.'
+        ext_jeep_desc: 'Simulador virtual del Robot Jeep para programar sin hardware.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Programa nuestro Robot Arturito para moverlo, girar la cabeza, encender el neón, hacer sonidos y disparar el burbujero!',
+        ext_iot_title: 'Módulo IoT REC',
+        ext_iot_desc: 'Conecta tus proyectos a la nube y envía telemetría en tiempo real.',
+        ext_iamanos_title: 'Manos Robóticas',
+        ext_iamanos_desc: 'Controla manos robóticas con gestos y movimientos.',
+        ext_senales_title: 'Señales de Tránsito',
+        ext_senales_desc: 'Reconocimiento de señales de tránsito usando inteligencia artificial.',
+        ext_voz_title: 'Voz a Texto',
+        ext_voz_desc: 'Convierte voz en texto para controlar tus proyectos.',
+        ext_emociones_title: 'IA: Emociones Rostro',
+        ext_emociones_desc: 'Detecta emociones del rostro (FELIZ, TRISTE, ENOJADO, SORPRENDIDO, NEUTRAL) y si la boca está abierta, usando IA en vivo.',
+        ext_objetos_title: 'IA: Detección de Objetos',
+        ext_objetos_desc: 'Detecta objetos cotidianos en tiempo real (PERSONA, GATO, PERRO, AUTO, CELULAR y más) usando IA COCO-SSD.',
+        ext_teachable_title: 'IA: Teachable Machine',
+        ext_teachable_desc: 'Cargá tu propio modelo de Google Teachable Machine y detectá cualquier imagen que hayas entrenado.',
+        ext_tachin_title: 'Robot Tachín',
+        ext_tachin_desc: 'Robot Tachin: para los mas peques, responde a caminos y gestos con I.A.!',
+        ext_autonomo_title: '🧠 Aprendizaje Autónomo (Q-Learning)',
+        ext_autonomo_desc: 'Entrená robots físicos o virtuales con Q-Learning: sensores, acciones y recompensas unificadas.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Programá el Robot 1 Arduino por Bluetooth o USB: motores, sensores, matriz LED y sonido.'
       },
       en: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - AI, ROBOTICS AND PROGRAMMING IN ONE PLACE',
@@ -53294,7 +53345,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'How to use AI',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Virtual Robot Jeep simulator for programming without hardware.'
+        ext_jeep_desc: 'Virtual Robot Jeep simulator for programming without hardware.',
+        ext_r2d2_title: 'ARTURITO R2D2 ROBOT',
+        ext_r2d2_desc: 'Program our Arturito Robot to move, turn its head, switch the neon on, make sounds, and trigger the bubble blower!',
+        ext_iot_title: 'IoT REC Module',
+        ext_iot_desc: 'Connect your projects to the cloud and send real-time telemetry.',
+        ext_iamanos_title: 'Robotic Hands',
+        ext_iamanos_desc: 'Control robotic hands with gestures and movements.',
+        ext_senales_title: 'Traffic Signs',
+        ext_senales_desc: 'Traffic sign recognition using artificial intelligence.',
+        ext_voz_title: 'Speech to Text',
+        ext_voz_desc: 'Convert speech into text to control your projects.',
+        ext_emociones_title: 'AI: Face Emotions',
+        ext_emociones_desc: 'Detects facial emotions (HAPPY, SAD, ANGRY, SURPRISED, NEUTRAL) and whether the mouth is open, using live AI.',
+        ext_objetos_title: 'AI: Object Detection',
+        ext_objetos_desc: 'Detects everyday objects in real time (PERSON, CAT, DOG, CAR, PHONE and more) using COCO-SSD AI.',
+        ext_teachable_title: 'AI: Teachable Machine',
+        ext_teachable_desc: 'Load your own Google Teachable Machine model and detect any image you have trained.',
+        ext_tachin_title: 'Smart Trash Robot',
+        ext_tachin_desc: 'Control the Trash Robot: motors, LED matrix, RGB light and sound, all from blocks.',
+        ext_autonomo_title: '🧠 Autonomous Learning (Q-Learning)',
+        ext_autonomo_desc: 'Train physical or virtual robots with Q-Learning: unified sensors, actions and rewards.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Program the Robot 1 Arduino via Bluetooth or USB: motors, sensors, LED matrix and sound.'
       },
       pt: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA E PROGRAMACAO EM UM SO LUGAR',
@@ -53302,7 +53375,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Como usar a IA',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Simulador virtual do Robot Jeep para programar sem hardware.'
+        ext_jeep_desc: 'Simulador virtual do Robot Jeep para programar sem hardware.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Programe nosso Robot Arturito para movê-lo, girar a cabeça, ligar o neon, fazer sons e disparar a bolha de sabão!',
+        ext_iot_title: 'Módulo IoT REC',
+        ext_iot_desc: 'Conecte seus projetos à nuvem e envie telemetria em tempo real.',
+        ext_iamanos_title: 'Mãos Robóticas',
+        ext_iamanos_desc: 'Controle mãos robóticas com gestos e movimentos.',
+        ext_senales_title: 'Sinais de Trânsito',
+        ext_senales_desc: 'Reconhecimento de sinais de trânsito usando inteligência artificial.',
+        ext_voz_title: 'Voz para Texto',
+        ext_voz_desc: 'Converte voz em texto para controlar seus projetos.',
+        ext_emociones_title: 'IA: Emoções do Rosto',
+        ext_emociones_desc: 'Detecta emoções do rosto (FELIZ, TRISTE, IRRITADO, SURPRESO, NEUTRO) e se a boca está aberta, usando IA ao vivo.',
+        ext_objetos_title: 'IA: Detecção de Objetos',
+        ext_objetos_desc: 'Detecta objetos do dia a dia em tempo real (PESSOA, GATO, CACHORRO, CARRO, CELULAR e mais) usando IA COCO-SSD.',
+        ext_teachable_title: 'IA: Teachable Machine',
+        ext_teachable_desc: 'Carregue seu próprio modelo do Google Teachable Machine e detecte qualquer imagem que você tenha treinado.',
+        ext_tachin_title: 'Robô Lixeira Inteligente',
+        ext_tachin_desc: 'Controle o Robô Lixeira: motores, matriz de LED, luz RGB e som, tudo por blocos.',
+        ext_autonomo_title: '🧠 Aprendizado Autônomo (Q-Learning)',
+        ext_autonomo_desc: 'Treine robôs físicos ou virtuais com Q-Learning: sensores, ações e recompensas unificadas.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Programe o Robot 1 Arduino via Bluetooth ou USB: motores, sensores, matriz de LED e som.'
       },
       fr: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - IA, ROBOTIQUE ET PROGRAMMATION EN UN SEUL ENDROIT',
@@ -53310,7 +53405,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Comment utiliser l\'IA',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Simulateur virtuel du Robot Jeep pour programmer sans matériel.'
+        ext_jeep_desc: 'Simulateur virtuel du Robot Jeep pour programmer sans matériel.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Programme notre Robot Arturito pour le déplacer, tourner la tête, allumer le néon, faire des sons et déclencher le lance-bulles !',
+        ext_iot_title: 'Module IoT REC',
+        ext_iot_desc: 'Connecte tes projets au cloud et envoie de la télémétrie en temps réel.',
+        ext_iamanos_title: 'Mains Robotiques',
+        ext_iamanos_desc: 'Contrôle des mains robotiques avec des gestes et des mouvements.',
+        ext_senales_title: 'Panneaux de Signalisation',
+        ext_senales_desc: 'Reconnaissance des panneaux de signalisation grâce à l\'intelligence artificielle.',
+        ext_voz_title: 'Voix vers Texte',
+        ext_voz_desc: 'Convertit la voix en texte pour contrôler tes projets.',
+        ext_emociones_title: 'IA : Émotions du Visage',
+        ext_emociones_desc: 'Détecte les émotions du visage (HEUREUX, TRISTE, EN COLÈRE, SURPRIS, NEUTRE) et si la bouche est ouverte, grâce à l\'IA en direct.',
+        ext_objetos_title: 'IA : Détection d\'Objets',
+        ext_objetos_desc: 'Détecte des objets du quotidien en temps réel (PERSONNE, CHAT, CHIEN, VOITURE, TÉLÉPHONE et plus) grâce à l\'IA COCO-SSD.',
+        ext_teachable_title: 'IA : Teachable Machine',
+        ext_teachable_desc: 'Charge ton propre modèle Google Teachable Machine et détecte toute image que tu as entraînée.',
+        ext_tachin_title: 'Robot Poubelle Intelligent',
+        ext_tachin_desc: 'Contrôle le Robot Poubelle : moteurs, matrice LED, lumière RGB et son, le tout depuis des blocs.',
+        ext_autonomo_title: '🧠 Apprentissage Autonome (Q-Learning)',
+        ext_autonomo_desc: 'Entraîne des robots physiques ou virtuels avec le Q-Learning : capteurs, actions et récompenses unifiés.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Programme le Robot 1 Arduino via Bluetooth ou USB : moteurs, capteurs, matrice LED et son.'
       },
       de: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - KI, ROBOTIK UND PROGRAMMIERUNG AN EINEM ORT',
@@ -53318,7 +53435,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Wie man KI nutzt',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Virtueller Robot Jeep-Simulator zum Programmieren ohne Hardware.'
+        ext_jeep_desc: 'Virtueller Robot Jeep-Simulator zum Programmieren ohne Hardware.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Programmiere unseren Arturito-Roboter, um ihn zu bewegen, den Kopf zu drehen, das Neonlicht einzuschalten, Geräusche zu machen und die Seifenblasenmaschine auszulösen!',
+        ext_iot_title: 'IoT REC Modul',
+        ext_iot_desc: 'Verbinde deine Projekte mit der Cloud und sende Telemetriedaten in Echtzeit.',
+        ext_iamanos_title: 'Robotische Hände',
+        ext_iamanos_desc: 'Steuere robotische Hände mit Gesten und Bewegungen.',
+        ext_senales_title: 'Verkehrsschilder',
+        ext_senales_desc: 'Erkennung von Verkehrsschildern mittels künstlicher Intelligenz.',
+        ext_voz_title: 'Sprache zu Text',
+        ext_voz_desc: 'Wandelt Sprache in Text um, um deine Projekte zu steuern.',
+        ext_emociones_title: 'KI: Gesichtsemotionen',
+        ext_emociones_desc: 'Erkennt Gesichtsemotionen (FRÖHLICH, TRAURIG, WÜTEND, ÜBERRASCHT, NEUTRAL) und ob der Mund geöffnet ist, mit Live-KI.',
+        ext_objetos_title: 'KI: Objekterkennung',
+        ext_objetos_desc: 'Erkennt alltägliche Objekte in Echtzeit (PERSON, KATZE, HUND, AUTO, HANDY und mehr) mit COCO-SSD-KI.',
+        ext_teachable_title: 'KI: Teachable Machine',
+        ext_teachable_desc: 'Lade dein eigenes Google-Teachable-Machine-Modell und erkenne jedes trainierte Bild.',
+        ext_tachin_title: 'Intelligenter Mülleimer-Roboter',
+        ext_tachin_desc: 'Steuere den Mülleimer-Roboter: Motoren, LED-Matrix, RGB-Licht und Ton, alles über Blöcke.',
+        ext_autonomo_title: '🧠 Autonomes Lernen (Q-Learning)',
+        ext_autonomo_desc: 'Trainiere physische oder virtuelle Roboter mit Q-Learning: einheitliche Sensoren, Aktionen und Belohnungen.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Programmiere den Robot 1 Arduino über Bluetooth oder USB: Motoren, Sensoren, LED-Matrix und Ton.'
       },
       it: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - IA, ROBOTICA E PROGRAMMAZIONE IN UN UNICO LUOGO',
@@ -53326,7 +53465,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Come usare l\'IA',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Simulatore virtuale del Robot Jeep per programmare senza hardware.'
+        ext_jeep_desc: 'Simulatore virtuale del Robot Jeep per programmare senza hardware.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Programma il nostro Robot Arturito per muoverlo, girare la testa, accendere il neon, emettere suoni e attivare la bolla di sapone!',
+        ext_iot_title: 'Modulo IoT REC',
+        ext_iot_desc: 'Collega i tuoi progetti al cloud e invia telemetria in tempo reale.',
+        ext_iamanos_title: 'Mani Robotiche',
+        ext_iamanos_desc: 'Controlla mani robotiche con gesti e movimenti.',
+        ext_senales_title: 'Segnali Stradali',
+        ext_senales_desc: 'Riconoscimento dei segnali stradali usando l\'intelligenza artificiale.',
+        ext_voz_title: 'Voce in Testo',
+        ext_voz_desc: 'Converte la voce in testo per controllare i tuoi progetti.',
+        ext_emociones_title: 'IA: Emozioni del Volto',
+        ext_emociones_desc: 'Rileva le emozioni del volto (FELICE, TRISTE, ARRABBIATO, SORPRESO, NEUTRO) e se la bocca è aperta, usando IA dal vivo.',
+        ext_objetos_title: 'IA: Rilevamento Oggetti',
+        ext_objetos_desc: 'Rileva oggetti quotidiani in tempo reale (PERSONA, GATTO, CANE, AUTO, CELLULARE e altro) usando IA COCO-SSD.',
+        ext_teachable_title: 'IA: Teachable Machine',
+        ext_teachable_desc: 'Carica il tuo modello di Google Teachable Machine e rileva qualsiasi immagine che hai addestrato.',
+        ext_tachin_title: 'Robot Cestino Intelligente',
+        ext_tachin_desc: 'Controlla il Robot Cestino: motori, matrice LED, luce RGB e suono, tutto tramite blocchi.',
+        ext_autonomo_title: '🧠 Apprendimento Autonomo (Q-Learning)',
+        ext_autonomo_desc: 'Addestra robot fisici o virtuali con Q-Learning: sensori, azioni e ricompense unificate.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Programma il Robot 1 Arduino via Bluetooth o USB: motori, sensori, matrice LED e suono.'
       },
       zh: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - 人工智能、机器人与编程一站式平台',
@@ -53334,7 +53495,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: '如何使用人工智能',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Robot Jeep 虚拟模拟器，无需硬件即可编程。'
+        ext_jeep_desc: 'Robot Jeep 虚拟模拟器，无需硬件即可编程。',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: '编程控制我们的阿图里托机器人：移动、转头、点亮霓虹灯、发出声音并触发泡泡机！',
+        ext_iot_title: 'IoT REC 模块',
+        ext_iot_desc: '将你的项目连接到云端并实时发送遥测数据。',
+        ext_iamanos_title: '机器人手',
+        ext_iamanos_desc: '通过手势和动作控制机器人手。',
+        ext_senales_title: '交通标志',
+        ext_senales_desc: '使用人工智能识别交通标志。',
+        ext_voz_title: '语音转文字',
+        ext_voz_desc: '将语音转换为文字以控制你的项目。',
+        ext_emociones_title: 'AI：面部情绪',
+        ext_emociones_desc: '使用实时AI检测面部情绪（快乐、悲伤、生气、惊讶、中性）以及嘴巴是否张开。',
+        ext_objetos_title: 'AI：物体检测',
+        ext_objetos_desc: '使用COCO-SSD人工智能实时检测日常物体（人、猫、狗、汽车、手机等）。',
+        ext_teachable_title: 'AI：Teachable Machine',
+        ext_teachable_desc: '加载你自己的Google Teachable Machine模型，检测你训练过的任何图像。',
+        ext_tachin_title: '智能垃圾桶机器人',
+        ext_tachin_desc: '控制垃圾桶机器人：电机、LED矩阵、RGB灯光和声音，全部通过积木完成。',
+        ext_autonomo_title: '🧠 自主学习 (Q-Learning)',
+        ext_autonomo_desc: '使用Q-Learning训练实体或虚拟机器人：统一的传感器、动作和奖励。',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: '通过蓝牙或USB编程Robot 1 Arduino：电机、传感器、LED矩阵和声音。'
       },
       ja: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - AI、ロボット、プログラミングのすべてがここに',
@@ -53342,7 +53525,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'AIの使い方',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'ハードウェアなしでプログラミングできる Robot Jeep 仮想シミュレーター。'
+        ext_jeep_desc: 'ハードウェアなしでプログラミングできる Robot Jeep 仮想シミュレーター。',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'アルトゥリートロボットをプログラムして、動かしたり、頭を回したり、ネオンを点灯させたり、音を鳴らしたり、バブルマシンを発射したりしよう！',
+        ext_iot_title: 'IoT REC モジュール',
+        ext_iot_desc: 'プロジェクトをクラウドに接続してリアルタイムでテレメトリを送信します。',
+        ext_iamanos_title: 'ロボットハンド',
+        ext_iamanos_desc: 'ジェスチャーと動きでロボットハンドを制御します。',
+        ext_senales_title: '交通標識',
+        ext_senales_desc: '人工知能を使った交通標識の認識。',
+        ext_voz_title: '音声からテキスト',
+        ext_voz_desc: '音声をテキストに変換してプロジェクトを制御します。',
+        ext_emociones_title: 'AI：顔の感情',
+        ext_emociones_desc: 'ライブAIを使って顔の感情（うれしい、悲しい、怒っている、驚いている、ニュートラル）と口が開いているかを検出します。',
+        ext_objetos_title: 'AI：物体検出',
+        ext_objetos_desc: 'COCO-SSD AIを使って日常の物体（人、猫、犬、車、携帯電話など）をリアルタイムで検出します。',
+        ext_teachable_title: 'AI：Teachable Machine',
+        ext_teachable_desc: '自分のGoogle Teachable Machineモデルを読み込んで、トレーニングした画像を検出します。',
+        ext_tachin_title: 'スマートゴミ箱ロボット',
+        ext_tachin_desc: 'ゴミ箱ロボットを制御：モーター、LEDマトリックス、RGBライト、サウンドをすべてブロックで。',
+        ext_autonomo_title: '🧠 自律学習 (Q-Learning)',
+        ext_autonomo_desc: 'Q-Learningで実機またはバーチャルロボットを訓練：統合されたセンサー、アクション、報酬。',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Bluetooth または USB で Robot 1 Arduino をプログラム：モーター、センサー、LEDマトリックス、サウンド。'
       },
       ko: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - AI, 로봇 및 프로그래밍을 한 곳에서',
@@ -53350,7 +53555,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'AI 사용 방법',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: '하드웨어 없이 프로그래밍할 수 있는 Robot Jeep 가상 시뮬레이터입니다.'
+        ext_jeep_desc: '하드웨어 없이 프로그래밍할 수 있는 Robot Jeep 가상 시뮬레이터입니다.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: '아르투리토 로봇을 프로그래밍하여 움직이고, 머리를 돌리고, 네온을 켜고, 소리를 내고, 비눗방울 발사기를 작동시켜보세요!',
+        ext_iot_title: 'IoT REC 모듈',
+        ext_iot_desc: '프로젝트를 클라우드에 연결하고 실시간으로 원격 측정 데이터를 전송합니다.',
+        ext_iamanos_title: '로봇 손',
+        ext_iamanos_desc: '제스처와 동작으로 로봇 손을 제어합니다.',
+        ext_senales_title: '교통 표지판',
+        ext_senales_desc: '인공지능을 이용한 교통 표지판 인식.',
+        ext_voz_title: '음성을 텍스트로',
+        ext_voz_desc: '음성을 텍스트로 변환하여 프로젝트를 제어합니다.',
+        ext_emociones_title: 'AI: 얼굴 감정',
+        ext_emociones_desc: '실시간 AI를 사용하여 얼굴 감정(행복, 슬픔, 화남, 놀람, 무표정)과 입이 열려 있는지를 감지합니다.',
+        ext_objetos_title: 'AI: 물체 감지',
+        ext_objetos_desc: 'COCO-SSD AI를 사용하여 일상 물체(사람, 고양이, 개, 자동차, 휴대폰 등)를 실시간으로 감지합니다.',
+        ext_teachable_title: 'AI: Teachable Machine',
+        ext_teachable_desc: '자신만의 Google Teachable Machine 모델을 불러와 학습한 이미지를 감지합니다.',
+        ext_tachin_title: '스마트 쓰레기통 로봇',
+        ext_tachin_desc: '쓰레기통 로봇 제어: 모터, LED 매트릭스, RGB 조명 및 소리를 모두 블록으로 제어합니다.',
+        ext_autonomo_title: '🧠 자율 학습 (Q-Learning)',
+        ext_autonomo_desc: 'Q-Learning으로 실제 또는 가상 로봇을 훈련: 통합된 센서, 동작, 보상.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: '블루투스 또는 USB로 Robot 1 Arduino 프로그래밍: 모터, 센서, LED 매트릭스, 소리.'
       },
       ru: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - ИИ, РОБОТОТЕХНИКА И ПРОГРАММИРОВАНИЕ В ОДНОМ МЕСТЕ',
@@ -53358,7 +53585,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Как использовать ИИ',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Виртуальный симулятор Robot Jeep для программирования без оборудования.'
+        ext_jeep_desc: 'Виртуальный симулятор Robot Jeep для программирования без оборудования.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Программируй нашего робота Артурито: двигай его, поворачивай голову, включай неон, издавай звуки и запускай пузырьковую машину!',
+        ext_iot_title: 'Модуль IoT REC',
+        ext_iot_desc: 'Подключи свои проекты к облаку и отправляй телеметрию в реальном времени.',
+        ext_iamanos_title: 'Роботизированные руки',
+        ext_iamanos_desc: 'Управляй роботизированными руками с помощью жестов и движений.',
+        ext_senales_title: 'Дорожные знаки',
+        ext_senales_desc: 'Распознавание дорожных знаков с помощью искусственного интеллекта.',
+        ext_voz_title: 'Голос в текст',
+        ext_voz_desc: 'Преобразует голос в текст для управления твоими проектами.',
+        ext_emociones_title: 'ИИ: Эмоции лица',
+        ext_emociones_desc: 'Определяет эмоции лица (СЧАСТЛИВ, ГРУСТЕН, ЗОЛ, УДИВЛЁН, НЕЙТРАЛЕН) и открыт ли рот, используя ИИ в реальном времени.',
+        ext_objetos_title: 'ИИ: Обнаружение объектов',
+        ext_objetos_desc: 'Обнаруживает повседневные объекты в реальном времени (ЧЕЛОВЕК, КОШКА, СОБАКА, МАШИНА, ТЕЛЕФОН и другие) с помощью ИИ COCO-SSD.',
+        ext_teachable_title: 'ИИ: Teachable Machine',
+        ext_teachable_desc: 'Загрузи свою модель Google Teachable Machine и распознавай любое обученное изображение.',
+        ext_tachin_title: 'Умный робот-мусорка',
+        ext_tachin_desc: 'Управляй роботом-мусоркой: моторы, светодиодная матрица, RGB-подсветка и звук — всё через блоки.',
+        ext_autonomo_title: '🧠 Автономное обучение (Q-Learning)',
+        ext_autonomo_desc: 'Обучай физических или виртуальных роботов с помощью Q-Learning: единые датчики, действия и вознаграждения.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Программируй Robot 1 Arduino через Bluetooth или USB: моторы, датчики, светодиодная матрица и звук.'
       },
       ar: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - الذكاء الاصطناعي والروبوتات والبرمجة في مكان واحد',
@@ -53366,7 +53615,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'كيفية استخدام الذكاء الاصطناعي',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'محاكاة روبوت جيب الافتراضية للبرمجة دون أجهزة.'
+        ext_jeep_desc: 'محاكاة روبوت جيب الافتراضية للبرمجة دون أجهزة.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'برمج روبوتنا أرتوريتو لتحريكه، وتدوير رأسه، وإضاءة النيون، وإصدار الأصوات، وتشغيل آلة الفقاعات!',
+        ext_iot_title: 'وحدة IoT REC',
+        ext_iot_desc: 'اربط مشاريعك بالسحابة وأرسل بيانات القياس عن بُعد في الوقت الفعلي.',
+        ext_iamanos_title: 'أيدٍ روبوتية',
+        ext_iamanos_desc: 'تحكم في الأيدي الروبوتية بالإيماءات والحركات.',
+        ext_senales_title: 'إشارات المرور',
+        ext_senales_desc: 'التعرف على إشارات المرور باستخدام الذكاء الاصطناعي.',
+        ext_voz_title: 'الصوت إلى نص',
+        ext_voz_desc: 'حوّل الصوت إلى نص للتحكم في مشاريعك.',
+        ext_emociones_title: 'الذكاء الاصطناعي: مشاعر الوجه',
+        ext_emociones_desc: 'يكتشف مشاعر الوجه (سعيد، حزين، غاضب، متفاجئ، محايد) وما إذا كان الفم مفتوحًا، باستخدام الذكاء الاصطناعي المباشر.',
+        ext_objetos_title: 'الذكاء الاصطناعي: اكتشاف الأجسام',
+        ext_objetos_desc: 'يكتشف الأجسام اليومية في الوقت الفعلي (شخص، قطة، كلب، سيارة، هاتف والمزيد) باستخدام ذكاء اصطناعي COCO-SSD.',
+        ext_teachable_title: 'الذكاء الاصطناعي: Teachable Machine',
+        ext_teachable_desc: 'حمّل نموذجك الخاص من Google Teachable Machine واكتشف أي صورة قمت بتدريبها.',
+        ext_tachin_title: 'روبوت سلة المهملات الذكي',
+        ext_tachin_desc: 'تحكم في روبوت سلة المهملات: المحركات، مصفوفة LED، الإضاءة RGB والصوت، كل ذلك من خلال المكعبات.',
+        ext_autonomo_title: '🧠 التعلم الذاتي (Q-Learning)',
+        ext_autonomo_desc: 'درّب روبوتات فعلية أو افتراضية باستخدام Q-Learning: مستشعرات وإجراءات ومكافآت موحدة.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'برمج Robot 1 Arduino عبر البلوتوث أو USB: المحركات، المستشعرات، مصفوفة LED والصوت.'
       },
       hi: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - AI, रोबोटिक्स और प्रोग्रामिंग एक ही जगह पर',
@@ -53374,7 +53645,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'AI का उपयोग कैसे करें',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Robot Jeep का वर्चुअल सिम्युलेटर, बिना हार्डवेयर के प्रोग्रामिंग के लिए।'
+        ext_jeep_desc: 'Robot Jeep का वर्चुअल सिम्युलेटर, बिना हार्डवेयर के प्रोग्रामिंग के लिए।',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'हमारे आर्टुरिटो रोबोट को प्रोग्राम करें - इसे चलाएं, सिर घुमाएं, नियॉन जलाएं, आवाज़ें निकालें और बबल मशीन चलाएं!',
+        ext_iot_title: 'IoT REC मॉड्यूल',
+        ext_iot_desc: 'अपनी परियोजनाओं को क्लाउड से जोड़ें और वास्तविक समय में टेलीमेट्री भेजें।',
+        ext_iamanos_title: 'रोबोटिक हाथ',
+        ext_iamanos_desc: 'इशारों और गतिविधियों से रोबोटिक हाथों को नियंत्रित करें।',
+        ext_senales_title: 'यातायात संकेत',
+        ext_senales_desc: 'कृत्रिम बुद्धिमत्ता का उपयोग करके यातायात संकेतों की पहचान।',
+        ext_voz_title: 'आवाज़ से टेक्स्ट',
+        ext_voz_desc: 'अपनी परियोजनाओं को नियंत्रित करने के लिए आवाज़ को टेक्स्ट में बदलें।',
+        ext_emociones_title: 'AI: चेहरे की भावनाएं',
+        ext_emociones_desc: 'लाइव AI का उपयोग करके चेहरे की भावनाओं (खुश, उदास, गुस्सा, हैरान, तटस्थ) और मुंह खुला है या नहीं, इसका पता लगाता है।',
+        ext_objetos_title: 'AI: वस्तु पहचान',
+        ext_objetos_desc: 'COCO-SSD AI का उपयोग करके रोज़मर्रा की वस्तुओं (व्यक्ति, बिल्ली, कुत्ता, कार, मोबाइल और अधिक) को वास्तविक समय में पहचानता है।',
+        ext_teachable_title: 'AI: Teachable Machine',
+        ext_teachable_desc: 'अपना खुद का Google Teachable Machine मॉडल लोड करें और अपने द्वारा प्रशिक्षित किसी भी छवि का पता लगाएं।',
+        ext_tachin_title: 'स्मार्ट कचरा रोबोट',
+        ext_tachin_desc: 'कचरा रोबोट को नियंत्रित करें: मोटर, LED मैट्रिक्स, RGB लाइट और ध्वनि, सब कुछ ब्लॉक से।',
+        ext_autonomo_title: '🧠 स्वायत्त सीखना (Q-Learning)',
+        ext_autonomo_desc: 'Q-Learning के साथ भौतिक या वर्चुअल रोबोट को प्रशिक्षित करें: एकीकृत सेंसर, क्रियाएं और पुरस्कार।',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'ब्लूटूथ या USB के माध्यम से Robot 1 Arduino प्रोग्राम करें: मोटर, सेंसर, LED मैट्रिक्स और ध्वनि।'
       },
       bn: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - AI, রোবোটিক্স এবং প্রোগ্রামিং এক জায়গায়',
@@ -53382,7 +53675,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'AI কীভাবে ব্যবহার করবেন',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Robot Jeep-এর ভার্চুয়াল সিমুলেটর, হার্ডওয়্যার ছাড়াই প্রোগ্রামিং করতে।'
+        ext_jeep_desc: 'Robot Jeep-এর ভার্চুয়াল সিমুলেটর, হার্ডওয়্যার ছাড়াই প্রোগ্রামিং করতে।',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'আমাদের আর্তুরিতো রোবটকে প্রোগ্রাম করুন - এটিকে সরান, মাথা ঘোরান, নিয়ন জ্বালান, শব্দ তৈরি করুন এবং বাবল মেশিন চালান!',
+        ext_iot_title: 'IoT REC মডিউল',
+        ext_iot_desc: 'আপনার প্রকল্পগুলোকে ক্লাউডে সংযুক্ত করুন এবং রিয়েল-টাইমে টেলিমেট্রি পাঠান।',
+        ext_iamanos_title: 'রোবোটিক হাত',
+        ext_iamanos_desc: 'ইশারা এবং নড়াচড়ার মাধ্যমে রোবোটিক হাত নিয়ন্ত্রণ করুন।',
+        ext_senales_title: 'ট্রাফিক সাইন',
+        ext_senales_desc: 'কৃত্রিম বুদ্ধিমত্তা ব্যবহার করে ট্রাফিক সাইন শনাক্তকরণ।',
+        ext_voz_title: 'ভয়েস থেকে টেক্সট',
+        ext_voz_desc: 'আপনার প্রকল্প নিয়ন্ত্রণ করতে ভয়েসকে টেক্সটে রূপান্তর করুন।',
+        ext_emociones_title: 'AI: মুখের আবেগ',
+        ext_emociones_desc: 'লাইভ AI ব্যবহার করে মুখের আবেগ (খুশি, দুঃখিত, রাগান্বিত, বিস্মিত, নিরপেক্ষ) এবং মুখ খোলা আছে কিনা তা শনাক্ত করে।',
+        ext_objetos_title: 'AI: বস্তু শনাক্তকরণ',
+        ext_objetos_desc: 'COCO-SSD AI ব্যবহার করে দৈনন্দিন বস্তু (ব্যক্তি, বিড়াল, কুকুর, গাড়ি, মোবাইল এবং আরও) রিয়েল-টাইমে শনাক্ত করে।',
+        ext_teachable_title: 'AI: Teachable Machine',
+        ext_teachable_desc: 'আপনার নিজের Google Teachable Machine মডেল লোড করুন এবং আপনার প্রশিক্ষিত যেকোনো ছবি শনাক্ত করুন।',
+        ext_tachin_title: 'স্মার্ট আবর্জনা রোবট',
+        ext_tachin_desc: 'আবর্জনা রোবট নিয়ন্ত্রণ করুন: মোটর, LED ম্যাট্রিক্স, RGB লাইট এবং শব্দ, সব ব্লক থেকে।',
+        ext_autonomo_title: '🧠 স্বায়ত্তশাসিত শিক্ষণ (Q-Learning)',
+        ext_autonomo_desc: 'Q-Learning দিয়ে বাস্তব বা ভার্চুয়াল রোবট প্রশিক্ষণ দিন: একীভূত সেন্সর, ক্রিয়া এবং পুরস্কার।',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'ব্লুটুথ বা USB এর মাধ্যমে Robot 1 Arduino প্রোগ্রাম করুন: মোটর, সেন্সর, LED ম্যাট্রিক্স এবং শব্দ।'
       },
       id: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - AI, ROBOTIKA, DAN PEMROGRAMAN DALAM SATU TEMPAT',
@@ -53390,7 +53705,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Cara menggunakan AI',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Simulator virtual Robot Jeep untuk memrogram tanpa perangkat keras.'
+        ext_jeep_desc: 'Simulator virtual Robot Jeep untuk memrogram tanpa perangkat keras.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Program Robot Arturito kami untuk bergerak, memutar kepala, menyalakan neon, membuat suara, dan menembakkan mesin gelembung!',
+        ext_iot_title: 'Modul IoT REC',
+        ext_iot_desc: 'Hubungkan proyekmu ke cloud dan kirim telemetri secara real-time.',
+        ext_iamanos_title: 'Tangan Robot',
+        ext_iamanos_desc: 'Kendalikan tangan robot dengan gestur dan gerakan.',
+        ext_senales_title: 'Rambu Lalu Lintas',
+        ext_senales_desc: 'Pengenalan rambu lalu lintas menggunakan kecerdasan buatan.',
+        ext_voz_title: 'Suara ke Teks',
+        ext_voz_desc: 'Mengubah suara menjadi teks untuk mengendalikan proyekmu.',
+        ext_emociones_title: 'AI: Emosi Wajah',
+        ext_emociones_desc: 'Mendeteksi emosi wajah (BAHAGIA, SEDIH, MARAH, TERKEJUT, NETRAL) dan apakah mulut terbuka, menggunakan AI secara langsung.',
+        ext_objetos_title: 'AI: Deteksi Objek',
+        ext_objetos_desc: 'Mendeteksi objek sehari-hari secara real-time (ORANG, KUCING, ANJING, MOBIL, PONSEL dan lainnya) menggunakan AI COCO-SSD.',
+        ext_teachable_title: 'AI: Teachable Machine',
+        ext_teachable_desc: 'Muat model Google Teachable Machine milikmu sendiri dan deteksi gambar apa pun yang telah kamu latih.',
+        ext_tachin_title: 'Robot Tempat Sampah Pintar',
+        ext_tachin_desc: 'Kendalikan Robot Tempat Sampah: motor, matriks LED, lampu RGB, dan suara, semuanya dari blok.',
+        ext_autonomo_title: '🧠 Pembelajaran Otonom (Q-Learning)',
+        ext_autonomo_desc: 'Latih robot fisik atau virtual dengan Q-Learning: sensor, aksi, dan hadiah terpadu.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Program Robot 1 Arduino melalui Bluetooth atau USB: motor, sensor, matriks LED, dan suara.'
       },
       tr: {
         bar_title: '@roboticaencolegios - LABORATORIO REC - YAPAY ZEKA, ROBOTIK VE PROGRAMLAMA TEK YERDE',
@@ -53398,7 +53735,89 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
         btn_ia: 'Yapay zeka nasıl kullanılır',
         btn_instagram: 'Instagram REC',
         ext_jeep_title: 'Robot Jeep Virtual',
-        ext_jeep_desc: 'Robot Jeep için donanım olmadan programlama yapılabilen sanal simülatör.'
+        ext_jeep_desc: 'Robot Jeep için donanım olmadan programlama yapılabilen sanal simülatör.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Arturito Robotumuzu hareket ettirmek, kafasını döndürmek, neonu açmak, sesler çıkarmak ve baloncuk makinesini çalıştırmak için programla!',
+        ext_iot_title: 'IoT REC Modülü',
+        ext_iot_desc: 'Projelerini buluta bağla ve gerçek zamanlı telemetri gönder.',
+        ext_iamanos_title: 'Robotik Eller',
+        ext_iamanos_desc: 'Jestler ve hareketlerle robotik elleri kontrol et.',
+        ext_senales_title: 'Trafik İşaretleri',
+        ext_senales_desc: 'Yapay zeka kullanarak trafik işareti tanıma.',
+        ext_voz_title: 'Sesten Metne',
+        ext_voz_desc: 'Projelerini kontrol etmek için sesi metne dönüştür.',
+        ext_emociones_title: 'YZ: Yüz Duyguları',
+        ext_emociones_desc: 'Canlı YZ kullanarak yüz duygularını (MUTLU, ÜZGÜN, KIZGIN, ŞAŞIRMIŞ, NÖTR) ve ağzın açık olup olmadığını algılar.',
+        ext_objetos_title: 'YZ: Nesne Tespiti',
+        ext_objetos_desc: 'COCO-SSD YZ kullanarak günlük nesneleri (İNSAN, KEDİ, KÖPEK, ARABA, TELEFON ve daha fazlası) gerçek zamanlı algılar.',
+        ext_teachable_title: 'YZ: Teachable Machine',
+        ext_teachable_desc: 'Kendi Google Teachable Machine modelini yükle ve eğittiğin herhangi bir görüntüyü algıla.',
+        ext_tachin_title: 'Akıllı Çöp Kutusu Robotu',
+        ext_tachin_desc: 'Çöp Kutusu Robotunu kontrol et: motorlar, LED matrisi, RGB ışık ve ses, hepsi bloklarla.',
+        ext_autonomo_title: '🧠 Otonom Öğrenme (Q-Learning)',
+        ext_autonomo_desc: 'Q-Learning ile fiziksel veya sanal robotları eğit: birleşik sensörler, eylemler ve ödüller.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Robot 1 Arduino\'yu Bluetooth veya USB üzerinden programla: motorlar, sensörler, LED matrisi ve ses.'
+      },
+      pl: {
+        bar_title: '@roboticaencolegios - LABORATORIO REC - SI, ROBOTYKA I PROGRAMOWANIE W JEDNYM MIEJSCU',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Jak korzystać z SI',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Wirtualny symulator Robota Jeep do programowania bez sprzętu.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Zaprogramuj naszego Robota Arturito, aby się poruszał, obracał głowę, włączał neon, wydawał dźwięki i uruchamiał maszynę do baniek!',
+        ext_iot_title: 'Moduł IoT REC',
+        ext_iot_desc: 'Połącz swoje projekty z chmurą i wysyłaj telemetrię w czasie rzeczywistym.',
+        ext_iamanos_title: 'Ręce Robotyczne',
+        ext_iamanos_desc: 'Steruj rękami robotycznymi za pomocą gestów i ruchów.',
+        ext_senales_title: 'Znaki Drogowe',
+        ext_senales_desc: 'Rozpoznawanie znaków drogowych za pomocą sztucznej inteligencji.',
+        ext_voz_title: 'Mowa na Tekst',
+        ext_voz_desc: 'Zamienia mowę na tekst, aby sterować twoimi projektami.',
+        ext_emociones_title: 'SI: Emocje Twarzy',
+        ext_emociones_desc: 'Wykrywa emocje twarzy (SZCZĘŚLIWY, SMUTNY, ZŁY, ZASKOCZONY, NEUTRALNY) oraz czy usta są otwarte, korzystając z SI na żywo.',
+        ext_objetos_title: 'SI: Wykrywanie Obiektów',
+        ext_objetos_desc: 'Wykrywa codzienne obiekty w czasie rzeczywistym (OSOBA, KOT, PIES, SAMOCHÓD, TELEFON i więcej) za pomocą SI COCO-SSD.',
+        ext_teachable_title: 'SI: Teachable Machine',
+        ext_teachable_desc: 'Wczytaj własny model Google Teachable Machine i wykrywaj dowolny wytrenowany obraz.',
+        ext_tachin_title: 'Inteligentny Robot Kosz',
+        ext_tachin_desc: 'Steruj Robotem Koszem: silniki, matryca LED, światło RGB i dźwięk, wszystko za pomocą bloków.',
+        ext_autonomo_title: '🧠 Uczenie Autonomiczne (Q-Learning)',
+        ext_autonomo_desc: 'Trenuj fizyczne lub wirtualne roboty za pomocą Q-Learning: zunifikowane czujniki, akcje i nagrody.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Zaprogramuj Robot 1 Arduino przez Bluetooth lub USB: silniki, czujniki, matryca LED i dźwięk.'
+      },
+      nl: {
+        bar_title: '@roboticaencolegios - LABORATORIO REC - AI, ROBOTICA EN PROGRAMMEREN OP ÉÉN PLEK',
+        btn_jeep: 'ROBOT JEEP VIRTUAL',
+        btn_ia: 'Hoe AI te gebruiken',
+        btn_instagram: 'Instagram REC',
+        ext_jeep_title: 'Robot Jeep Virtual',
+        ext_jeep_desc: 'Virtuele Robot Jeep-simulator om te programmeren zonder hardware.',
+        ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+        ext_r2d2_desc: 'Programmeer onze Arturito-robot om te bewegen, het hoofd te draaien, het neonlicht aan te zetten, geluiden te maken en de bellenblazer te activeren!',
+        ext_iot_title: 'IoT REC Module',
+        ext_iot_desc: 'Verbind je projecten met de cloud en verzend realtime telemetrie.',
+        ext_iamanos_title: 'Robothanden',
+        ext_iamanos_desc: 'Bestuur robothanden met gebaren en bewegingen.',
+        ext_senales_title: 'Verkeersborden',
+        ext_senales_desc: 'Herkenning van verkeersborden met behulp van kunstmatige intelligentie.',
+        ext_voz_title: 'Spraak naar Tekst',
+        ext_voz_desc: 'Zet spraak om in tekst om je projecten te besturen.',
+        ext_emociones_title: 'AI: Gezichtsemoties',
+        ext_emociones_desc: 'Detecteert gezichtsemoties (BLIJ, VERDRIETIG, BOOS, VERRAST, NEUTRAAL) en of de mond open is, met live AI.',
+        ext_objetos_title: 'AI: Objectdetectie',
+        ext_objetos_desc: 'Detecteert alledaagse objecten in realtime (PERSOON, KAT, HOND, AUTO, TELEFOON en meer) met COCO-SSD AI.',
+        ext_teachable_title: 'AI: Teachable Machine',
+        ext_teachable_desc: 'Laad je eigen Google Teachable Machine-model en detecteer elke afbeelding die je hebt getraind.',
+        ext_tachin_title: 'Slimme Vuilnisbak Robot',
+        ext_tachin_desc: 'Bestuur de Vuilnisbak Robot: motoren, LED-matrix, RGB-licht en geluid, allemaal via blokken.',
+        ext_autonomo_title: '🧠 Autonoom Leren (Q-Learning)',
+        ext_autonomo_desc: 'Train fysieke of virtuele robots met Q-Learning: uniforme sensoren, acties en beloningen.',
+        ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+        ext_pcb_desc: 'Programmeer de Robot 1 Arduino via Bluetooth of USB: motoren, sensoren, LED-matrix en geluid.'
       }
     };
   }
@@ -53410,7 +53829,29 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
     btn_ia: 'Cómo usar la I.A.',
     btn_instagram: 'Instagram de @roboticaencolegios',
     ext_jeep_title: 'Robot Jeep Virtual',
-    ext_jeep_desc: 'Simulá y programá el Robot Jeep: física 2D, sensores, LEDs y audio 100% offline.'
+    ext_jeep_desc: 'Simulá y programá el Robot Jeep: física 2D, sensores, LEDs y audio 100% offline.',
+    ext_r2d2_title: 'ROBOT ARTURITO R2D2',
+    ext_r2d2_desc: 'Programa nuestro Robot Arturito para moverlo, girar la cabeza, encender el neon, hacer sonidos y disparar el burbujero!',
+    ext_iot_title: 'Módulo IoT REC',
+    ext_iot_desc: 'Conecta tus proyectos a la nube y envía telemetría en tiempo real.',
+    ext_iamanos_title: 'Manos Robóticas',
+    ext_iamanos_desc: 'Controla manos robóticas con gestos y movimientos.',
+    ext_senales_title: 'Señales de Tránsito',
+    ext_senales_desc: 'Reconocimiento de señales de tránsito usando inteligencia artificial.',
+    ext_voz_title: 'Voz a Texto',
+    ext_voz_desc: 'Convierte voz en texto para controlar tus proyectos.',
+    ext_emociones_title: 'IA: Emociones Rostro',
+    ext_emociones_desc: 'Detecta emociones del rostro (FELIZ, TRISTE, ENOJADO, SORPRENDIDO, NEUTRAL) y si la boca está abierta, usando IA en vivo.',
+    ext_objetos_title: 'IA: Detección de Objetos',
+    ext_objetos_desc: 'Detecta objetos cotidianos en tiempo real (PERSONA, GATO, PERRO, AUTO, CELULAR y más) usando IA COCO-SSD.',
+    ext_teachable_title: 'IA: Teachable Machine',
+    ext_teachable_desc: 'Cargá tu propio modelo de Google Teachable Machine y detectá cualquier imagen que hayas entrenado.',
+    ext_tachin_title: ['Robot Tachín', 'Robot Tachin', 'Robot Tacho Inteligente'],
+    ext_tachin_desc: ['Robot Tachin: para los mas peques, responde a caminos y gestos con I.A.!', 'Robot Tachín: para los más peques, responde a caminos y gestos con I.A.!', 'Controlá el Robot Tacho: motores, matriz LED, luz RGB y sonido, todo desde bloques.'],
+    ext_autonomo_title: '🧠 Aprendizaje Autónomo (Q-Learning)',
+    ext_autonomo_desc: 'Entrená robots físicos o virtuales con Q-Learning: sensores, acciones y recompensas unificadas.',
+    ext_pcb_title: 'ROBOT 1 Arduino (Bluetooth-USB)',
+    ext_pcb_desc: 'Programá el Robot 1 Arduino por Bluetooth o USB: motores, sensores, matriz LED y sonido.'
   };
 
   var FALLBACK_LOCALE = 'en';
@@ -53490,7 +53931,14 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
 
   function getKnownValues(key) {
     var values = {};
-    if (REC_I18N_SOURCES[key]) values[REC_I18N_SOURCES[key]] = true;
+    var source = REC_I18N_SOURCES[key];
+    if (source) {
+      if (Array.isArray(source)) {
+        for (var si = 0; si < source.length; si++) values[source[si]] = true;
+      } else {
+        values[source] = true;
+      }
+    }
     for (var lang in window.REC_STRINGS) {
       if (!window.REC_STRINGS.hasOwnProperty(lang)) continue;
       var v = window.REC_STRINGS[lang][key];
@@ -53706,6 +54154,50 @@ module.exports = __webpack_require__.p + "static/assets/30d09ba32a17082ef820b57d
             descNode.textContent = strings.ext_jeep_desc;
           } else {
             descSpan.textContent = strings.ext_jeep_desc;
+          }
+        }
+      }
+
+      if (getKnownValues('ext_r2d2_title')[text]) {
+        var r2d2TitleNode = span.firstChild;
+        if (r2d2TitleNode && r2d2TitleNode.nodeType === Node.TEXT_NODE) {
+          r2d2TitleNode.textContent = strings.ext_r2d2_title;
+        }
+
+        var r2d2Parent = span.parentNode;
+        if (!r2d2Parent) continue;
+        var r2d2DescSpan = r2d2Parent.querySelector('[class*="library-item_featured-description_"]');
+        if (r2d2DescSpan) {
+          var r2d2DescNode = r2d2DescSpan.firstChild;
+          if (r2d2DescNode && r2d2DescNode.nodeType === Node.TEXT_NODE) {
+            r2d2DescNode.textContent = strings.ext_r2d2_desc;
+          } else {
+            r2d2DescSpan.textContent = strings.ext_r2d2_desc;
+          }
+        }
+      }
+
+      var recCardSlugs = ['iot', 'iamanos', 'senales', 'voz', 'emociones', 'objetos', 'teachable', 'tachin', 'autonomo', 'pcb'];
+      for (var s = 0; s < recCardSlugs.length; s++) {
+        var slug = recCardSlugs[s];
+        var titleKey = 'ext_' + slug + '_title';
+        var descKey = 'ext_' + slug + '_desc';
+        if (getKnownValues(titleKey)[text]) {
+          var titleNode = span.firstChild;
+          if (titleNode && titleNode.nodeType === Node.TEXT_NODE) {
+            titleNode.textContent = strings[titleKey];
+          }
+          var parent = span.parentNode;
+          if (parent) {
+            var descSpan = parent.querySelector('[class*="library-item_featured-description_"]');
+            if (descSpan) {
+              var descNode = descSpan.firstChild;
+              if (descNode && descNode.nodeType === Node.TEXT_NODE) {
+                descNode.textContent = strings[descKey];
+              } else {
+                descSpan.textContent = strings[descKey];
+              }
+            }
           }
         }
       }

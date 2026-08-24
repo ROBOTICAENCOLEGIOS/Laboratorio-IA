@@ -817,7 +817,9 @@ async resetPort() {
         }
         this._serialQueue = Promise.resolve();
         console.log('[resetPort] Puerto e hilos de lectura liberados exitosamente');
-        const t = I18N_BLOCKS[window.currentRecLocale || 'es'] || I18N_BLOCKS['es'];
+        const rawLocale = window.currentRecLocale || (this.runtime && this.runtime.currentLocale) || 'es';
+        const lang = rawLocale.split(/[-_]/)[0].toLowerCase();
+        const t = I18N_BLOCKS[lang] || I18N_BLOCKS['es'] || {};
         alert(t.msg_reset_success);
     } catch (e) {
         console.error('[resetPort] Error al reiniciar puerto:', e);

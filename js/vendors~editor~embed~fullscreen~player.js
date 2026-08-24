@@ -185245,7 +185245,9 @@ try {
     iaObjetosREC: _recBase + 'iaobjetos.js',
     iaTeachableREC: _recBase + 'iateachable.js',
     iaSenalesTransitoV7: _recBase + 'senialestransito.js',
-    recpcb1arduino: _recBase + 'extensionpcb.js'
+    recpcb1arduino: _recBase + 'extensionpcb.js',
+    recr2d2arduino: _recBase + 'extensionr2d2.js',
+    robottachov4: _recBase + 'robottachin.js'
   });
 } catch (e) {
   // document/baseURI not available in this context (e.g. worker); skip.

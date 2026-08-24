@@ -892,8 +892,9 @@
         this.jeepToastMostrado = true;
       }
 
-      const locale = window.currentRecLocale || 'es';
-      const t = key => (I18N_BLOCKS[locale] && I18N_BLOCKS[locale][key]) || I18N_BLOCKS['es'][key] || key;
+      const rawLocale = window.currentRecLocale || (this.runtime && this.runtime.currentLocale) || 'es';
+      const lang = rawLocale.split(/[-_]/)[0].toLowerCase();
+      const t = key => (I18N_BLOCKS[lang] && I18N_BLOCKS[lang][key]) || (I18N_BLOCKS['es'] && I18N_BLOCKS['es'][key]) || key;
       const base = new URL('extensionesrec/', document.baseURI).href;
 
       return {

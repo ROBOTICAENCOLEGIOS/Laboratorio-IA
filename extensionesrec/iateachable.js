@@ -322,8 +322,9 @@
   };
 
   const t = key => {
-    const locale = window.currentRecLocale || 'es';
-    return (I18N_BLOCKS[locale] && I18N_BLOCKS[locale][key]) || I18N_BLOCKS['es'][key] || key;
+    const rawLocale = window.currentRecLocale || 'es';
+    const lang = rawLocale.split(/[-_]/)[0].toLowerCase();
+    return (I18N_BLOCKS[lang] && I18N_BLOCKS[lang][key]) || (I18N_BLOCKS['es'] && I18N_BLOCKS['es'][key]) || key;
   };
 
   const _REC_CAMERA_URL = new URL('extensionesrec/recCamera.js', document.baseURI).href;
