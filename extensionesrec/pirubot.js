@@ -43,6 +43,7 @@
   let currentFila  = HOME_FILA;
   let currentDir   = HOME_DIR;
   let currentLevel = 1; // 1 = Traslación pura (5-6 años) · 2 = Orientación/giros (7+ años)
+  window.__pirubotCurrentLevel = currentLevel; // estado global leído por el bloque "Agregar comando"
 
   // ── Audio (alerta de borde) ─────────────────────────────────────────────
   let audioCtx = null;
@@ -401,6 +402,7 @@
     if (level !== 1 && level !== 2) return;
     if (level === currentLevel) return;
     currentLevel = level;
+    window.__pirubotCurrentLevel = currentLevel;
     updateLevelSelectorUI();
     updateDPadForLevel();
     // Nota: cambiar de nivel NO vacía commandQueue ni el visor (regla
@@ -408,6 +410,14 @@
     // comando de la cola lleva su propio código (L1_* vs FWD/BWD/LEFT/
     // RIGHT), por lo que la ejecución sigue siendo correcta aunque la
     // secuencia mezcle comandos cargados en distintos niveles.
+
+    // Refresca instantáneamente la paleta de bloques: vuelve a invocar
+    // getInfo() del bloque "Agregar comando" para que el menú desplegable
+    // y el valor por defecto reflejen el nuevo nivel sin recargar la página.
+    var vm = Scratch.vm;
+    if (vm && vm.extensionManager && typeof vm.extensionManager.refreshBlocks === 'function') {
+      vm.extensionManager.refreshBlocks('pirubotREC');
+    }
   }
 
   function updateLevelSelectorUI() {
@@ -715,7 +725,7 @@
               CMD: {
                 type: Scratch.ArgumentType.STRING,
                 menu: 'cmdMenu',
-                defaultValue: 'FWD'
+                defaultValue: window.__pirubotCurrentLevel === 1 ? 'L1_UP' : 'FWD'
               }
             }
           },
@@ -733,43 +743,44 @@
             opcode: 'goHomeBlock',
             blockType: Scratch.BlockType.COMMAND,
             text: 'Ir al inicio (HOME)'
-          },
-          '---',
-          {
-            opcode: 'getCol',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'Columna actual'
-          },
-          {
-            opcode: 'getFila',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'Fila actual'
-          },
-          {
-            opcode: 'getDir',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'Dirección actual'
-          },
-          {
-            opcode: 'getQueueLength',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'Cantidad de comandos'
           }
         ],
         menus: {
           cmdMenu: {
-            items: [
-              { text: '⬆️ Adelante',  value: 'FWD' },
-              { text: '⬇️ Atrás',     value: 'BWD' },
-              { text: '⬅️ Izquierda', value: 'LEFT' },
-              { text: '➡️ Derecha',   value: 'RIGHT' }
-            ]
+            items: 'getCmdMenuItems'
           }
         }
       };
     }
 
-    // ── Bloques Scratch ───────────────────────────────────────────────
+    // ── Menú dinámico del bloque "Agregar comando" ────────────────
+    // Scratch/TurboWarp invoca este método cada vez que se abre el
+    // desplegable, por lo que basta con leer window.__pirubotCurrentLevel
+    // para reflejar el nivel activo sin recargar la extensión.
+    getCmdMenuItems() {
+      if (window.__pirubotCurrentLevel === 1) {
+        return [
+          { text: '▲ Arriba',     value: 'L1_UP' },
+          { text: '▼ Abajo',      value: 'L1_DOWN' },
+          { text: '◄ Izquierda',  value: 'L1_LEFT' },
+          { text: '► Derecha',    value: 'L1_RIGHT' }
+        ];
+      }
+      // Nivel 2: los menús dinámicos de scratch-vm (_convertMenuItems) solo
+      // aceptan texto plano en cada opción -no soportan objetos/arreglos de
+      // imagen, eso solo aplica a argumentos ArgumentType.IMAGE del bloque-,
+      // por lo que se usa el glifo angular "↰/↱" (giro en L de 90°, sin
+      // semicírculos ni flechas rectas) como aproximación textual del mismo
+      // ícono del D-Pad. Las 4 opciones son obligatorias y nunca se omiten.
+      return [
+        { text: '⬆️ Adelante',       value: 'FWD' },
+        { text: '⬇️ Atrás',          value: 'BWD' },
+        { text: '↰ Giro Izquierda', value: 'LEFT' },
+        { text: '↱ Giro Derecha',   value: 'RIGHT' }
+      ];
+    }
+
+    // ── Bloques Scratch ──────────────────────────────────────
     addCommand(args) {
       pushCommand(args.CMD);
     }
@@ -785,11 +796,6 @@
     goHomeBlock() {
       goHome();
     }
-
-    getCol()         { return currentCol; }
-    getFila()        { return currentFila; }
-    getDir()         { return currentDir; }
-    getQueueLength() { return commandQueue.length; }
   }
 
   Scratch.extensions.register(new PirubotExtension());
