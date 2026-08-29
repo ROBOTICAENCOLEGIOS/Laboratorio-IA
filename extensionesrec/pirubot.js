@@ -25,23 +25,111 @@
   const GRID_LINES_X = [0, 80, 160, 240, 320, 400, 480];
   const GRID_LINES_Y = [20, 100, 180, 260, 340];
 
-  // HOME: col=2, fila=3, dir=0 → X=-40, Y=-120 (fila inferior, centro del tablero)
-  const HOME_COL  = 2;
-  const HOME_FILA = 3;
-  const HOME_X    = -40;
-  const HOME_Y    = -120;
-  const HOME_DIR  = 0;
-
   // Conversión matricial → píxeles Scratch
   function colToX(col)   { return ORIGIN_X + (col * CELL_SIZE); }
   function filaToY(fila) { return ORIGIN_Y - (fila * CELL_SIZE); }
 
+  // ── Motor de Desafíos (estilo Pilas Bloques) ────────────────────────────
+  // Cada desafío define posición inicial (start), meta (goal) y obstáculos
+  // (rocas) en coordenadas de grilla (col 0-5, fila 0-3). El HOME dinámico
+  // del robot (botón 🏠) siempre corresponde al 'start' del desafío activo.
+  // Todos los desafíos inician en la casilla abajo-centro de la grilla
+  // 6x4 (col=2, fila=3 en índices 0-based ≡ col:3, fila:4 en notación 1-based).
+  // Mapa de 10 misiones con dificultad progresiva.
+  const PIRUBOT_CHALLENGES = [
+    {
+      id: 0,
+      name: '1. Paso a Paso',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 2, fila: 2 },
+      obstacles: []
+    },
+    {
+      id: 1,
+      name: '2. Camino Directo',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 2, fila: 0 },
+      obstacles: []
+    },
+    {
+      id: 2,
+      name: '3. Esquivar la Piedra',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 2, fila: 0 },
+      obstacles: [ { col: 2, fila: 2 } ]
+    },
+    {
+      id: 3,
+      name: '4. Zigzag Simple',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 4, fila: 0 },
+      obstacles: [ { col: 2, fila: 1 } ]
+    },
+    {
+      id: 4,
+      name: '5. Doble Obstáculo',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 0, fila: 0 },
+      obstacles: [ { col: 2, fila: 2 }, { col: 1, fila: 1 } ]
+    },
+    {
+      id: 5,
+      name: '6. Primer Giro - L',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 4, fila: 2 },
+      obstacles: [ { col: 3, fila: 3 } ]
+    },
+    {
+      id: 6,
+      name: '7. El Laberinto Corto',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 4, fila: 0 },
+      obstacles: [ { col: 2, fila: 1 }, { col: 3, fila: 1 } ]
+    },
+    {
+      id: 7,
+      name: '8. Rodeando la Pared',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 0, fila: 3 },
+      obstacles: [ { col: 1, fila: 3 }, { col: 2, fila: 2 } ]
+    },
+    {
+      id: 8,
+      name: '9. Serpiente',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 0, fila: 0 },
+      obstacles: [ { col: 2, fila: 2 }, { col: 1, fila: 1 }, { col: 3, fila: 0 } ]
+    },
+    {
+      id: 9,
+      name: '10. El Gran Desafío',
+      start: { col: 2, fila: 3, dir: 0 },
+      goal:  { col: 4, fila: 0 },
+      obstacles: [ { col: 2, fila: 2 }, { col: 3, fila: 2 }, { col: 1, fila: 1 }, { col: 2, fila: 0 } ]
+    }
+  ];
+  let currentChallengeIndex = 0;
+
+  function getActiveChallenge() {
+    return PIRUBOT_CHALLENGES[currentChallengeIndex] || PIRUBOT_CHALLENGES[0];
+  }
+
+  function getHomeCoords() {
+    const active = getActiveChallenge();
+    return { col: active.start.col, fila: active.start.fila, dir: active.start.dir || 0 };
+  }
+
+  function isObstacleAt(col, fila) {
+    const active = getActiveChallenge();
+    return active.obstacles.some(function (ob) { return ob.col === col && ob.fila === fila; });
+  }
+
   // ── Estado interno ──────────────────────────────────────────────────────
   let commandQueue = [];
   let isRunning    = false;
-  let currentCol   = HOME_COL;
-  let currentFila  = HOME_FILA;
-  let currentDir   = HOME_DIR;
+  let currentCol   = getHomeCoords().col;
+  let currentFila  = getHomeCoords().fila;
+  let currentDir   = getHomeCoords().dir;
   let currentLevel = 1; // 1 = Traslación pura (5-6 años) · 2 = Orientación/giros (7+ años)
   window.__pirubotCurrentLevel = currentLevel; // estado global leído por el bloque "Agregar comando"
 
@@ -63,6 +151,23 @@
       osc.start();
       gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.3);
       osc.stop(ac.currentTime + 0.3);
+    } catch (e) { /* noop */ }
+  }
+
+  // ── Audio (bleep de paso, sintetizado con Web Audio API) ────────────────
+  function playStepBleep() {
+    try {
+      const ac   = getAudio();
+      const osc  = ac.createOscillator();
+      const gain = ac.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = 600;
+      gain.gain.value = 0.12;
+      osc.connect(gain);
+      gain.connect(ac.destination);
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.06);
+      osc.stop(ac.currentTime + 0.06);
     } catch (e) { /* noop */ }
   }
 
@@ -158,6 +263,142 @@
     L1_RIGHT: '►'
   };
 
+  // ── Assets de Desafíos (meta circular + roca) ─────────────────────
+  let pirubotGoalImg = new Image();
+  pirubotGoalImg.onload = function () { drawGrid(); };
+  pirubotGoalImg.src = 'extensionesrec/pajarito.png';
+
+  function drawGoalMarker(ctx, cx, cy, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.shadowColor = 'rgba(0,0,0,0.45)';
+    ctx.shadowBlur = 10;
+    ctx.clip();
+
+    // Fondo de respaldo: evita huecos visibles si la imagen no cubre
+    // el círculo completo al preservar su relación de aspecto original.
+    ctx.fillStyle = '#FFF6C8';
+    ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+
+    if (pirubotGoalImg.complete && pirubotGoalImg.naturalWidth) {
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+
+      const diameter   = radius * 2;
+      const imgAspect  = pirubotGoalImg.naturalWidth / pirubotGoalImg.naturalHeight;
+      let drawWidth  = diameter;
+      let drawHeight = diameter;
+      if (imgAspect > 1) {
+        drawHeight = diameter / imgAspect;
+      } else if (imgAspect < 1) {
+        drawWidth = diameter * imgAspect;
+      }
+      const dx = cx - drawWidth / 2;
+      const dy = cy - drawHeight / 2;
+      ctx.drawImage(pirubotGoalImg, dx, dy, drawWidth, drawHeight);
+    } else {
+      ctx.fillStyle = '#FFD700';
+      ctx.fill();
+    }
+    ctx.restore();
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#FFD700';
+    ctx.stroke();
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Roca poligonal irregular (8 vértices no uniformes) con tonos de
+  // pizarra: base #4b5563, sombra inferior #1f2937, brillo superior #9ca3af.
+  const ROCK_VERTICES = [
+    { angle: -95,  r: 0.92 },
+    { angle: -55,  r: 1.05 },
+    { angle: -10,  r: 0.88 },
+    { angle: 35,   r: 1.02 },
+    { angle: 85,   r: 0.80 },
+    { angle: 135,  r: 1.00 },
+    { angle: 180,  r: 0.86 },
+    { angle: -140, r: 0.97 }
+  ];
+
+  function drawObstacleRock(ctx, cx, cy, radius) {
+    ctx.save();
+    ctx.beginPath();
+    ROCK_VERTICES.forEach(function (v, i) {
+      const rad = (v.angle * Math.PI) / 180;
+      const px  = cx + Math.cos(rad) * radius * v.r;
+      const py  = cy + Math.sin(rad) * radius * v.r;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    ctx.closePath();
+
+    ctx.shadowColor = '#1f2937';
+    ctx.shadowBlur = 6;
+    ctx.shadowOffsetY = 2;
+    ctx.fillStyle = '#4b5563';
+    ctx.fill();
+    ctx.restore();
+
+    // Degradado vertical clipeado a la silueta: brillo arriba, sombra abajo
+    ctx.save();
+    ctx.beginPath();
+    ROCK_VERTICES.forEach(function (v, i) {
+      const rad = (v.angle * Math.PI) / 180;
+      const px  = cx + Math.cos(rad) * radius * v.r;
+      const py  = cy + Math.sin(rad) * radius * v.r;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    ctx.closePath();
+    ctx.clip();
+    const grad = ctx.createLinearGradient(cx, cy - radius, cx, cy + radius);
+    grad.addColorStop(0, '#9ca3af');
+    grad.addColorStop(0.5, '#4b5563');
+    grad.addColorStop(1, '#1f2937');
+    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = grad;
+    ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+    ctx.restore();
+
+    // Grietas internas
+    ctx.save();
+    ctx.strokeStyle = 'rgba(17,24,39,0.65)';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(cx - radius * 0.3, cy - radius * 0.5);
+    ctx.lineTo(cx - radius * 0.05, cy - radius * 0.08);
+    ctx.lineTo(cx + radius * 0.28, cy - radius * 0.32);
+    ctx.moveTo(cx - radius * 0.05, cy - radius * 0.08);
+    ctx.lineTo(cx + radius * 0.12, cy + radius * 0.42);
+    ctx.stroke();
+    ctx.restore();
+
+    // Contorno de la silueta
+    ctx.save();
+    ctx.beginPath();
+    ROCK_VERTICES.forEach(function (v, i) {
+      const rad = (v.angle * Math.PI) / 180;
+      const px  = cx + Math.cos(rad) * radius * v.r;
+      const py  = cy + Math.sin(rad) * radius * v.r;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    ctx.closePath();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = '#1f2937';
+    ctx.stroke();
+    ctx.restore();
+  }
+
   // ── Canvas overlay de grilla (fija, permanente, sin toggle) ─────────────
   let gridCanvas = null;
   let gridCtx    = null;
@@ -217,6 +458,20 @@
       gridCtx.moveTo(0, y);
       gridCtx.lineTo(CANVAS_W, y);
       gridCtx.stroke();
+    });
+
+    // Meta y obstáculos del desafío activo (fichas circulares)
+    const activeChallenge = getActiveChallenge();
+    const markerRadius = CELL_SIZE * 0.36;
+    if (activeChallenge.goal) {
+      const gx = activeChallenge.goal.col * CELL_SIZE + CELL_SIZE / 2;
+      const gy = GRID_LINES_Y[0] + activeChallenge.goal.fila * CELL_SIZE + CELL_SIZE / 2;
+      drawGoalMarker(gridCtx, gx, gy, markerRadius);
+    }
+    activeChallenge.obstacles.forEach(function (ob) {
+      const ox = ob.col * CELL_SIZE + CELL_SIZE / 2;
+      const oy = GRID_LINES_Y[0] + ob.fila * CELL_SIZE + CELL_SIZE / 2;
+      drawObstacleRock(gridCtx, ox, oy, markerRadius);
     });
   }
 
@@ -310,7 +565,69 @@
       '  box-shadow: inset 0 2px 6px rgba(0,0,0,0.45), 0 0 8px rgba(255,107,53,0.6);',
       '}',
       '#pirubot-level-selector { top: 140px; left: 20px; cursor: grab; touch-action: none; }',
-      '#pirubot-level-selector.pirubot-dragging { cursor: grabbing; opacity: 0.85; }'
+      '#pirubot-level-selector.pirubot-dragging { cursor: grabbing; opacity: 0.85; }',
+      '#pirubot-challenge-selector {',
+      '  position: fixed; top: 196px; left: 20px; z-index: 99999;',
+      '  display: flex; align-items: center; gap: 6px;',
+      '  background: rgba(30,30,40,0.92); border: 2px solid rgba(255,215,0,0.4);',
+      '  border-radius: 12px; padding: 6px 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.4);',
+      '  font-family: "Segoe UI", system-ui, sans-serif; cursor: grab; touch-action: none;',
+      '}',
+      '#pirubot-challenge-selector.pirubot-dragging { cursor: grabbing; opacity: 0.85; }',
+      '.pirubot-challenge-select {',
+      '  border: none; border-radius: 8px; padding: 6px 10px; font-size: 13px; font-weight: 600;',
+      '  cursor: pointer; color: #fff; background: rgba(70,70,90,0.9); outline: none;',
+      '}',
+      '#pirubot-result-popup {',
+      '  position: fixed; inset: 0; z-index: 999999; display: flex;',
+      '  align-items: center; justify-content: center;',
+      '  background: rgba(0,0,0,0.55); animation: pirubot-fadein 0.25s ease;',
+      '}',
+      '.pirubot-result-card {',
+      '  position: relative; background: linear-gradient(160deg,#2b2b3d,#1c1c28);',
+      '  border-radius: 20px; padding: 28px 32px; text-align: center;',
+      '  box-shadow: 0 12px 40px rgba(0,0,0,0.6); max-width: 320px;',
+      '  font-family: "Segoe UI", system-ui, sans-serif; color: #fff;',
+      '  animation: pirubot-popin 0.35s cubic-bezier(.34,1.56,.64,1);',
+      '}',
+      '.pirubot-result-avatar-frame {',
+      '  width: 140px; height: 140px; margin: 0 auto 16px; border-radius: 50%;',
+      '  padding: 4px; background: linear-gradient(45deg,#FFD700,#FFF6C8,#FFD700);',
+      '  box-shadow: 0 0 24px rgba(255,215,0,0.7), 0 4px 16px rgba(0,0,0,0.5);',
+      '  display: flex; align-items: center; justify-content: center;',
+      '}',
+      '.pirubot-result-avatar {',
+      '  width: 100%; height: 100%; border-radius: 50%; object-fit: cover;',
+      '  border: 3px solid #fff; display: block;',
+      '}',
+      '.pirubot-result-title { font-size: 18px; margin: 8px 0 18px; }',
+      '.pirubot-result-btn {',
+      '  border: none; border-radius: 10px; padding: 10px 20px; font-size: 14px; font-weight: 600;',
+      '  cursor: pointer; color: #fff; transition: transform 0.15s ease;',
+      '}',
+      '.pirubot-result-btn:hover { transform: scale(1.05); }',
+      '.pirubot-result-btn-success { background: linear-gradient(135deg,#22c55e,#16a34a); }',
+      '.pirubot-result-btn-fail { background: linear-gradient(135deg,#ef4444,#b91c1c); }',
+      '.pirubot-result-hearts {',
+      '  position: absolute; top: -10px; left: 0; right: 0; height: 0; pointer-events: none;',
+      '}',
+      '.pirubot-heart {',
+      '  position: absolute; left: calc(15% + (var(--i) * 12%)); bottom: 40px; font-size: 20px;',
+      '  animation: pirubot-float 1.8s ease-in infinite; animation-delay: calc(var(--i) * 0.15s); opacity: 0;',
+      '}',
+      '@keyframes pirubot-float {',
+      '  0%   { transform: translateY(0) scale(0.6); opacity: 0; }',
+      '  20%  { opacity: 1; }',
+      '  100% { transform: translateY(-120px) scale(1.1); opacity: 0; }',
+      '}',
+      '@keyframes pirubot-popin {',
+      '  0%   { transform: scale(0.7); opacity: 0; }',
+      '  100% { transform: scale(1); opacity: 1; }',
+      '}',
+      '@keyframes pirubot-fadein {',
+      '  0%   { opacity: 0; }',
+      '  100% { opacity: 1; }',
+      '}'
     ].join('\n');
     document.head.appendChild(style);
 
@@ -319,6 +636,9 @@
 
     // ── Selector de nivel (Nivel 1 / Nivel 2) ──────────────────────────
     injectLevelSelector();
+
+    // ── Selector de Desafío (Motor de Desafíos) ────────────────────────
+    injectChallengeSelector();
 
     // ── Visor de secuencia ────────────────────────────────────────────
     const viewer = document.createElement('div');
@@ -384,6 +704,31 @@
     makeDraggable(panel);
   }
 
+  // ── Selector de Desafío (dropdown flotante y arrastrable) ────────────────
+  function injectChallengeSelector() {
+    const panel = document.createElement('div');
+    panel.id = 'pirubot-challenge-selector';
+
+    let optionsHtml = '';
+    PIRUBOT_CHALLENGES.forEach(function (ch, idx) {
+      optionsHtml += '<option value="' + idx + '">' + ch.name + '</option>';
+    });
+
+    panel.innerHTML =
+      '<span class="pirubot-level-label">🎯 Desafío:</span>' +
+      '<select id="pirubot-challenge-select" class="pirubot-challenge-select">' + optionsHtml + '</select>';
+    document.body.appendChild(panel);
+
+    const select = panel.querySelector('#pirubot-challenge-select');
+    select.value = String(currentChallengeIndex);
+    select.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+    select.addEventListener('change', function (e) {
+      setChallenge(parseInt(e.target.value, 10));
+    });
+
+    makeDraggable(panel);
+  }
+
   // ── Posiciona el D-Pad en el centro exacto de la pantalla (viewport) ────
   // Se usan coordenadas absolutas en px (left/top) en vez de
   // 'transform: translate(-50%, -50%)' para que no haya desfases al
@@ -427,6 +772,27 @@
     if (btn2) btn2.classList.toggle('pirubot-level-active', currentLevel === 2);
   }
 
+  // ── Cambia el desafío activo: reposiciona a Piru en el nuevo 'start',
+  // cierra cualquier popup de resultado abierto y redibuja meta/obstáculos.
+  // No vacía commandQueue (misma regla que setLevel: solo Tacho limpia).
+  function setChallenge(idx) {
+    if (idx < 0 || idx >= PIRUBOT_CHALLENGES.length) return;
+    if (idx === currentChallengeIndex) return;
+    currentChallengeIndex = idx;
+    removeResultPopup();
+    if (!isRunning) {
+      clearHighlight();
+      goHome();
+    }
+    drawGrid();
+    updateChallengeSelectorUI();
+  }
+
+  function updateChallengeSelectorUI() {
+    const select = document.getElementById('pirubot-challenge-select');
+    if (select) select.value = String(currentChallengeIndex);
+  }
+
   // ── Actualiza íconos/textos/comandos de las 4 flechas según el nivel ────
   function updateDPadForLevel() {
     const up    = document.getElementById('btn-up');
@@ -468,7 +834,7 @@
     let offsetY  = 0;
 
     el.addEventListener('pointerdown', function (e) {
-      if (e.target.closest('.pirubot-btn, .pirubot-level-btn')) return; // los botones manejan su propio evento
+      if (e.target.closest('.pirubot-btn, .pirubot-level-btn, select')) return; // los botones/select manejan su propio evento
       dragging = true;
       const rect = el.getBoundingClientRect();
       offsetX = e.clientX - rect.left;
@@ -571,13 +937,14 @@
   // exclusiva del botón Tacho / clearQueue()).
   function goHome() {
     if (isRunning) return;
-    currentCol  = HOME_COL;
-    currentFila = HOME_FILA;
-    currentDir  = HOME_DIR;
+    const home = getHomeCoords();
+    currentCol  = home.col;
+    currentFila = home.fila;
+    currentDir  = home.dir;
     const target = getTarget();
     if (target) {
-      target.setXY(HOME_X, HOME_Y);
-      target.setDirection(HOME_DIR);
+      target.setXY(colToX(home.col), filaToY(home.fila));
+      target.setDirection(home.dir);
     }
   }
 
@@ -588,12 +955,15 @@
 
     isRunning = true;
     setDPadDisabled(true);
+    removeResultPopup();
+
+    let hitObstacle = false;
 
     for (let i = 0; i < commandQueue.length; i++) {
       const cmd = commandQueue[i];
       highlightStep(i);
 
-      let outOfBounds = false;
+      let stepBlocked = false;
 
       if (cmd === 'L1_UP' || cmd === 'L1_DOWN' || cmd === 'L1_LEFT' || cmd === 'L1_RIGHT') {
         // Nivel 1: traslación pura, el robot nunca rota sobre su eje.
@@ -608,7 +978,10 @@
 
         if (newColL1 < 0 || newColL1 > GRID_COLS - 1 ||
             newFilaL1 < 0 || newFilaL1 > GRID_ROWS - 1) {
-          outOfBounds = true;
+          stepBlocked = true;
+        } else if (isObstacleAt(newColL1, newFilaL1)) {
+          hitObstacle = true;
+          stepBlocked = true;
         } else {
           currentCol  = newColL1;
           currentFila = newFilaL1;
@@ -634,7 +1007,10 @@
         // Control de bordes
         if (newCol < 0 || newCol > GRID_COLS - 1 ||
             newFila < 0 || newFila > GRID_ROWS - 1) {
-          outOfBounds = true;
+          stepBlocked = true;
+        } else if (isObstacleAt(newCol, newFila)) {
+          hitObstacle = true;
+          stepBlocked = true;
         } else {
           currentCol  = newCol;
           currentFila = newFila;
@@ -648,10 +1024,11 @@
         updateSpriteDirection();
       }
 
-      if (outOfBounds) {
+      if (stepBlocked) {
         playAlertTone();
         break;
       }
+      playStepBleep();
 
       await new Promise(function (resolve) { setTimeout(resolve, STEP_MS); });
     }
@@ -659,6 +1036,105 @@
     clearHighlight();
     isRunning = false;
     setDPadDisabled(false);
+
+    // ── Evaluación del desafío al finalizar la secuencia ─────────────────
+    const active = getActiveChallenge();
+    const reachedGoal = !!active.goal &&
+      currentCol === active.goal.col && currentFila === active.goal.fila;
+
+    if (hitObstacle) {
+      showResultPopup(false, '💥 ¡Chocaste con una roca!');
+      goHome();
+    } else if (reachedGoal) {
+      showResultPopup(true, '🎉 ¡Desafío Completado!');
+    } else {
+      showResultPopup(false, '❌ ¡Casi! Revisa tu secuencia');
+      goHome();
+    }
+  }
+
+  // ── Popup de resultado del desafío (victoria / fallo) ────────────────────
+  function removeResultPopup() {
+    const el = document.getElementById('pirubot-result-popup');
+    if (el) el.remove();
+  }
+
+  // ── Audio de victoria: prioriza archivo local, con cadena de fallback ───
+  function playVictorySound() {
+    const sources = [
+      'extensionesrec/gatito.mp3',
+      'extensionesrec/meow.mp3',
+      'https://scratch.mit.edu/static/sounds/meow.wav'
+    ];
+    let i = 0;
+    function attempt() {
+      if (i >= sources.length) return; // fallback silencioso: no quedan fuentes
+      const audio = new Audio(sources[i]);
+      audio.addEventListener('error', function () {
+        i++;
+        attempt();
+      }, { once: true });
+      audio.play().catch(function () { /* autoplay bloqueado por el navegador: noop */ });
+    }
+    attempt();
+  }
+
+  function showResultPopup(success, message) {
+    removeResultPopup();
+
+    // Al ganar, vacía automáticamente la secuencia para el próximo intento.
+    if (success) {
+      clearQueue();
+    }
+
+    const overlay = document.createElement('div');
+    overlay.id = 'pirubot-result-popup';
+
+    let heartsHtml = '';
+    if (success) {
+      for (let i = 0; i < 6; i++) {
+        heartsHtml += '<span class="pirubot-heart" style="--i:' + i + '">💖</span>';
+      }
+    }
+
+    overlay.innerHTML =
+      '<div class="pirubot-result-card">' +
+        (success
+          ? '<div class="pirubot-result-hearts">' + heartsHtml + '</div>' +
+            '<div class="pirubot-result-avatar-frame">' +
+              '<img src="extensionesrec/gatito-beso.png" class="pirubot-result-avatar" alt="¡Bien hecho!"/>' +
+            '</div>'
+          : '') +
+        '<h2 class="pirubot-result-title">' + message + '</h2>' +
+        (success
+          ? '<button id="pirubot-result-next" class="pirubot-result-btn pirubot-result-btn-success">➡️ Siguiente Desafío</button>'
+          : '<button id="pirubot-result-retry" class="pirubot-result-btn pirubot-result-btn-fail">🔄 Reintentar</button>') +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    if (success) {
+      playVictorySound();
+
+      const nextBtn = document.getElementById('pirubot-result-next');
+      if (nextBtn) {
+        nextBtn.addEventListener('pointerdown', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          removeResultPopup();
+          const nextIdx = (currentChallengeIndex + 1) % PIRUBOT_CHALLENGES.length;
+          setChallenge(nextIdx);
+        });
+      }
+    } else {
+      const retryBtn = document.getElementById('pirubot-result-retry');
+      if (retryBtn) {
+        retryBtn.addEventListener('pointerdown', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          removeResultPopup();
+        });
+      }
+    }
   }
 
   // ── Toast de carga ──────────────────────────────────────────────────────
