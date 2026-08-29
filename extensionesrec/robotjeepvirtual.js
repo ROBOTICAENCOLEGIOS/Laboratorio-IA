@@ -11,7 +11,7 @@
 
   // ── Constantes ──────────────────────────────────────────────────────────
   const MAX_V        = 160;   // Scratch units/s al 100 %
-  const TURN_SCALE   = 1.125;   // grados/s por unidad de diferencia (vR - vL)
+  const TURN_SCALE   = 0.5625;   // grados/s por unidad de diferencia (vR - vL)
   const FIXED_DT     = 1 / 60; // paso de tiempo fijo determinista por tic
   const SENSOR_DIST  = 36;    // Scratch units al frente del centro (sensor de piso)
   const LINE_THRESH  = 60;    // umbral RGB para considerar color negro/línea
@@ -35,7 +35,9 @@
   let lastSetX  = 0;
   let lastSetY  = 0;
   let lastTs    = null;
+  let accumulator = 0;
   let resetting = false;
+  let wasTurning = false; // true si el último motor activo estaba en giro (vL !== vR)
 
   // ── Estado del Lápiz (Pen Layer) ─────────────────────────────────────────
   let isPenDown   = false;
@@ -226,10 +228,28 @@
 
   function startPhysics() {
     if (rafId) return;
-    (function loop() {
+    function loop(timestamp) {
       rafId = requestAnimationFrame(loop);
-      physicsStep(FIXED_DT);
-    })();
+
+      if (!lastTs) {
+        lastTs = timestamp;
+        return;
+      }
+
+      let frameTime = (timestamp - lastTs) / 1000;
+      lastTs = timestamp;
+
+      // Límite de seguridad para evitar saltos si la pestaña pierde foco
+      if (frameTime > 0.1) frameTime = 0.1;
+
+      accumulator += frameTime;
+
+      while (accumulator >= FIXED_DT) {
+        physicsStep(FIXED_DT);
+        accumulator -= FIXED_DT;
+      }
+    }
+    rafId = requestAnimationFrame(loop);
   }
 
   // ── Cinemática + Trazado de Lápiz ────────────────────────────────────────
@@ -244,6 +264,8 @@
 
     t.rotationStyle = 'all around';
     // jeep.dir = (((t.direction % 360) + 360) % 360); // Desactivado para evitar bucle con el renderer de Scratch al cambiar escala
+
+    wasTurning = (jeep.vL !== jeep.vR);
 
     const v    = (jeep.vL + jeep.vR) / 2;
     const wDeg = (jeep.vR - jeep.vL) * TURN_SCALE;
@@ -1050,16 +1072,20 @@
     moveForward ({ SIDE, PCT }) { this.moveMotor({ SIDE, DIR: 'FWD', PCT }); }
     moveBackward ({ SIDE, PCT }) { this.moveMotor({ SIDE, DIR: 'BWD', PCT }); }
     stopMotor ({ WHICH }) {
-      if (jeep.vL !== jeep.vR && jeep.totalDeg !== undefined) {
-          const nearest45 = Math.round(jeep.totalDeg / 45) * 45;
-          if (Math.abs(jeep.totalDeg - nearest45) <= 12) {
-              jeep.totalDeg = nearest45;
-              jeep.dir = (((nearest45 % 360) + 360) % 360);
+      // Smart Snap: solo alinea magnéticamente a la grilla de 22.5° si la
+      // acción previa fue un giro (wasTurning). Si venía en recta (vL === vR),
+      // el ángulo se mantiene intacto, sin alterar la dirección.
+      if (wasTurning && jeep.totalDeg !== undefined) {
+          const nearest225 = Math.round(jeep.totalDeg / 22.5) * 22.5;
+          if (Math.abs(jeep.totalDeg - nearest225) <= 11.25) {
+              jeep.totalDeg = nearest225;
+              jeep.dir = (((nearest225 % 360) + 360) % 360);
           }
       }
       if (WHICH === 'AMBOS') { jeep.vL = 0; jeep.vR = 0; }
       else if (WHICH === 'IZQ') jeep.vR = 0;
       else jeep.vL = 0;
+      wasTurning = false;
     }
 
     // ── Opcodes de Lápiz ──────────────────────────────────────────────────
@@ -1123,6 +1149,9 @@
     // ── Control ───────────────────────────────────────────────────────────
     resetPos () {
       resetting = true;
+      lastTs = null;
+      accumulator = 0;
+      wasTurning = false;
       jeep.vL  = 0;
       jeep.vR  = 0;
       jeep.x   = homePos.x;
